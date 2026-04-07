@@ -1,0 +1,311 @@
+specVersion: "3.1"
+metadata:
+  name: zautodesignapp
+type: application
+server:
+  customMiddleware:
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertError: false
+        ui5:
+          path:
+            - /resources
+            - /test-resources
+          url: https://ui5.sap.com
+        backend:
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZAU_FT_PROCESSORDER_SRVB_/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_AU_FT_HEADER/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_AU_FT_ITEM/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZAU_FT_PRODCONF_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZAU_FT_GR_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZAU_ACM_PROCESSORDER_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZAU_QA01_PROCESSORDER_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZAU_ATS_PROCESSORDER_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZDIPS_MASTER_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_AU_QA01_HEADER/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_AU_QA01_ITEM/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZAU_AIS_PROCESSORDER_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZAU_ACM_SAVE_DIPS_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_AU_TB_MAC_SPEED_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_AU_ACM_HEADER/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_AU_ACM_ITEM/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZCE_ACM_HEAD_CNF_SRB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZDEFECTS_TABLE_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_AU_MASTERDATA/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_AU_QA03_HEADER/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_AU_QA03_ITEM/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZAU_QA03_PROCESSORDER_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_MATDOC_REV_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZC_ATS_HEAD_GD_CRT_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZATS_MATDOC_REV_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZAU_ACM_BOM_COMPONENT_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_AU_QA02_HEADER/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_AU_QA02_ITEM/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZDIFFECTS_TAB_QA03_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZAIS_HEAD_GD_CRT_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZAIS_FT_GR_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZAIS_MATDOC_REV_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZAU_PTG_PROCESSORDER_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZCE_ATS_BATCH_RUN_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZCE_AIS_BATCH_RUN_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZPTG01_BATCH_RUN_281_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZNC_FT_HD_ITEM_REPORT_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZAU_ACM_SAVE_DIPS_DATA_SB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZAU_ACM_DOWNTIME_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZCE_ZCOUNT_HEAD_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_ZCOUNT_HEADER/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_ZCOUNT_ITEM/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZPTG_HEAD_GD_CRT__261_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZPTG_HEAD_GD_CRT_531_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZPTG01_BATCH_RUN_531_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZPTG_GR_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZCE_ZDTCOUNT_HEAD_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZCE_ZCOUNT_HEAD_SAVE_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZCE_USERBUSINESSROLE_SRB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZCE_ZCOUNT_FORM_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZCE_WASTE_PRINT_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZPTG01_MATDOC_REV_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZCE_ZCOUNT_REPT_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZCE_BATCH_MATNR_F4_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_ACM_REPORT/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_ATS_REPORT/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_PTG_REPORT/
+          - url: https://my421042-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421042_DEV
+            path: /sap/opu/odata/sap/ZPROC_HEAD_CONF_AIS_SRB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZPROC_HEAD_CONF_PTG_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZCE_ZBCR_REPT_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZCE_CONF_REV_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_YAIS_FIELDS/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_LABEL_HEADER/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_LABEL_ITEM/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_CUSTOM_LABEL_HEAD/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZSB_ZLABEL_REPT/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZCE_ZLABEL_FORM_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZCE_YFCS_REPT_SRVB/
+          - url: https://my421040-api.s4hana.cloud.sap
+            authenticationType: SAMLAssertion
+            destination: my421040_cust
+            path: /sap/opu/odata/sap/ZCE_YFCS_TAB_SRVB/
+    - name: fiori-tools-appreload
+      afterMiddleware: compression
+      configuration:
+        port: 35729
+        path: webapp
+        delay: 300
+    - name: fiori-tools-preview
+      afterMiddleware: fiori-tools-appreload
+      configuration:
+        component: zautodesignapp
+        ui5Theme: sap_horizon

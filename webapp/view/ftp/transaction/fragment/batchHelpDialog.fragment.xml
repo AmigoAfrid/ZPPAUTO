@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog" xmlns:m="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core">
+	<ValueHelpDialog supportMultiselect="false"  title=" Batch." ok=".onBatchValueHelpOkPress" cancel=".onBatchValueHelpCancelPress" afterClose=".onBatchValueHelpAfterClose" supportRanges="false" key="Batch" descriptionKey="">
+		<filterBar>
+			<fb:FilterBar  advancedMode="true" search=".onBatchFilterBarSearch" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="Batch." label="Batch." visibleInFilterBar="true">
+						<fb:control>
+								<m:Input name="Batch." showSuggestion="true" showValueHelp="false" suggestionItems="{ path: 'ZAU_FT_PROCESSORDER_SRVB_>/ZCE_FT_BATCH_VH', sorter: { path: 'Batch' }}">
+								<core:Item key="{ZAU_FT_PROCESSORDER_SRVB_>Batch}" text="{ZAU_FT_PROCESSORDER_SRVB_>Batch}" />
+							</m:Input>
+						</fb:control>
+					</fb:FilterGroupItem>
+				
+
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+		
+	</ValueHelpDialog>
+</core:FragmentDefinition> 

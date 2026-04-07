@@ -1,0 +1,99 @@
+<mvc:View xmlns:ndc="sap.ndc"
+		xmlns:c="sap.ui.core"
+		controllerName="zautodesignapp.controller.masterdata.componentmaterial.componentmaterial"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:u="sap.ui.unified"
+		xmlns="sap.m"
+        xmlns:core="sap.ui.core"
+		xmlns:t="sap.ui.table"
+		xmlns:fb="sap.ui.comp.filterbar"
+		xmlns:svm="sap.ui.comp.smartvariants"
+		xmlns:f="sap.f"
+		xmlns:tnt="sap.tnt"
+		xmlns:layout="sap.ui.layout"
+
+		height="100%">
+		<f:DynamicPage id="iddynamicpage" class="sapUiTinyMarginTop sapUiTinyMarginBegin" headerExpanded="false" preserveHeaderStateOnScroll="false" showFooter="true" fitContent="true">
+			<!-- DynamicPage Title -->
+			<f:title>
+				<f:DynamicPageTitle>
+				
+					<f:expandedContent>
+						<Label class="Titleexpanded" text="Component Material Master" />
+						<tnt:InfoLabel visible="false" text="Total Component Material Master : " />
+						<tnt:InfoLabel visible="false" text="" />
+						<tnt:InfoLabel visible="false" text="" />
+					</f:expandedContent>
+					<f:snappedContent>
+						<Label class="Titleclassssnap" text="Component Material Master" />
+						<tnt:InfoLabel visible="false" text="Total Component Material Master : " />
+					</f:snappedContent>
+					
+				</f:DynamicPageTitle>
+			</f:title>
+
+			<!-- DynamicPage Header -->
+
+			<f:content>
+				<t:Table enableBusyIndicator="true" threshold="100"  rowSelectionChange="onRowSelect"
+				rows="{path: 'TabModel>/Datass'}" selectionBehavior="Row" selectionMode="Multi" enableSelectAll="true"	rowMode="Auto">
+					<t:extension>
+						<OverflowToolbar style="Clear">
+							<Title text=" Component Material Master"/>
+							<!-- <SearchField placeholder="Filter" value="{ui>/filterValue}" search="handleTxtFilter" width="15rem"/> -->
+							<ToolbarSpacer/>
+							<ToolbarSpacer/>
+								<Button text="add" icon="sap-icon://add" press="OnGateAdd"/>
+                   			 	<!-- <ndc:BarcodeScannerButton icon="sap-icon://delete" press="OnTableRowRemove"/> -->
+									<Button text="remove" icon="sap-icon://delete" press="OnTableRowRemove"/>
+						</OverflowToolbar>
+					</t:extension>
+					<t:columns>
+
+					 	<t:Column width="auto" sortProperty="sno" tooltip="S.No"> <!-- 0 -->
+							<Label required="false" text="S.No" />
+							<t:template>
+								<Text text="{TabModel>sno}"/>
+							</t:template>
+						</t:Column>
+						
+					 	<t:Column width="auto" sortProperty="actualmatdesc" tooltip="Speed"><!--  1-->
+							<Label required="true" text="Actual Material Name" />
+							<t:template>
+							<Text text="{TabModel>actualmatdesc}" />
+							</t:template>
+						</t:Column>
+
+					 	<t:Column width="auto" sortProperty="matcode" tooltip="Material Code"> <!-- 2 -->
+							<Label required="true" text="Material Code" />
+							<t:template>
+								<Input type="Text" value="{TabModel>matcode}" change=".OnValidateMacNo"/>
+							</t:template>
+						</t:Column>
+
+					 	<t:Column width="auto" sortProperty="matdesc" tooltip="Speed"><!--  3-->
+							<Label required="true" text="Material Description" />
+							<t:template>
+							<Input type="Text" maxLength="80" value="{TabModel>matdesc}" />
+							</t:template>
+						</t:Column>
+
+					 	<t:Column width="auto" sortProperty="status" tooltip="Status"><!--  4-->
+							<Label required="true" text="Status" />
+							<t:template>
+								<Text text="{TabModel>status}"/>
+							</t:template>
+						</t:Column>
+						
+					</t:columns>
+				</t:Table>
+			</f:content>
+			<!-- DynamicPage Footer -->
+			<f:footer>
+				<OverflowToolbar>
+					<ToolbarSpacer  />
+					<Button tooltip="Save the document internally" type="Default" press=".OnSubmit" enabled="true" text="Save" icon="sap-icon://save" />
+				</OverflowToolbar>
+			</f:footer>
+		</f:DynamicPage>
+</mvc:View>

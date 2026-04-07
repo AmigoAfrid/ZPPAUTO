@@ -1,0 +1,229 @@
+/* Or, specifically target VBox for this use case if necessary */
+.myCustomVBoxClass {
+    margin-top:-50px;  /* Adjust as needed */
+}
+
+.myCustomVBoxClassGo {
+    margin-top:-30px;  /* Adjust as needed */
+}
+.myCustomVBoxClassGo {
+    margin-left:200px;  /* Adjust as needed */
+}
+.myCustomVBoxClassSpacing {
+    margin-left:12px;  /* Adjust as needed */
+}
+.myCustomVBoxClassSpacingS {
+    margin-left:18px;  /* Adjust as needed */
+}
+.myCustomVBoxClassH {
+    margin-left:170px;  /* Adjust as needed */
+}
+
+.sapTntSideNavigation {
+    height: 100%;
+}
+
+.sapMSplitContainerMaster {
+    margin-top: 0.5rem;
+}
+
+.IdGateEntryTotalText{
+    font-size: 1rem;
+}
+
+.IdGateEntryTotalText1{
+    font-size: 1rem;
+    margin-left: 7.4rem;
+}
+
+.IdGateEntryTotalNo{
+    font-size: 1.5rem;
+}
+
+
+
+.ClassTextBolder{
+    font-weight: bolder;
+    /* color: blue !important; */
+}
+
+.masterStyle{
+    width:3.5rem;
+}
+
+.masterStyleAfter{
+    width: 20.8rem;
+}
+
+.sapUiGlobalBackgroundColor .sapUiGlobalBackgroundColor:not(.sapUiGlobalBackgroundColorForce), .sapMGlobalBackgroundColor .sapUiGlobalBackgroundColor:not(.sapUiGlobalBackgroundColorForce) {
+    background-color: rgb(220, 220, 220);
+    background-image: none;
+}
+
+.IconTabDatas{
+    font-size: 1rem;
+}
+
+/* .sapMTB.sapMTBStandard {
+    border-bottom: none;
+} */
+
+[data-iconcolor="green"] {
+    color: green;
+}
+
+[data-iconcolor="yellow"] {
+    color: yellow;
+}
+
+.LabelTextAlign{
+    margin-top: 7px;
+}
+
+.sapUiForm .sapUiFormTitle {
+    border-width: 0px;
+    border-color: #a8b3bd;
+    font-family: "72-Bold", "72-Boldfull", "72", "72full", Arial, Helvetica, sans-serif;
+    height: 2.75rem;
+    line-height: 2.75rem;
+}
+
+.TableIDD.sapMLIBShowSeparator>td {
+    border-top: 0px solid #e5e5e5;
+}
+
+ .TableIDD.sapMListShowSeparatorsAll .sapMLIBShowSeparator:last-child>td:not(.sapMListTblDummyCell), .sapMListShowSeparatorsAll .sapMListTblSubRow:last-child>td:not(.sapMListTblDummyCell) {
+    border-bottom: 0px solid #a8b3bd;
+}
+
+.TableIDD.sapMTable {
+    border: none; /* Remove the border */
+}
+
+.TablePadding{
+    padding-left: 2rem;
+}
+
+
+/* CSS from EXIM */
+/* Enter your custom styles here */
+
+.tileLayout {
+	float: left;
+}
+
+
+.wrapper {
+	margin: auto;
+	overflow-x: hidden;
+	white-space: nowrap; /* Prevents the text from wrapping to the next line */
+	width: 100%; /* Ensure the wrapper takes full width */
+  }
+  
+  .target {
+	display: inline-block; /* Ensures the text is treated as an inline-block element */
+	font-weight: bold;
+	color: black;
+	animation: leftToRight 12s linear infinite; /* Increased the duration to 10 seconds */
+	white-space: nowrap; /* Prevent text wrapping */
+  }
+  
+  @keyframes leftToRight {
+	0% {
+	  transform: translateX(-100%); /* Start from the left outside the viewport */
+	}
+	100% {
+	  transform: translateX(100vw); /* Move to the right outside the viewport */
+	}
+  }
+  
+  .target:hover {
+	animation-play-state: paused;
+	cursor: pointer;
+  }
+
+  .TitleFragment{
+	font-size: 1.5rem !important;
+    font-family: "72Black", "72Blackfull", "72", "72full", Arial, Helvetica, sans-serif !important;
+  }
+
+  .Titleexpanded{
+	color: black !important;
+	font-weight: bolder !important;
+	font-size: 1.5rem !important;
+	font-family: "72Black", "72Blackfull", "72", "72full", Arial, Helvetica, sans-serif !important;
+  }
+  .Titleclassssnap{
+	color: black !important;
+	font-weight: bolder !important;
+	font-size: 1.25rem !important;
+	font-family: "72Black", "72Blackfull", "72", "72full", Arial, Helvetica, sans-serif !important;
+
+  }
+
+  .sapMImg {
+    border: none;
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -webkit-touch-callout: none;
+    height: 38px;
+}
+
+
+
+/* For Inward CSS */
+
+.INWARDCSS{
+    color: red !important;
+}
+/* 
+.sapTntNavLIItem .sapMText {
+    color: #e3f707 !important;
+} */
+
+/* Change font color for NavigationListItem */
+#KIRU060100 .sapTntNavLIText {
+    color: blue !important; /* Replace with desired color */
+}
+
+.customNavTextColor {
+    color: blue !important;  /* Replace with the desired color */
+}
+  
+.customTopMargin {
+    margin-top: 28px !important; /* Or any value you prefer */
+}
+
+/* For button value help css */
+.fixedButtonLayout .sapMFlexItem {
+    flex: 0 0 auto;
+    margin: 4px;
+}
+
+
+
+
+/* for zcount lable print */
+
+@media print {
+  body, td, th, div, span, p {
+    color: #000000 !important;
+    font-weight: bold !important;
+    opacity: 1 !important;
+  }
+
+  .table td, .table th {
+    border: 2px solid #000000 !important;
+  }
+
+  .header h1 {
+    color: #000000 !important; /* instead of white */
+  }
+
+  /* Ensure browser doesn’t lighten colors */
+  body {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}

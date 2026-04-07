@@ -1,0 +1,292 @@
+<core1:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core1="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:u="sap.ui.unified"
+    xmlns:t="sap.ui.table"
+    xmlns:m="sap.f"
+    xmlns:layout1="sap.ui.layout"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core">
+    <Dialog id="id_qualitycheck" title="FINAL QUALITY CHECK ASSESSMENT - PRINTED CAPSULES - FCQ(QA01) ASSESSMENT" showHeader="true" verticalScrolling="true" horizontalScrolling="true" contentHeight="100%" contentWidth="100%" resizable="true" draggable="true" >
+        <VBox class="sapUiSmallMargin">
+            <!-- Coding Place -->
+            <!-- Start Table create place -->
+            <Title text="Visual Defects" level="H3" class="sapUiTinyMarginBottom"/>
+            <t:Table
+            rows="{path: 'JModel1>/critical'}"
+            selectionMode="None"
+            >
+                <t:extension>
+                    <OverflowToolbar
+                    style="Clear">
+                        <Title text="Critical Table"/>
+                    </OverflowToolbar>
+                </t:extension>
+                <t:extension>
+                    <OverflowToolbar
+                    style="Clear">
+                        <Title text="Defects Table"/>
+                    </OverflowToolbar>
+                </t:extension>
+                <t:columns>
+                    <t:Column
+                    width="4rem"
+                    hAlign="Left">
+                        <Label text="S.No."/>
+                        <t:template>
+                            <Text text="{JModel1>sno}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                    width="11rem"
+                    hAlign="Left">
+                        <Label text="Critical Defects"/>
+                        <t:template>
+                            <Text text="{JModel1>defects}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                    width="5rem"
+                    hAlign="Left">
+                        <Label text="Norm"/>
+                        <t:template>
+                            <Text
+                                    text="{JModel1>norm}"
+                                    width="100%"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                    width="auto"
+                    hAlign="Left">
+                        <Label text="IPQC"/>
+                        <t:template>
+                            <Input
+                                    value="{JModel1>ipqc}"
+                                    width="100%"
+                                    placeholder=""
+                                    editable="{JModel1>editable}"
+                                    type="{JModel1>datatype}"
+                                    change=".onLevelLiveChange"  />
+                        </t:template>
+                    </t:Column>
+                    <!-- <t:Column
+                    width="auto"
+                    hAlign="Left"><Label text="Level2"/><t:template><Text
+                                    value="{JModel1>level2}"
+                                    width="100%"
+                                    type="Text"
+                                    placeholder="" /></t:template></t:Column> -->
+                    <!-- <t:Column
+                    width="auto"
+                    hAlign="Left"><Label text="Level3"/><t:template><Text
+                                    value="{JModel1>level3}"
+                                    width="100%"
+                                    type="Text"
+                                    placeholder="" /></t:template></t:Column> -->
+                    <!-- <t:Column
+                    width="auto"
+                    hAlign="Left"><Label text="Level4"/><t:template><Text
+                                    value="{JModel1>level4}"
+                                    width="100%"
+                                    type="Text"
+                                    placeholder="" /></t:template></t:Column> -->
+                </t:columns>
+            </t:Table>
+            <t:Table
+            rows="{JModel2>/major}"
+            selectionMode="None"
+            >
+                <!-- rowMode="fixed" -->
+                <t:extension>
+                    <OverflowToolbar
+                    style="Clear">
+                        <Title text="Major Table"/>
+                    </OverflowToolbar>
+                </t:extension>
+                <t:columns>
+                    <t:Column
+                    width="4rem"
+                    hAlign="Left">
+                        <Label text="S.No."/>
+                        <t:template>
+                            <Text text="{JModel2>sno}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                    width="11rem"
+                    hAlign="Left">
+                        <Label text="Major Defects"/>
+                        <t:template>
+                            <Text text="{JModel2>defects}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                    width="5rem"
+                    hAlign="Left">
+                        <Label text="Norm"/>
+                        <t:template>
+                            <Text
+                                    text="{JModel2>norm}"
+                                    width="100%" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                    width="auto"
+                    hAlign="Left">
+                        <Label text="ipqc"/>
+                        <t:template>
+                            <Input
+                                    value="{JModel2>ipqc}"
+                                    width="100%"
+                                    placeholder=""
+                                    editable="{JModel2>editable}"
+                                    type="{JModel2>datatype}"
+                                    change=".onLevelLiveChange" />
+                        </t:template>
+                    </t:Column>
+                    <!-- change=".onipqcLiveChange" -->
+                    <!-- <t:Column
+                    width="auto"
+                    hAlign="Left"><Label text="Level2"/><t:template><Text
+                                    value="{JModel2>level2}"
+                                    width="100%"
+                                    type="Text"
+                                    placeholder=""/></t:template></t:Column><t:Column
+                    width="auto"
+                    hAlign="Left"><Label text="Level3"/><t:template><Text
+                                    value="{JModel2>level3}"
+                                    width="100%"
+                                    type="Text"
+                                    placeholder=""/></t:template></t:Column><t:Column
+                    width="auto"
+                    hAlign="Left"><Label text="Level4"/><t:template><Text
+                                    value="{JModel2>level4}"
+                                    width="100%"
+                                    type="Text"
+                                    placeholder=""/></t:template></t:Column> -->
+                </t:columns>
+            </t:Table>
+            <t:Table
+            rows="{JModel3>/minor}"
+            selectionMode="None"
+            >
+                <t:extension>
+                    <OverflowToolbar
+                    style="Clear">
+                        <Title text="Minor Table"/>
+                    </OverflowToolbar>
+                </t:extension>
+                <t:columns>
+                    <t:Column
+                    width="4rem"
+                    hAlign="Left">
+                        <Label text="S.No."/>
+                        <t:template>
+                            <Text text="{JModel3>sno}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                    width="11rem"
+                    hAlign="Left">
+                        <Label text="Minor Defects"/>
+                        <t:template>
+                            <Text text="{JModel3>defects}"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                    width="5rem"
+                    hAlign="Left">
+                        <Label text="Norm"/>
+                        <t:template>
+                            <Text
+                                    text="{JModel3>norm}"
+                                    width="100%"/>
+                        </t:template>
+                    </t:Column>
+                    <t:Column
+                    width="auto"
+                    hAlign="Left">
+                        <Label text="ipqc"/>
+                        <t:template>
+                            <Input
+                                    value="{JModel3>ipqc}"
+                                    width="100%"
+                                    placeholder=""
+                                    editable="{JModel3>editable}"
+                                    type="{JModel3>datatype}"
+                                    change=".onLevelLiveChange"/>
+                        </t:template>
+                    </t:Column>
+                    <!-- <t:Column
+                    width="auto"
+                    hAlign="Left"><Label text="Level2"/><t:template><Text
+                                    value="{JModel3>level2}"
+                                    width="100%"
+                                    type="Text"
+                                    placeholder=""/></t:template></t:Column><t:Column
+                    width="auto"
+                    hAlign="Left"><Label text="Level3"/><t:template><Text
+                                    value="{JModel3>level3}"
+                                    width="100%"
+                                    type="Text"
+                                    placeholder=""/></t:template></t:Column><t:Column
+                    width="auto"
+                    hAlign="Left"><Label text="Level4"/><t:template><Text
+                                    value="{JModel3>level4}"
+                                    width="100%"
+                                    type="Text"
+                                    placeholder=""/></t:template></t:Column> -->
+                </t:columns>
+            </t:Table>
+            <!-- End Table create place -->
+            <VBox class="sapUiSmallMarginTop">
+                <FlexBox direction="Row" alignItems="Center" class="sapUiSmallMarginTop">
+                    <Label text="Grade" labelFor="section2Input" width="150px"/>
+                    <Input value="{QAJModelInput>/Samples/grades}" editable="false" placeholder="Enter value..." maxLength="120" width="300px"/>
+                </FlexBox>
+            </VBox>
+            <VBox class="sapUiSmallMarginTop">
+                <Title text="Section2" level="H3" class="sapUiTinyMarginBottom"/>
+                <FlexBox direction="Row" alignItems="Center" class="sapUiSmallMarginTop">
+                    <Label text="CFM Performance" labelFor="section2Input" width="150px"/>
+                    <Input value="{QAJModelInput>/Samples/qa01_cfmperform}" placeholder="Enter value..." maxLength="120" width="300px"/>
+                </FlexBox>
+            </VBox>
+            <VBox class="sapUiTinyMarginTop">
+                <Title text="Section3" level="H3" class="sapUiTinyMarginBottom"/>
+                <!-- Avg. Wt. of 100 Capsules -->
+                <FlexBox direction="Row" alignItems="Center" class="sapUiTinyMarginTop">
+                    <Label text="3. Avg. Wt. of 100 Capsules (By Packing):" width="150px"/>
+                    <Input value="{QAJModelInput>/Samples/qa01_avgwt}" maxLength="120" placeholder="Enter value..."/>
+                </FlexBox>
+                <!-- Moisture Content (%) -->
+                <FlexBox direction="Row" alignItems="Center" class="sapUiSmallMarginTop">
+                    <Label text="4. Moisture Content (%) (By IPQC):" width="150px"/>
+                    <Input value="{QAJModelInput>/Samples/qa01_moistcontent}" maxLength="120" placeholder="Enter value..."/>
+                </FlexBox>
+                <!-- Pull Test -->
+                <FlexBox direction="Row" alignItems="Center" class="sapUiSmallMarginTop">
+                    <Label text="5. Pull Test: (OK / Not OK) (By IPQC):" width="150px"/>
+                    <Input value="{QAJModelInput>/Samples/qa01_pulltest}" maxLength="120" placeholder="Enter value..."/>
+                </FlexBox>
+                <!-- Joining Length -->
+                <FlexBox direction="Row" alignItems="Center" class="sapUiSmallMarginTop">
+                    <Label text="6. Joining Length (mm) (By IPQC):" width="150px"/>
+                    <Input value="{QAJModelInput>/Samples/qa01_joinlength}" maxLength="120" placeholder="Enter value..."/>
+                </FlexBox>
+            </VBox>
+        </VBox>
+        <!-- Start - Footer  -->
+        <footer>
+            <OverflowToolbar>
+                <Button id="messagePopoverBtn" icon="sap-icon://warning2" text="{ErrorModel>/Errors/0/text}" type="Attention" press="onMessageButtonPress" visible="false" />
+                <ToolbarSpacer />
+                <Button press="onQualitySubmit" icon="sap-icon://save" text="Submit"/>
+                <Button press="onQualityCancel" icon="sap-icon://cancel" text="Cancel"/>
+            </OverflowToolbar>
+        </footer>
+        <!-- End - Footer  -->
+    </Dialog>
+</core1:FragmentDefinition>

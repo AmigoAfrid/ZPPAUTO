@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="cds_zce_yfcs_rept_srvd" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="ZCE_YFCS_REPTType" sap:label="YFCS Counting record" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="srno"/>
+                </Key>
+                <Property Name="srno" Type="Edm.String" Nullable="false" MaxLength="10"/>
+                <Property Name="process_order" Type="Edm.String" MaxLength="12"/>
+                <Property Name="salesorder" Type="Edm.String" MaxLength="10"/>
+                <Property Name="createdat" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="batch" Type="Edm.String" MaxLength="10"/>
+                <Property Name="boxno" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative"/>
+                <Property Name="drum_no" Type="Edm.String" MaxLength="6"/>
+                <Property Name="avrgwt" Type="Edm.String" MaxLength="10"/>
+                <Property Name="qty" Type="Edm.Decimal" Precision="16" Scale="3"/>
+                <Property Name="qty_lac" Type="Edm.Decimal" Precision="16" Scale="3"/>
+                <Property Name="tare_wt" Type="Edm.String" MaxLength="10"/>
+                <Property Name="netwt" Type="Edm.Decimal" Precision="16" Scale="3"/>
+                <Property Name="grosswt" Type="Edm.Decimal" Precision="16" Scale="3"/>
+                <Property Name="target_qty" Type="Edm.Decimal" Precision="16" Scale="2"/>
+                <Property Name="cbyname" Type="Edm.String" MaxLength="40"/>
+                <Property Name="tot_lac" Type="Edm.Decimal" Precision="16" Scale="2"/>
+                <Property Name="remarks" Type="Edm.String" MaxLength="40"/>
+                <Property Name="plant" Type="Edm.String" MaxLength="4"/>
+                <Property Name="customername" Type="Edm.String" MaxLength="40"/>
+                <Property Name="material" Type="Edm.String" MaxLength="18"/>
+                <Property Name="fsc_operator" Type="Edm.String" MaxLength="40"/>
+                <Property Name="yfcs_date" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="Observations" Type="Edm.String" MaxLength="40"/>
+                <Property Name="capprinting" Type="Edm.String" MaxLength="20"/>
+                <Property Name="bodyprinting" Type="Edm.String" MaxLength="20"/>
+                <Property Name="location" Type="Edm.String" MaxLength="40"/>
+                <Property Name="packedby" Type="Edm.String" MaxLength="40"/>
+                <Property Name="verified_by" Type="Edm.String" MaxLength="40"/>
+                <Property Name="status" Type="Edm.String" MaxLength="1"/>
+            </EntityType>
+            <EntityContainer Name="cds_zce_yfcs_rept_srvd_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ZCE_YFCS_REPT" EntityType="cds_zce_yfcs_rept_srvd.ZCE_YFCS_REPTType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <Annotations Target="cds_zce_yfcs_rept_srvd.cds_zce_yfcs_rept_srvd_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cds_zce_yfcs_rept_srvd.cds_zce_yfcs_rept_srvd_Entities/ZCE_YFCS_REPT" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zce_yfcs_rept_srvd.cds_zce_yfcs_rept_srvd_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Org.OData.Capabilities.V1.BatchSupport">
+                    <Record Type="Org.OData.Capabilities.V1.BatchSupportType">
+                        <PropertyValue Property="ReferencesAcrossChangeSetsSupported" Bool="true"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="/sap/opu/odata/sap/ZCE_YFCS_REPT_SRVB/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="/sap/opu/odata/sap/ZCE_YFCS_REPT_SRVB/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

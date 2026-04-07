@@ -1,0 +1,140 @@
+<mvc:View controllerName="zautodesignapp.controller.App"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:mvc="sap.ui.core.mvc"
+    displayBlock="true"
+    xmlns:tnt="sap.tnt"
+    xmlns="sap.m">
+
+    <App id="app" initialPage="splitApp">
+        <SplitApp id="splitApp">
+            <masterPages>
+                <Page showHeader="true" title="Master Page">
+                    <customHeader>
+                        <Bar>
+                            <contentLeft>
+                                <Image id="SideBarHeaderLogo" width="120px" src="{/svgLogo}" />
+                            </contentLeft>
+
+                          <contentMiddle>
+		    <Text class="ClassTextBolder" id="SideBarHeaderCName" text=""></Text>
+		</contentMiddle>
+                            <contentRight>
+                                <!-- <Button press="OnRefresh" tooltip="Refresh Your Admin Panel..." icon="sap-icon://refresh" /> -->
+                                <Button press="OnClick" tooltip="Expand/Collapse Side Bar..." icon="sap-icon://menu2" />
+                            </contentRight>
+                        </Bar>
+                    </customHeader>
+
+                    <content>
+                        <tnt:SideNavigation visible="true" id="sideNavigation" width="330px">
+                            <tnt:NavigationList width="330px" id="navigationList">
+                                
+<!-- enabled="{= ${AdminPanelAuth>/Samples/Role} === false ? false : true}" -->
+
+                                <tnt:NavigationListItem   visible="true" text="Feed Tank Process" select=".OnExpandItems" expanded="false" icon="sap-icon://BusinessSuiteInAppSymbols/icon-truck-load">
+                                    <tnt:NavigationListItem visible="true" key="ftp.transaction.ftp_selectrange" text="Transaction" select=".OnNavBtn"/>
+                                    <tnt:NavigationListItem visible="true" key="ftp.report.ftp_report" text="Reports" select=".OnNavBtn"/>
+                                </tnt:NavigationListItem>
+
+                                <tnt:NavigationListItem visible="true" text="ACM Process" select=".OnExpandItems" expanded="false" icon="sap-icon://BusinessSuiteInAppSymbols/icon-truck-load">
+                                    <tnt:NavigationListItem visible="true" key="acm.transaction.acm_selectrange" text="Transaction" select=".OnNavBtn"/>
+                                    <tnt:NavigationListItem visible="true" key="acm.report.acm_report" text="Reports" select=".OnNavBtn"/>
+                                     <tnt:NavigationListItem visible="true" key="acm.downtime.acm_downtime" text="Downtime" select=".OnNavBtn"/>
+                                        <tnt:NavigationListItem visible="true" key="acm.downtimereport.downtime_report" text="Downtime Report" select=".OnNavBtn"/>
+                                    
+                                </tnt:NavigationListItem>
+
+                                <tnt:NavigationListItem visible="true" text="Quality ATS Process" select=".OnExpandItems" expanded="false" icon="sap-icon://BusinessSuiteInAppSymbols/icon-truck-load">
+                                    <tnt:NavigationListItem visible="true" key="qa01.transaction.qa01_selectrange" text="Transaction" select=".OnNavBtn"/>
+                                    <tnt:NavigationListItem visible="false" key="qa01.report.qa01_report" text="Reports" select=".OnNavBtn"/>
+                                </tnt:NavigationListItem>
+
+                                <tnt:NavigationListItem visible="true" text="ATS Process" select=".OnExpandItems" expanded="false" icon="sap-icon://BusinessSuiteInAppSymbols/icon-truck-load">
+                                    <tnt:NavigationListItem visible="true" key="ats.transaction.ats_selectrange" text="Transaction" select=".OnNavBtn"/>
+                                    <tnt:NavigationListItem visible="true" key="ats.report.ats_report" text="Reports" select=".OnNavBtn"/>
+                                </tnt:NavigationListItem>
+
+                                <tnt:NavigationListItem visible="true" text="Quality AIS Process" select=".OnExpandItems" expanded="false" icon="sap-icon://BusinessSuiteInAppSymbols/icon-truck-load">
+                                    <tnt:NavigationListItem visible="true" key="qa02.transaction.qa02_selectrange" text="Transaction" select=".OnNavBtn"/>
+                                    <tnt:NavigationListItem visible="false" key="qa02.report.qa02_report" text="Reports" select=".OnNavBtn"/>
+                                </tnt:NavigationListItem>
+
+
+                                
+                                <tnt:NavigationListItem visible="true" text="AIS Process" select=".OnExpandItems" expanded="false" icon="sap-icon://BusinessSuiteInAppSymbols/icon-truck-load">
+                                    <tnt:NavigationListItem visible="true" key="ais.transaction.ais_selectrange" text="Transaction" select=".OnNavBtn"/>
+                                    <tnt:NavigationListItem visible="true" key="ais.report.ais_report" text="Reports" select=".OnNavBtn"/>
+                                </tnt:NavigationListItem>
+
+
+                                 <tnt:NavigationListItem visible="true" text="Quality Printing Process" select=".OnExpandItems" expanded="false" icon="sap-icon://BusinessSuiteInAppSymbols/icon-truck-load">
+                                    <tnt:NavigationListItem visible="true" key="qa03.transaction.qa03_selectrange" text="Transaction" select=".OnNavBtn"/>
+                                    <tnt:NavigationListItem visible="false" key="qa03.report.qa03_report" text="Reports" select=".OnNavBtn"/>
+                                </tnt:NavigationListItem>
+
+
+                                <tnt:NavigationListItem visible="true" text="Printing Process" select=".OnExpandItems" expanded="false" icon="sap-icon://BusinessSuiteInAppSymbols/icon-truck-load">
+                                    
+                                    <tnt:NavigationListItem visible="true" key="ptg.transaction.ptg_selectrange" text="Transaction" select=".OnNavBtn"/>
+                                    <tnt:NavigationListItem visible="true" key="ptg.report.ptg_report" text="Reports" select=".OnNavBtn"/>
+                                </tnt:NavigationListItem>
+
+
+                                <tnt:NavigationListItem visible="true" text="Packing Process" select=".OnExpandItems" expanded="false" icon="sap-icon://BusinessSuiteInAppSymbols/icon-truck-load">
+                                    <tnt:NavigationListItem visible="true" key="zcount.transaction.zcount_selectrange" text="Transaction" select=".OnNavBtn"/>
+                                    <tnt:NavigationListItem visible="true" key="zcount.report.zcount_report" text="Reports" select=".OnNavBtn"/>
+                                </tnt:NavigationListItem>
+
+                                <tnt:NavigationListItem visible="true" text="Counting Record - YFCS" select=".OnExpandItems" expanded="false" icon="sap-icon://BusinessSuiteInAppSymbols/icon-truck-load">
+                                    <tnt:NavigationListItem visible="true" key="yfcs.report.yfcs_report" text="Reports" select=".OnNavBtn"/>
+                                </tnt:NavigationListItem>
+
+                                <tnt:NavigationListItem visible="false" text="YCOUNT Report" select=".OnExpandItems" expanded="false" icon="sap-icon://BusinessSuiteInAppSymbols/icon-truck-load">
+                                    <!-- <tnt:NavigationListItem visible="true" key="zcount.transaction.zcount_selectrange" text="Transaction" select=".OnNavBtn"/> -->
+                                    <tnt:NavigationListItem visible="false" key="ycount.report.ycount_report" text="Reports" select=".OnNavBtn"/>
+                                </tnt:NavigationListItem>
+
+                                <tnt:NavigationListItem visible="true" text="YBCR Report"  select=".OnExpandItems" expanded="false" icon="sap-icon://BusinessSuiteInAppSymbols/icon-truck-load">
+                                    <!-- <tnt:NavigationListItem visible="true" key="zcount.transaction.zcount_selectrange" text="Transaction" select=".OnNavBtn"/> -->
+                                    <tnt:NavigationListItem visible="true" key="ybcr.report.ybcr_report" text="Reports" select=".OnNavBtn"/>
+                                </tnt:NavigationListItem>
+
+                                <tnt:NavigationListItem visible="true" text="MASTER DATA" select=".OnExpandItems" expanded="false" icon="sap-icon://sap-box">
+                                    <tnt:NavigationListItem visible="true" key="masterdata.dips.dipscalculation" text="DIPS Calculation" select=".OnNavBtn"/>
+                                    <tnt:NavigationListItem visible="false" key="masterdata.macspeed.macspeed" text="MAC Speed" select=".OnNavBtn"/>
+                                    <tnt:NavigationListItem visible="false" key="masterdata.componentmaterial.componentmaterial" text="Component Material Master" select=".OnNavBtn"/>
+                                </tnt:NavigationListItem>
+
+
+                                   <tnt:NavigationListItem visible="true" text="Wastage Reports" select=".OnExpandItems" expanded="false" icon="sap-icon://print">
+                                    <!-- <tnt:NavigationListItem visible="true" key="zcount.transaction.zcount_selectrange" text="Transaction" select=".OnNavBtn"/> -->
+                                    <tnt:NavigationListItem visible="true" key="WastageReport.report.Wastage_report" text="Labels" select=".OnNavBtn"/>
+                                </tnt:NavigationListItem>
+
+                                <tnt:NavigationListItem visible="true" text="Z Label" select=".OnExpandItems" expanded="false" icon="sap-icon://building">
+                                    <tnt:NavigationListItem visible="true" key="zlabel.transaction.zlabel_selectrange" text="Transaction" select=".OnNavBtn"/>
+                                    <tnt:NavigationListItem visible="true" key="zlabel.report.zlabel_report" text="Report - YCOUNT" select=".OnNavBtn"/>
+                                </tnt:NavigationListItem>
+
+                            </tnt:NavigationList>
+
+                  
+
+                            <!-- <tnt:fixedItem>
+                                <tnt:NavigationList width="330px">
+                                    <tnt:NavigationListItem text="Help &amp; Support" tooltip="Help &amp; Support" icon="sap-icon://sys-help" />
+                                    <tnt:NavigationListItem text="Useful Links" tooltip="Useful Links" icon="sap-icon://chain-link" />
+                                </tnt:NavigationList>
+                            </tnt:fixedItem> -->
+                       
+                        </tnt:SideNavigation>
+                    </content>
+                </Page>
+            </masterPages>
+
+            <detailPages>
+                <mvc:XMLView viewName="zautodesignapp.view.Home" />
+            </detailPages>
+        </SplitApp>
+    </App>
+</mvc:View>

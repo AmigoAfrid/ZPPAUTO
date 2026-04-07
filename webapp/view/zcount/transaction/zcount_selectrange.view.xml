@@ -1,0 +1,379 @@
+<mvc:View
+    controllerName="zautodesignapp.controller.zcount.transaction.zcount_selectrange"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+	xmlns:u="sap.ui.unified"
+	xmlns:core="sap.ui.core"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.f"
+	xmlns:layout="sap.ui.layout"
+    height="100%">
+	<f:DynamicPage
+       
+        visible="{= ${ScreenVisible>/openscreen} === 'screen1' }"
+        class="sapUiTinyMarginTop sapUiTinyMarginBegin"
+        preserveHeaderStateOnScroll="true"
+        showFooter="true"
+        fitContent="true">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle >
+				<f:heading>
+					<Title text="ZCount Selection Screen" />
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!-- DynamicPage Header -->
+		<f:header>
+			<f:DynamicPageHeader  pinnable="true">
+				<FlexBox  alignItems="Start" justifyContent="SpaceBetween">
+					<items>
+						<Panel
+                           
+                            backgroundDesign="Transparent"
+                            class="sapUiNoContentPadding">
+							<content>
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Process Order NO :" tooltip="Process order no" design="Bold" required="true" />
+									<!-- <Input  editable="true" value="{zcountmodel>/HeaderData/0/processno}" /> -->
+									      <Input maxLength="10" required="true" width="12.5rem" id="idprocessorder" placeholder="Select process order.." editable="true" enabled="true"    showValueHelp="true" valueHelpRequest=".onValueHelpRequest"  suggest=".OnSuggest_User" suggestionItems="{oJSONModel>/Datas}" showSuggestion="true"  suggestionItemSelected=".ondocumentsuggestselected">
+                    <suggestionItems>
+                    <core:Item key="{POJsonModel>AccountingDocument}" text="{POJsonModel>AccountingDocument}"></core:Item>
+                    </suggestionItems>
+                    </Input>				
+					</layout:VerticalLayout>
+
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="" tooltip="" design="Bold"  />
+									<Button text="Go" tooltip="Execute" type="Emphasized" press="onGoItemPages" enabled="true" />
+							</layout:VerticalLayout>
+								
+							</content>
+						</Panel>
+					</items>
+				</FlexBox>
+			</f:DynamicPageHeader>
+		</f:header>
+		<!-- DynamicPage Content -->
+		<!-- DynamicPage Footer -->
+		<!-- <f:footer  ><OverflowToolbar id="overFlow"><Button  icon="sap-icon://message-popup" text="{/messagesLength}" type="Emphasized" id="idBtn" press="onMessageButtonPress" visible="{= !!${/messagesLength}}"/><ToolbarSpacer id="toolbarsapcer" /><Button visible="false"  tooltip="Save" type="Accept" press="onGoToScreen2" id="Final_Save_Button" enabled="true" text="Next" icon="sap-icon://save" /></OverflowToolbar></f:footer> -->
+	</f:DynamicPage>
+	<!-- screen 2  -->
+	<f:DynamicPage
+        
+        visible="{= ${ScreenVisible>/openscreen} === 'screen2' }"
+        class="sapUiTinyMarginTop sapUiTinyMarginBegin"
+        preserveHeaderStateOnScroll="true"
+        showFooter="true"
+        fitContent="true"
+		xmlns:f="sap.f"
+		xmlns="sap.m"
+		xmlns:c="sap.ui.core">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle >
+				<f:heading>
+					<Title text="ZCount Process" />
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!-- DynamicPage Header -->
+		<f:header>
+			<f:DynamicPageHeader id="iddynamicscount" pinnable="true">
+				<FlexBox id="idflexboxscount" alignItems="Start" justifyContent="SpaceBetween">
+					<items>
+						<Panel
+                            id="idpanelscount"
+                            backgroundDesign="Transparent"
+                            class="sapUiNoContentPadding">
+							<content>
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Sales Document :"  class="sapUiSmallMarginTop" />
+									 <Input value="{zcountmodel>/HeaderData/0/SalesOrder}" editable="false" />
+								</layout:VerticalLayout>
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="SIZE:" class="sapUiSmallMarginTop" />
+									<Input value="{zcountmodel>/HeaderData/0/Zsize}" editable="false" />
+								</layout:VerticalLayout>
+
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Process ORDER:" class="sapUiSmallMarginTop" />
+									<Input value="{zcountmodel>/HeaderData/0/ProcessOrder}" editable="false" />
+								</layout:VerticalLayout>
+								<layout:VerticalLayout visible="false" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="C/B:" class="sapUiSmallMarginTop" />
+									<Input value="" editable="false" />
+								</layout:VerticalLayout>
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Sales order QTY:" class="sapUiSmallMarginTop" />
+									<Input value="{zcountmodel>/HeaderData/0/ItemGrossWeight}" editable="false" />
+								</layout:VerticalLayout>
+								<layout:VerticalLayout visible="false" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="COLOUR CODE:" class="sapUiSmallMarginTop" />
+									<Input value="" editable="false" />
+								</layout:VerticalLayout>
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Process order QTY :" tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+									<Input value="{zcountmodel>/HeaderData/0/MfgOrderPlannedTotalQty}" editable="false" />
+								</layout:VerticalLayout>
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Checked By :" tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+									<Input value="{zcountmodel>/HeaderData/0/checked_by}" editable="false" />
+								</layout:VerticalLayout>
+
+								<layout:VerticalLayout visible="false" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Verified :" tooltip="Field" design="Bold" class="sapUiSmallMarginTop"  />
+									<Input value="{zcountmodel>/HeaderData/0/verfied_by}" editable="true" />
+								</layout:VerticalLayout>
+								<layout:VerticalLayout visible="false" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Remarks:" tooltip="Field" design="Bold" class="sapUiSmallMarginTop"  />
+									<Input value="{zcountmodel>/HeaderData/0/remarks}" editable="true" />
+								</layout:VerticalLayout>
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Item Gross Weight :" tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+									<Input value="{zcountmodel>/HeaderData/0/ItemGrossWeight}" editable="false" />
+								</layout:VerticalLayout>
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Counted Quantity:" tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+									<Input value="{zcountmodel>/HeaderData/0/counted_qty}" editable="false" />
+								</layout:VerticalLayout>
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Target Quantity:" tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+									<Input value="{zcountmodel>/HeaderData/0/target_qty}" editable="false" />
+								</layout:VerticalLayout>
+								
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Batch" tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+									<Input value="{zcountmodel>/HeaderData/0/Batch}" editable="false" />
+								</layout:VerticalLayout>
+
+
+									<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Sales order" tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+									<Input value="{zcountmodel>/HeaderData/0/SalesOrder}" editable="false" />
+								</layout:VerticalLayout>
+									<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Sales order item text" tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+									<Input value="{zcountmodel>/HeaderData/0/salesorderitemtext}" editable="false" />
+								</layout:VerticalLayout>
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Customer Name" tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+									<Input value="{zcountmodel>/HeaderData/0/CustomerName}" editable="false" />
+								</layout:VerticalLayout>
+
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Customer" tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+									<Input value="{zcountmodel>/HeaderData/0/Customer}" editable="false" />
+								</layout:VerticalLayout>
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Material" tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+									<Input value="{zcountmodel>/HeaderData/0/Product}" editable="false" />
+								</layout:VerticalLayout>
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Description" tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+									<Input value="{zcountmodel>/HeaderData/0/ProductDescription}" editable="false" />
+								</layout:VerticalLayout>
+							
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="ACM NO " tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+									<Input value="{zcountmodel>/HeaderData/0/ACMNO}" editable="false" />
+								</layout:VerticalLayout>
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="CAP Printing " tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+									<Input value="{zcountmodel>/HeaderData/0/capprinting}" editable="false" />
+								</layout:VerticalLayout>
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Body Printing " tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+									<Input value="{zcountmodel>/HeaderData/0/bodyprinting}" editable="false" />
+								</layout:VerticalLayout>
+
+
+									<layout:VerticalLayout visible="false" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="SAPUUID  " tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+									<Input value="{zcountmodel>/HeaderData/0/sap_uuid}" editable="false" />
+								</layout:VerticalLayout>
+
+
+									<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Plant" tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+									<Input value="{zcountmodel>/HeaderData/0/plant}" editable="false" />
+								</layout:VerticalLayout>
+
+								<!-- <layout:HorizontalLayout visible="true" class=" sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+                                    <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Box :" tooltip="Enter the starting value" design="Bold" class="sapUiSmallMarginEnd" />
+									<Input value="" editable="true" placeholder="Enter From Value"  id="Box1"/>
+                                    </layout:VerticalLayout>
+									<layout:VerticalLayout visible="true" class=" sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="To:" tooltip="Enter the ending value" design="Bold" class="sapUiSmallMarginBegin" />
+                                    <Input value="" editable="true" placeholder="Enter To Value"  id="Box2"/>
+									</layout:VerticalLayout>
+									<layout:VerticalLayout visible="true" class="customTopMargin sapUiSmallMarginEnd sapUiMediumMarginBottom customWidth">
+									<Button text="Print" tooltip="Execute" type="Emphasized" press="onPrint" enabled="true" />
+									</layout:VerticalLayout>
+                                </layout:HorizontalLayout> -->
+
+								<layout:HorizontalLayout visible="true" class=" sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+                                    <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="Box :" tooltip="Enter the starting value" design="Bold" class="sapUiSmallMarginEnd" />
+									<Input value="" editable="true" placeholder="Enter From Value"  id="Box1"/>
+                                    </layout:VerticalLayout>
+									<layout:VerticalLayout visible="true" class=" sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
+									<Label text="To:" tooltip="Enter the ending value" design="Bold" class="" />
+                                    <Input value="" editable="true" placeholder="Enter To Value"  id="Box2"/>
+									</layout:VerticalLayout>
+									<layout:VerticalLayout visible="true" class="customTopMargin sapUiSmallMarginEnd sapUiMediumMarginBottom customWidth">
+									<Button text="Print" tooltip="Execute" type="Emphasized" press="onPrint" enabled="true" />
+									</layout:VerticalLayout>
+                                </layout:HorizontalLayout>
+
+							</content>
+						</Panel>
+					</items>
+				</FlexBox>
+			</f:DynamicPageHeader>
+		</f:header>
+		<!-- DynamicPage Content -->
+		<f:content>
+			<t:Table  visible="true" id="zcounttable"
+                rows="{path:'TabZcountItemModel>/DatasZitem'}"
+                selectionMode="Single"
+                enableSelectAll="false"             
+  rowMode="Auto"
+  rowSelectionChange=".onRowSelected">
+				<t:extension>
+					<OverflowToolbar style="Clear">
+						<Title text="Items" />
+						<ToolbarSpacer />
+						<ToolbarSpacer />
+						<!-- <Button icon="sap-icon://excel-attachment" press="OnExportExl" /> -->
+						<Button text="add" id = "tableadd" icon="sap-icon://add" press=".OnTableItemAdd"/>
+					<!-- <Button text="Remove" icon="sap-icon://delete" press="OnRowDelete"/> -->
+					</OverflowToolbar>
+				</t:extension>
+				<t:columns>
+					<t:Column tooltip="S.NO" width="4rem">
+						<Label text="S.NO" />
+						<t:template>
+							<Text  text="{TabZcountItemModel>srno}" />
+						</t:template>
+					</t:Column>
+						<t:Column tooltip="Process Order" width="6rem">
+						<Label text="Process Order" />
+						<t:template>
+							<Text  text="{TabZcountItemModel>process_order}" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="Created On" width="9rem">
+						<Label text="Created On" />
+						<t:template>
+						<DatePicker change="onDateChange" value="{
+																				'path':'TabZcountItemModel>zdate',
+																				'type':'sap.ui.model.type.Date',
+																				'formatOptions': {
+																					'pattern': 'dd-MM-yyyy'
+																				}
+																			}"  editable="{= ${TabZcountItemModel>isEditMode} }" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="Target QTY" width="5rem">
+						<Label text="Target QTY" />
+						<t:template>
+							<Text  text="{TabZcountItemModel>target_qty}" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="Tare wt" width="7rem">
+						<Label text="Tare wt" />
+						<t:template>
+							<Input  value="{TabZcountItemModel>tare_wt}"   editable="{= ${TabZcountItemModel>isEditMode} || ${TabZcountItemModel>isTareOnlyEditable} }" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="Box No" width="7rem">
+						<Label text="Box No" />
+						<t:template>
+							<Text  text="{TabZcountItemModel>boxno}" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="Drum no" width="7rem">
+						<Label text="Drum no" />
+						<t:template>
+							<Input  value="{TabZcountItemModel>drum_no}"   editable="{= ${TabZcountItemModel>isEditMode} }"/>
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="Avt wt(mg)" width="7rem">
+						<Label text="Avt wt(mg)" />
+						<t:template>
+							<Input   change=".onchangeavgwt" value="{TabZcountItemModel>avrgwt}"   editable="{= ${TabZcountItemModel>isEditMode} }"/>
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="Qty(wt)" width="7rem">
+						<Label text="Qty(wt)" />
+						<t:template>
+							<Input  value="{TabZcountItemModel>qty}"  change=".onchangeqtywt"/>
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="Qty LAC" width="7rem">
+						<Label text="Qty LAC" />
+						<t:template>
+							<Text  text="{TabZcountItemModel>qty_lac}" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="TOT LAC" width="7rem">
+						<Label text="TOT LAC" />
+						<t:template>
+							<Text  text="{TabZcountItemModel>tot_lac}" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="Netweight" width="7rem">
+						<Label text="Netweight" />
+						<t:template>
+							<Text  text="{TabZcountItemModel>netwt}" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="Grossweight" width="7rem">
+						<Label text="Grossweight" />
+						<t:template>
+							<Text  text="{TabZcountItemModel>grosswt}" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="Capsules in box" width="7rem">
+						<Label text="Capsules in box" />
+						<t:template>
+							<Text  text="{TabZcountItemModel>capbox}" />
+						</t:template>
+					</t:Column>
+			
+
+					<t:Column tooltip="Packed by" width="7rem">
+						<Label text="Packed by" />
+						<t:template>
+							<Input  value="{TabZcountItemModel>packedby}" />
+						</t:template>
+					</t:Column>
+
+					<t:Column tooltip="Verified by" width="7rem">
+						<Label text="Verified by" />
+						<t:template>
+							<Input  value="{TabZcountItemModel>verified_by}" />
+						</t:template>
+					</t:Column>
+				</t:columns>
+			</t:Table>
+		</f:content>
+		<!-- DynamicPage Content -->
+
+		<f:footer>
+			<OverflowToolbar>
+				<Button icon="sap-icon://message-popup" text="{/messagesLength}" type="Emphasized"  press="onMessageButtonPress" visible="{= !!${/messagesLength}}"/>
+				 <Button tooltip="tarewt" id ="idgettarweight" type="Accept"  press="onTarewt" enabled="true" text="GetTarWeight" icon="sap-icon://journey-change" /> 
+				 
+				<ToolbarSpacer id="toolbarsapcerscount" />
+				<Button tooltip="back" type="Reject"  press="onGoToScreen1" enabled="true" text="back" icon="sap-icon://close-command-field" />
+				<Button tooltip="Save" id ="save" type="Accept"  press="onSaveCount" enabled="true" text="Save" icon="sap-icon://save" />
+			    <Button tooltip="update" type="Attention" id ="idupdate"  press="onTarewtupate" enabled="true" text="Update" icon="sap-icon://journey-change" /> 
+			
+			</OverflowToolbar>
+		</f:footer>
+	</f:DynamicPage>
+</mvc:View>

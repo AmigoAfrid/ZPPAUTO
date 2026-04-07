@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog" xmlns:m="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core">
+	<ValueHelpDialog supportMultiselect="false"  title=" Process Order." ok=".onProcessOrderValueHelpOkPress" cancel=".onProcessOrderValueHelpCancelPress" afterClose=".onProcessOrderValueHelpAfterClose" supportRanges="false" key="ManufacturingOrder" descriptionKey="">
+		<filterBar>
+			<fb:FilterBar  advancedMode="true" search=".onProcessOrderFilterBarSearch" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="ProcessOrder." label="ProcessOrder." visibleInFilterBar="true">
+						<fb:control>
+								<m:Input name="ProcessOrder." showSuggestion="true" showValueHelp="false" suggestionItems="{ path: 'ZAU_FT_PROCESSORDER_SRVB_>/ZCE_FT_PROCESSORDER', sorter: { path: 'ManufacturingOrder' }}">
+								<core:Item key="{ZAU_FT_PROCESSORDER_SRVB_>ManufacturingOrder}" text="{ZAU_FT_PROCESSORDER_SRVB_>ManufacturingOrder}" />
+							</m:Input>
+						</fb:control>
+					</fb:FilterGroupItem>
+				
+
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+		
+	</ValueHelpDialog>
+</core:FragmentDefinition> 

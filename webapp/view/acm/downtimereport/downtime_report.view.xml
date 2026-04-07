@@ -1,0 +1,278 @@
+<mvc:View
+    controllerName="zautodesignapp.controller.acm.downtimereport.downtime_report"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table"
+    xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout"
+    height="100%">
+
+    <f:DynamicPage
+		visible="{= ${ScreenVisible>/openscreen} === 'screen1' }"
+        class="sapUiTinyMarginTop sapUiTinyMarginBegin"
+        preserveHeaderStateOnScroll="true"
+        showFooter="true"
+        fitContent="true">
+
+        <!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Downtime Report" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <!-- DynamicPage Header -->
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <FlexBox alignItems="Start" justifyContent="SpaceBetween">
+                    <items>
+                        <Panel backgroundDesign="Transparent" class="sapUiNoContentPadding">
+                            <content>
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  customWidth">
+
+                                    <Label text="Select Date Range :" tooltip="DatePicker" design="Bold" required="false" class="sapUiSmallMarginBegin" />
+                                    <DateRangeSelection id="Datesdowntime" valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd" tooltip="DatePicker" width="10rem" value="" />
+
+                                </layout:VerticalLayout>
+
+                                <layout:VerticalLayout class="sapUiSmallMarginBegin sapUiSmallMarginEnd customWidth">
+                                    <Label tooltip="Select Machine No :" required="false" text="Select Machine No :" design="Bold" />
+                                    <Input
+                                        id="idacmvalues"
+                                        type="Text"
+                                        editable="true"
+                                        showValueHelp="true"
+                                        placeholder="Select Machine No." 
+                                        value="{acmModel>/HeaderData/0/selectedMachine}"
+                                        valueHelpIconSrc="sap-icon://value-help"
+                                        valueHelpRequest="OnAcmCheck" />
+                                </layout:VerticalLayout>	
+
+                    <layout:VerticalLayout class="sapUiSmallMarginBegin sapUiSmallMarginEnd customWidth">
+
+ <Label />
+                                 <Button text="Go" tooltip="Execute" type="Emphasized" press="OnGoItemPageACM" enabled="true" />
+       </layout:VerticalLayout>	
+                            </content>
+                        </Panel>
+                    </items>
+                </FlexBox>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <!-- DynamicPage Content -->
+        <f:content>
+            <t:Table
+                rows="{path:'TabModel>/ItemData'}"
+                id="acm_downtime_report"
+                selectionMode="None"
+                enableSelectAll="false"
+                rowMode="Auto"
+                   fixedColumnCount="4"
+                >
+
+                
+                  <t:extension>
+						<OverflowToolbar  style="Clear">
+							<ToolbarSpacer/>
+							<ToolbarSpacer/>
+                   			 <Button id="_IDGenButtondowntime" icon="sap-icon://excel-attachment" press="OnExportExl"/>
+						</OverflowToolbar>
+					</t:extension>
+
+                <t:columns>
+				
+                    <t:Column tooltip="Date" width="6rem">
+                        <Label text="Date" />
+                        <t:template>
+                            <Text text="{path:'TabModel>Dates',formatter: '.formatDate'}"  />
+                        </t:template>
+                    </t:Column>
+
+                     <t:Column tooltip="Acm No" width="5rem">
+                        <Label text="Acm No" />
+                        <t:template>
+                            <Text text="{TabModel>Acmno}" />
+                        </t:template>
+                    </t:Column>
+
+
+                           <t:Column tooltip="Shift" width="5rem">
+                        <Label text="Shift" />
+                        <t:template>
+                            <Text text="{TabModel>Shift}" />
+                        </t:template>
+                    </t:Column>
+
+
+                       <t:Column tooltip="Speed" width="5rem">
+                        <Label text="Speed" />
+                        <t:template>
+                            <Text text="{TabModel>Speed}" />
+                        </t:template>
+                    </t:Column>  
+                  
+                       <t:Column tooltip="NoBar" width="5rem">
+                        <Label text="NoBar" />
+                        <t:template>
+                            <Text text="{TabModel>NoBar}" />
+                        </t:template>
+                    </t:Column>
+
+
+                            <t:Column tooltip="CurDips" width="5rem">
+                        <Label text="CurDips" />
+                        <t:template>
+                            <Text text="{TabModel>CurDips}" />
+                        </t:template>
+                    </t:Column>
+
+                            <t:Column tooltip="TotalDownTime" width="7rem">
+                        <Label text="TotalDownTime" />
+                        <t:template>
+                            <Text text="{TabModel>TotalDownTime}" />
+                        </t:template>
+                    </t:Column>
+
+
+                          <t:Column tooltip="ColorChange" width="7rem">
+                        <Label text="ColorChange" />
+                        <t:template>
+                            <Text text="{TabModel>ColorChange}" />
+                        </t:template>
+                    </t:Column>
+
+
+
+                          <t:Column tooltip="Mechanical" width="6rem">
+                        <Label text="Mechanical" />
+                        <t:template>
+                            <Text text="{TabModel>Mechanical}" />
+                        </t:template>
+                    </t:Column>
+
+
+                           <t:Column tooltip="Process" width="5rem">
+                        <Label text="Process" />
+                        <t:template>
+                            <Text text="{TabModel>Process}" />
+                        </t:template>
+                    </t:Column>
+
+
+
+                <t:Column tooltip="Electrical" width="6rem">
+                        <Label text="Electrical" />
+                        <t:template>
+                            <Text text="{TabModel>Electrical}" />
+                        </t:template>
+                    </t:Column>
+
+
+                    <t:Column tooltip="AC" width="5rem">
+                        <Label text="AC" />
+                        <t:template>
+                            <Text text="{TabModel>AC}" />
+                        </t:template>
+                    </t:Column>
+
+
+                    <t:Column tooltip="GelRoom" width="5rem">
+                        <Label text="GelRoom" />
+                        <t:template>
+                            <Text text="{TabModel>GelRoom}" />
+                        </t:template>
+                    </t:Column>
+
+
+                     <t:Column tooltip="QcQa" width="5rem">
+                        <Label text="QcQa" />
+                        <t:template>
+                            <Text text="{TabModel>QcQa}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="PowerOff" width="6rem">
+                        <Label text="PowerOff" />
+                        <t:template>
+                            <Text text="{TabModel>PowerOff}" />
+                        </t:template>
+                    </t:Column>
+
+
+                    
+
+                <t:Column tooltip="Preventive" width="6rem">
+                        <Label text="Preventive" />
+                        <t:template>
+                            <Text text="{TabModel>Preventive}" />
+                        </t:template>
+                    </t:Column>
+
+
+                    <t:Column tooltip="Plc" width="5rem">
+                        <Label text="Plc" />
+                        <t:template>
+                            <Text text="{TabModel>Plc}" />
+                        </t:template>
+                    </t:Column>
+
+
+                    
+                 <t:Column tooltip="Modification" width="8rem">
+                        <Label text="Modification" />
+                        <t:template>
+                            <Text text="{TabModel>Modification}" />
+                        </t:template>
+                    </t:Column>
+
+
+                    <t:Column tooltip="PowerShutdown" width="8rem">
+                        <Label text="PowerShutdown" />
+                        <t:template>
+                            <Text text="{TabModel>PowerShutdown}" />
+                        </t:template>
+                    </t:Column>
+
+
+                  <t:Column tooltip="ElecShutdown" width="8rem">
+                        <Label text="ElecShutdown" />
+                        <t:template>
+                            <Text text="{TabModel>ElecShutdown}" />
+                        </t:template>
+                    </t:Column>
+
+
+                    
+                      <t:Column tooltip="SizeChange" width="6rem">
+                        <Label text="SizeChange" />
+                        <t:template>
+                            <Text text="{TabModel>SizeChange}" />
+                        </t:template>
+                    </t:Column>
+
+
+                            
+                     <t:Column tooltip="NoOrder" width="6rem">
+                        <Label text="NoOrder" />
+                        <t:template>
+                            <Text text="{TabModel>NoOrder}" />
+                        </t:template>
+                    </t:Column>
+
+
+                   
+                </t:columns>
+
+            </t:Table>
+        </f:content>
+        <!-- DynamicPage Footer -->
+    </f:DynamicPage>
+
+
+</mvc:View>

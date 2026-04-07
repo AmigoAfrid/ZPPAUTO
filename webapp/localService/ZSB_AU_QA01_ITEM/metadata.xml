@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="cds_z_sd_au_qa01_item" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="ZC_AU_QA01_ITEMType" sap:label="consumption view for QA01 header" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="sap_uuid"/>
+                </Key>
+                <Property Name="sap_uuid" Type="Edm.String" Nullable="false" MaxLength="40"/>
+                <Property Name="id" Type="Edm.String" MaxLength="40"/>
+                <Property Name="zdate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="zatsdate" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="processorder" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Order" sap:quickinfo="Order Number"/>
+                <Property Name="batch" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Batch" sap:quickinfo="Batch Number"/>
+                <Property Name="shift" Type="Edm.String" MaxLength="2"/>
+                <Property Name="boxno" Type="Edm.String" MaxLength="5" sap:display-format="NonNegative"/>
+                <Property Name="acmno" Type="Edm.String" MaxLength="2" sap:display-format="NonNegative"/>
+                <Property Name="averagewt" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="uom" sap:label="Gross Weight"/>
+                <Property Name="weight" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="uom" sap:label="Gross Weight"/>
+                <Property Name="uom" Type="Edm.String" MaxLength="3" sap:label="Unit of Weight" sap:semantics="unit-of-measure"/>
+                <Property Name="cumulativeqty" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="uom" sap:label="Gross Weight"/>
+                <Property Name="cumulativeqtys" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="uom" sap:label="Gross Weight"/>
+                <Property Name="gradeats" Type="Edm.String" MaxLength="20"/>
+                <Property Name="gradeais" Type="Edm.String" MaxLength="20"/>
+                <Property Name="tarqty" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="uom" sap:label="Gross Weight"/>
+                <Property Name="agradeqty" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="uom"/>
+                <Property Name="remarks" Type="Edm.String" MaxLength="100"/>
+                <Property Name="hfx" Type="Edm.Decimal" Precision="13" Scale="2" sap:unit="uom"/>
+                <Property Name="wastage" Type="Edm.Decimal" Precision="13" Scale="2" sap:unit="uom"/>
+                <Property Name="floorwastage" Type="Edm.Decimal" Precision="13" Scale="2" sap:unit="uom"/>
+                <Property Name="qaname" Type="Edm.String" MaxLength="20"/>
+                <Property Name="operatorname" Type="Edm.String" MaxLength="20"/>
+                <Property Name="materialdescription" Type="Edm.String" MaxLength="40" sap:label="Material Description"/>
+                <Property Name="documentyear" Type="Edm.String" MaxLength="4"/>
+                <Property Name="materialdocumentno" Type="Edm.String" MaxLength="40" sap:label="Material Description"/>
+                <Property Name="materialdocumentyear" Type="Edm.String" MaxLength="4"/>
+                <Property Name="status" Type="Edm.String" MaxLength="40"/>
+                <Property Name="itemstatus" Type="Edm.String" MaxLength="40"/>
+                <Property Name="screencode" Type="Edm.String" MaxLength="40"/>
+                <Property Name="createdby" Type="Edm.String" MaxLength="120"/>
+                <Property Name="createdat" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="updatedat" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="updatedby" Type="Edm.String" MaxLength="120"/>
+                <Property Name="color_createdat" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="color_createdby" Type="Edm.String" MaxLength="200"/>
+                <Property Name="color_updatedat" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="color_updatedby" Type="Edm.String" MaxLength="200"/>
+                <Property Name="color_status" Type="Edm.String" MaxLength="40"/>
+                <Property Name="del_createdat" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="del_createdby" Type="Edm.String" MaxLength="200"/>
+                <Property Name="del_updatedat" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="del_updatedby" Type="Edm.String" MaxLength="200"/>
+                <Property Name="del_status" Type="Edm.String" MaxLength="40"/>
+                <Property Name="prt_createdat" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="prt_createdby" Type="Edm.String" MaxLength="200"/>
+                <Property Name="prt_updatedat" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="prt_updatedby" Type="Edm.String" MaxLength="200"/>
+                <Property Name="prt_status" Type="Edm.String" MaxLength="40"/>
+                <Property Name="updat_createdat" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="updat_createdby" Type="Edm.String" MaxLength="200"/>
+                <Property Name="updat_updatedat" Type="Edm.DateTime" Precision="0" sap:display-format="Date"/>
+                <Property Name="updat_updatedby" Type="Edm.String" MaxLength="200"/>
+                <Property Name="updat_status" Type="Edm.String" MaxLength="40"/>
+                <Property Name="qa01_status" Type="Edm.String" MaxLength="1"/>
+                <Property Name="qa02_status" Type="Edm.String" MaxLength="1"/>
+                <Property Name="qa03_status" Type="Edm.String" MaxLength="1"/>
+                <Property Name="wastageinlac" Type="Edm.Decimal" Precision="13" Scale="4" sap:unit="uom"/>
+            </EntityType>
+            <EntityContainer Name="cds_z_sd_au_qa01_item_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ZC_AU_QA01_ITEM" EntityType="cds_z_sd_au_qa01_item.ZC_AU_QA01_ITEMType" sap:content-version="1"/>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <Annotations Target="cds_z_sd_au_qa01_item.cds_z_sd_au_qa01_item_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cds_z_sd_au_qa01_item.cds_z_sd_au_qa01_item_Entities/ZC_AU_QA01_ITEM" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_z_sd_au_qa01_item.cds_z_sd_au_qa01_item_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Org.OData.Capabilities.V1.BatchSupport">
+                    <Record Type="Org.OData.Capabilities.V1.BatchSupportType">
+                        <PropertyValue Property="ReferencesAcrossChangeSetsSupported" Bool="true"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="/sap/opu/odata/sap/ZSB_AU_QA01_ITEM/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="/sap/opu/odata/sap/ZSB_AU_QA01_ITEM/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

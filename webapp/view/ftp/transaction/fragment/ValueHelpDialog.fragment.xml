@@ -1,0 +1,34 @@
+<core:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog" xmlns:m="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core">
+	<ValueHelpDialog supportMultiselect="false"  title=" Batch Document NO" ok=".onValueHelpOkPress" cancel=".onValueHelpCancelPress" afterClose=".onValueHelpAfterClose" supportRanges="false" key="Batch" descriptionKey="Batch">
+		<filterBar>
+			<fb:FilterBar  advancedMode="true" search=".onFilterBarSearch" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="Material" label="Accounting Document" visibleInFilterBar="true">
+						<fb:control>
+								<m:Input name="Material" showSuggestion="true" showValueHelp="false" suggestionItems="{ path: 'oJSONModelbatch>/Datasbatch', sorter: { path: 'Material' }}">
+								<core:Item key="{oJSONModelbatch>Material}" text="{oJSONModelbatch>Material}" />
+							</m:Input>
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="Plant" label="Accounting Document Year" visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="Plant" showSuggestion="true" showValueHelp="false" suggestionItems="{ path: 'oJSONModelbatch>/Datasbatch',sorter: { path: 'Plant' }}">
+								<core:Item key="{oJSONModelbatch>Plant}" text="{oJSONModelbatch>Plant}" />
+							</m:Input>
+						</fb:control>
+					</fb:FilterGroupItem>
+
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="Batch" label="Company Code" visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="Batch" showSuggestion="true" showValueHelp="false" suggestionItems="{ path: 'oJSONModelbatch>/Datasbatch',sorter: { path: 'Batch' }}">
+								<core:Item key="{oJSONModelbatch>Batch}" text="{oJSONModelbatch>Batch}" />
+							</m:Input>
+						</fb:control>
+					</fb:FilterGroupItem>
+
+
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+	</ValueHelpDialog>
+</core:FragmentDefinition> 

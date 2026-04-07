@@ -1,0 +1,489 @@
+<mvc:View
+    controllerName="zautodesignapp.controller.acm.transaction.acm_selectrange"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table"
+    xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout"
+    height="100%">
+
+<!-- screen 1 -->
+    <f:DynamicPage
+        id="dynamicgeneralpurchase"
+        visible="{= ${ScreenVisible>/openscreen} === 'screen1' }"
+        class="sapUiTinyMarginTop sapUiTinyMarginBegin"
+        preserveHeaderStateOnScroll="true"
+        showFooter="true"
+        fitContent="true">
+
+        <!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle id="iddynamictit">
+                <f:heading>
+                    <Title text="QA01 Selection Screen" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <!-- DynamicPage Header -->
+        <f:header>
+            <f:DynamicPageHeader id="iddynamic" pinnable="true">
+                <FlexBox id="idflexbox" alignItems="Start" justifyContent="SpaceBetween">
+                    <items>
+                        <Panel
+                            id="idpanel"
+                            backgroundDesign="Transparent"
+                            class="sapUiNoContentPadding">
+                            <content>
+                                <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginBottom sapUiTinyMarginTop customWidth">
+                                    <Label text="Select Date Range :" tooltip="DatePicker" design="Bold" required="true" />
+                                    <DateRangeSelection valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd" tooltip="DatePicker" width="11.5rem" value="" />
+                                </layout:VerticalLayout>
+
+
+                                 <layout:VerticalLayout id="idvehtype" class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginBottom sapUiTinyMarginTop " >
+                                        <Label tooltip="Select Machine No" required="false" id="lblvectype" text="Select Machine No" design="Bold" />
+                                        <ComboBox selectedKey="" width="11rem" required="false" items="{ path: 'MModel>/Samples'}" tooltip="Select Machine No" id="id_selectmachine" enabled="true" >
+                                            <core:Item key="{MModel>MachineID}" text="{MModel>MachineName}" />
+                                        </ComboBox>
+                                    </layout:VerticalLayout>
+
+                                <Toolbar style="Clear">
+                                    <ToolbarSpacer />
+                                    <Button text="Go" tooltip="Execute" type="Emphasized" press="GoQA01select" enabled="true" />
+                                    <ToolbarSpacer />
+                                </Toolbar>
+                            </content>
+                        </Panel>
+                    </items>
+                </FlexBox>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <!-- DynamicPage Content -->
+        <f:content>
+            <t:Table id="idqa01tablescreen" visible="false"
+                rows="{path:'TabModel>/Samples', sorter: {path: 'TabModel>item1'}}"
+                selectionMode="Single"
+                enableSelectAll="false"             
+ 
+  rowSelectionChange="onRowSelect">
+
+                <t:extension>
+                    <OverflowToolbar style="Clear">
+                        <Title text="Items" />
+                        <ToolbarSpacer />
+                        <ToolbarSpacer />
+                        <Button icon="sap-icon://excel-attachment" press="OnExportExl" />
+                    </OverflowToolbar>
+                </t:extension>
+
+                <t:columns>
+			
+
+                      <t:Column tooltip="Production Order" width="8rem">
+                        <Label text="Production Order" />
+                        <t:template>
+                            <Input  value="{TabModel>item2}" />
+                        </t:template>
+                    </t:Column>
+
+                       <t:Column tooltip="Start Date" width="6rem">
+                        <Label text="Start Date" />
+                        <t:template>
+                            <Input  value="{TabModel>item2}" />
+                        </t:template>
+                    </t:Column>
+
+
+                       <t:Column tooltip="Batch" width="6rem">
+                        <Label text="Batch" />
+                        <t:template>
+                            <Input  value="{TabModel>item2}" />
+                        </t:template>
+                    </t:Column>
+
+
+                    
+                       <t:Column tooltip="Material" width="6rem">
+                        <Label text="Material" />
+                        <t:template>
+                            <Input  value="{TabModel>item2}" />
+                        </t:template>
+                    </t:Column>
+
+                         <t:Column tooltip="Description" width="6rem">
+                        <Label text="Description" />
+                        <t:template>
+                            <Input  value="{TabModel>item2}" />
+                        </t:template>
+                    </t:Column>
+
+
+                       <t:Column tooltip="Sales order -Item" width="6rem">
+                        <Label text="Sales order -Item" />
+                        <t:template>
+                            <Input  value="{TabModel>item2}" />
+                        </t:template>
+                    </t:Column>
+
+
+                      <t:Column tooltip="Customer Name" width="6rem">
+                        <Label text="Customer Name" />
+                        <t:template>
+                            <Input  value="{TabModel>item2}" />
+                        </t:template>
+                    </t:Column>
+
+
+                       <t:Column tooltip="Size" width="6rem">
+                        <Label text="Size" />
+                        <t:template>
+                            <Input  value="{TabModel>item2}" />
+                        </t:template>
+                    </t:Column>
+
+                    
+                     <t:Column tooltip="Body Colour" width="6rem">
+                        <Label text="Body Colour" />
+                        <t:template>
+                            <Input  value="{TabModel>item2}" />
+                        </t:template>
+                    </t:Column>
+
+
+                       <t:Column tooltip="Cap colour" width="6rem">
+                        <Label text="Cap colour" />
+                        <t:template>
+                            <Input  value="{TabModel>item2}" />
+                        </t:template>
+                    </t:Column>
+
+                      <t:Column tooltip="Order QTY" width="6rem">
+                        <Label text="Order QTY" />
+                        <t:template>
+                            <Input  value="{TabModel>item2}" />
+                        </t:template>
+                    </t:Column>
+
+                   
+
+
+                    
+
+
+                     <t:Column tooltip="Direct Pass" width="6rem">
+                        <Label text="Direct Pass" />
+                        <t:template>
+                            <Input  value="{TabModel>item2}" />
+                        </t:template>
+                    </t:Column>
+
+
+                        <t:Column tooltip="Sort" width="6rem">
+                        <Label text="Sort" />
+                        <t:template>
+                            <Input  value="{TabModel>item2}" />
+                        </t:template>
+                    </t:Column>
+
+                        <t:Column tooltip="HFX" width="6rem">
+                        <Label text="HFX" />
+                        <t:template>
+                            <Input  value="{TabModel>item2}" />
+                        </t:template>
+                    </t:Column>
+
+
+                        <t:Column tooltip="Reject" width="6rem">
+                        <Label text="Reject" />
+                        <t:template>
+                            <Input  value="{TabModel>item2}" />
+                        </t:template>
+                    </t:Column>
+
+                
+                </t:columns>
+
+
+
+            </t:Table>
+        </f:content>
+
+        <!-- DynamicPage Footer -->
+      <!-- <f:footer  >
+            <OverflowToolbar id="overFlow">
+                <Button  icon="sap-icon://message-popup" text="{/messagesLength}" type="Emphasized" id="idBtn" press="onMessageButtonPress" visible="{= !!${/messagesLength}}"/>
+                <ToolbarSpacer id="toolbarsapcer" />
+                <Button visible="false"  tooltip="Save" type="Accept" press="onGoToScreen2" id="Final_Save_Button" enabled="true" text="Next" icon="sap-icon://save" />
+            </OverflowToolbar>
+        </f:footer> -->
+
+    </f:DynamicPage>
+
+
+    <!-- screen 2  -->
+   <f:DynamicPage
+        id="dynamicgeneralpurchases"
+        visible="{= ${ScreenVisible>/openscreen} === 'screen2' }"
+        class="sapUiTinyMarginTop sapUiTinyMarginBegin"
+        preserveHeaderStateOnScroll="true"
+        showFooter="true"
+        fitContent="true"
+        xmlns:f="sap.f"
+         xmlns="sap.m"
+    xmlns:c="sap.ui.core">
+
+        <!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle id="iddynamictits">
+                <f:heading>
+                    <Title text="QA01 Process" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <!-- DynamicPage Header -->
+        <f:header>
+            <f:DynamicPageHeader id="iddynamics" pinnable="true">
+                <FlexBox id="idflexboxs" alignItems="Start" justifyContent="SpaceBetween">
+                    <items>
+                        <Panel
+                            id="idpanels"
+                            backgroundDesign="Transparent"
+                            class="sapUiNoContentPadding">
+   
+
+
+       <content>
+     
+ <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginBottom sapUiTinyMarginTop customWidth">
+   
+        <Label text="Batch :"  class="sapUiSmallMarginTop" />
+        <Input value="{SelectedRow>/item1}" editable="false" />
+ </layout:VerticalLayout>
+
+  <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginBottom sapUiTinyMarginTop customWidth">
+   
+        <Label text="Sales Order:" class="sapUiSmallMarginTop" />
+        <Input value="{SelectedRow>/item2}" editable="false" />
+       </layout:VerticalLayout>
+
+      <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginBottom sapUiTinyMarginTop customWidth"> 
+      <Label text="Order QTY(Lakhs):" class="sapUiSmallMarginTop" />
+        <Input value="" editable="false" />
+ </layout:VerticalLayout>
+
+ <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginBottom sapUiTinyMarginTop customWidth"> 
+         <Label text="ACM No:" class="sapUiSmallMarginTop" />
+        <Input value="" editable="false" />
+ </layout:VerticalLayout>
+
+  <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginBottom sapUiTinyMarginTop customWidth"> 
+          <Label text="QTY to MFD(DIPS):" class="sapUiSmallMarginTop" />
+         <Input value="" editable="false" />
+ </layout:VerticalLayout>
+            
+ <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginBottom sapUiTinyMarginTop customWidth">
+                                    <Label text="Cap colour :" tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+                                     <Input value="" editable="false" />
+</layout:VerticalLayout>
+
+
+ <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginBottom sapUiTinyMarginTop customWidth">
+                                    <Label text="Body colour:" tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+                                     <Input value="" editable="false" />
+</layout:VerticalLayout>
+
+
+ <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginBottom sapUiTinyMarginTop customWidth">
+                                    <Label text="Size :" tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+                                     <Input value="" editable="false" />
+</layout:VerticalLayout>
+
+
+
+ <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginBottom sapUiTinyMarginTop customWidth">
+                                    <Label text="Material:" tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+                                     <Input value="" editable="false" />
+</layout:VerticalLayout>
+
+
+
+ <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginBottom sapUiTinyMarginTop customWidth">
+                                    <Label text="Customer:" tooltip="Field" design="Bold" required="false" class="sapUiSmallMarginTop"  />
+                                     <Input value="" editable="false" />
+</layout:VerticalLayout>
+      
+
+    </content>
+                        </Panel>
+                    </items>
+                </FlexBox>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <!-- DynamicPage Content -->
+     
+  <f:content>
+            <t:Table id="idacmprocesscreen" visible="true"
+                rows="{path:'TabModel>/Samples', sorter: {path: 'TabModel>item1'}}"
+                selectionMode="Single"
+                enableSelectAll="false"             
+ 
+  rowSelectionChange="onRowSelect">
+
+                <t:extension>
+                    <OverflowToolbar style="Clear">
+                        <Title text="Items" />
+                        <ToolbarSpacer />
+                        <ToolbarSpacer />
+                        <Button icon="sap-icon://excel-attachment" press="OnExportExl" />
+                    </OverflowToolbar>
+                </t:extension>
+
+                <t:columns>
+				
+                    <t:Column tooltip="Date" width="4rem">
+                        <Label text="Date" />
+                        <t:template>
+                            <Input  value="" />
+                        </t:template>
+                    </t:Column>
+
+
+                      <t:Column tooltip="Shift" width="8rem">
+                        <Label text="Shift" />
+                        <t:template>
+                            <Input  value="" />
+                        </t:template>
+                    </t:Column>
+
+                       <t:Column tooltip="Balance Qty" width="6rem">
+                        <Label text="Balance Qty" />
+                        <t:template>
+                            <Input  value="" />
+                        </t:template>
+                    </t:Column>
+
+
+                       <t:Column tooltip="Dips Upto Previous" width="6rem">
+                        <Label text="Dips Upto Previous" />
+                        <t:template>
+                            <Input  value="" />
+                        </t:template>
+                    </t:Column>
+
+
+                    
+                       <t:Column tooltip="Dips Cumulative" width="6rem">
+                        <Label text="Dips Cumulative" />
+                        <t:template>
+                            <Input  value="" />
+                        </t:template>
+                    </t:Column>
+
+                         <t:Column tooltip="Cumulative QTY Lakhs" width="6rem">
+                        <Label text="Cumulative QTY Lakhs" />
+                        <t:template>
+                            <Input  value="" />
+                        </t:template>
+                    </t:Column>
+
+
+                       <t:Column tooltip="HFX Qty Shift" width="6rem">
+                        <Label text="HFX Qty Shift" />
+                        <t:template>
+                            <Input  value="" />
+                        </t:template>
+                    </t:Column>
+
+
+                      <t:Column tooltip="Cap Cut QTY(KG)" width="6rem">
+                        <Label text="Cap Cut QTY(KG)" />
+                        <t:template>
+                            <Input  value="" />
+                        </t:template>
+                    </t:Column>
+
+                      <t:Column tooltip="Body Cut QTY (KG)" width="6rem">
+                        <Label text="Body Cut QTY (KG)" />
+                        <t:template>
+                            <Input  value="" />
+                        </t:template>
+                    </t:Column>
+
+                      <t:Column tooltip="Body Cake QTY(KG)" width="6rem">
+                        <Label text="Body Cake QTY(KG)" />
+                        <t:template>
+                            <Input  value="" />
+                        </t:template>
+                    </t:Column>
+
+
+                    
+                      <t:Column tooltip="HFX" width="6rem">
+                        <Label text="HFX" />
+                        <t:template>
+                            <Input  value="" />
+                        </t:template>
+                    </t:Column>
+
+
+                      <t:Column tooltip="Wastage" width="6rem">
+                        <Label text="Wastage" />
+                        <t:template>
+                            <Input  value="" />
+                        </t:template>
+                    </t:Column>
+
+
+                       <t:Column tooltip="Floor Wastage" width="6rem">
+                        <Label text="Floor Wastage" />
+                        <t:template>
+                            <Input  value="" />
+                        </t:template>
+                    </t:Column>
+
+
+                    
+                       <t:Column tooltip="Material Document No" width="6rem">
+                        <Label text="Material Document No" />
+                        <t:template>
+                            <Input  value="" />
+                        </t:template>
+                    </t:Column>
+
+
+                       
+                       <t:Column tooltip="Material Document Year" width="6rem">
+                        <Label text="Material Document Year" />
+                        <t:template>
+                            <Input  value="" />
+                        </t:template>
+                    </t:Column>
+                
+
+                </t:columns>
+
+
+
+            </t:Table>
+        </f:content>
+
+
+
+        <!-- DynamicPage Footer -->
+      <f:footer>
+            <OverflowToolbar id="overFlows">
+                <Button icon="sap-icon://message-popup" text="{/messagesLength}" type="Emphasized" id="idBtns" press="onMessageButtonPress" visible="{= !!${/messagesLength}}"/>
+                <ToolbarSpacer id="toolbarsapcers" />
+                <Button tooltip="Save" type="Accept"  press="onGoToScreen1" enabled="true" text="back" icon="sap-icon://save" />
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+
+</mvc:View>

@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog" xmlns:m="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core">
+	<ValueHelpDialog supportMultiselect="true"  title=" Batch No." ok=".onValueHelpOkPress_Batch" cancel=".onValueHelpCancelPress_Batch" afterClose=".onValueHelpAfterClose_Batch" supportRanges="false" key="batch" descriptionKey="">
+		<filterBar>
+			<fb:FilterBar  advancedMode="true" search=".onFilterBarSearch_Batch" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="batch" label=" BATCH" visibleInFilterBar="true">
+						<fb:control>
+								<m:Input name="Batch No." showSuggestion="true" showValueHelp="false" suggestionItems="{ path: 'ZCE_ZCOUNT_HEAD_SRVB>/ZCDS_BATCH_F4HELP', sorter: { path: 'batch' }}">
+								<core:Item key="{ZCE_ZCOUNT_HEAD_SRVB>batch}" text="{ZCE_ZCOUNT_HEAD_SRVB>batch}" />
+							</m:Input>
+						</fb:control>
+					</fb:FilterGroupItem>
+				
+
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+		
+	</ValueHelpDialog>
+</core:FragmentDefinition> 

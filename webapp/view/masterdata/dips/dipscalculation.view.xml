@@ -1,0 +1,120 @@
+<mvc:View
+		xmlns:c="sap.ui.core"
+		controllerName="zautodesignapp.controller.masterdata.dips.dipscalculation"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:u="sap.ui.unified"
+		xmlns="sap.m"
+        xmlns:core="sap.ui.core"
+		xmlns:t="sap.ui.table"
+		xmlns:fb="sap.ui.comp.filterbar"
+		xmlns:svm="sap.ui.comp.smartvariants"
+		xmlns:f="sap.f"
+		xmlns:tnt="sap.tnt"
+		xmlns:layout="sap.ui.layout"
+
+		height="100%">
+		<f:DynamicPage id="iddynamicpage" class="sapUiTinyMarginTop sapUiTinyMarginBegin" headerExpanded="false" preserveHeaderStateOnScroll="false" showFooter="true" fitContent="true">
+			<!-- DynamicPage Title -->
+			<f:title>
+				<f:DynamicPageTitle>
+				
+					<f:expandedContent>
+						<Label class="Titleexpanded" text="DIPS Master" />
+						<tnt:InfoLabel visible="false" id="headercount" text="Total DIPS Master : " />
+						<tnt:InfoLabel visible="false" id="headercount2" text="" />
+						<tnt:InfoLabel visible="false" id="modelcount" text="" />
+					</f:expandedContent>
+					<f:snappedContent>
+						<Label class="Titleclassssnap" text="DIPS Master" />
+						<tnt:InfoLabel visible="false" id="headercount1" text="Total DIPS Master : " />
+					</f:snappedContent>
+					
+				</f:DynamicPageTitle>
+			</f:title>
+
+			<!-- DynamicPage Header -->
+
+			<f:content>
+				<t:Table enableBusyIndicator="true" threshold="100"  rowSelectionChange="onRowSelect"
+				rows="{path: 'TabModel>/Datass'}" selectionBehavior="Row" selectionMode="Multi" id="idtable" enableSelectAll="true"	rowMode="Auto">
+					<t:extension>
+						<OverflowToolbar id="idovrflow" style="Clear">
+							<Title id = "ittabprod" text=" DIPS Master"/>
+							<!-- <SearchField placeholder="Filter" value="{ui>/filterValue}" search="handleTxtFilter" width="15rem"/> -->
+							<ToolbarSpacer/>
+							<ToolbarSpacer/>
+								<Button text="add" icon="sap-icon://add" press="OnGateAdd"/>
+                   			 	<Button id="idmultidelete" icon="sap-icon://delete" press="OnTableRowRemove"/>
+
+						</OverflowToolbar>
+					</t:extension>
+					<t:columns>
+
+					 	<t:Column width="3rem" sortProperty="macno" tooltip="ACM M/C No"> <!-- 0 -->
+							<Label required="true" text="ACM M/C No" />
+							<t:template>
+								<Input type="Number" value="{TabModel>macno}" change=".OnValidateMacNo"/>
+							</t:template>
+						</t:Column>
+
+					 	<t:Column width="auto" sortProperty="speed" tooltip="Speed"><!--  1-->
+							<Label required="true" text="Speed" />
+							<t:template>
+							<Input type="Number" value="{TabModel>speed}" change="zdips_qty_dips"/>
+							</t:template>
+						</t:Column>
+
+					 	<t:Column width="auto" sortProperty="bar" tooltip="Bar"><!--  2-->
+							<Label required="true" text="Bar" />
+							<t:template>
+							<Input type="Number" value="{TabModel>bar}" change="zdips_qty_dips"/>
+							</t:template>
+						</t:Column>
+
+					 	<t:Column width="auto" sortProperty="tot_pins" tooltip="Total Pins"><!--  3-->
+							<Label required="true" text="Total Pins" />
+							<t:template>
+								<Input type="Number" value="{TabModel>tot_pins}" change="zdips_qty_dips"/>
+							</t:template>
+						</t:Column>
+
+						<t:Column width="auto" sortProperty="qty_dips" tooltip="Capsules/Dip"><!-- 4 -->
+							<Label  text="Capsules/Dip" />
+							<t:template>
+								<Text text="{TabModel>qty_dips}" wrapping="false" />
+							</t:template>
+						</t:Column>
+
+					 	<t:Column width="auto" sortProperty="max_dips" tooltip="Max Dips/Shift"><!--  5-->
+							<Label  text="Max Dips/Shift" />
+							<t:template>
+								<Text text="{TabModel>max_dips}" wrapping="false" />
+							</t:template>
+						</t:Column>
+
+					 	<t:Column width="auto" sortProperty="qty_shift" tooltip="QTY/Shift(Lacks)"><!--  6-->
+							<Label  text="QTY/Shift(Lacks)" />
+							<t:template>
+								<Text text="{TabModel>qty_shift}" wrapping="false" />
+							</t:template>
+						</t:Column>
+						
+					 	<t:Column width="auto" sortProperty="qty_day" tooltip="QTY For The Day(Lacks)"><!-- 7 -->
+							<Label  text="QTY For The Day(Lacks)" />
+							<t:template>
+								<Text text="{TabModel>qty_day}" wrapping="false" />
+							</t:template>
+						</t:Column>
+						
+					</t:columns>
+				</t:Table>
+			</f:content>
+			<!-- DynamicPage Footer -->
+			<f:footer>
+				<OverflowToolbar>
+					<ToolbarSpacer  />
+					<Button tooltip="Save the document internally" type="Default" press=".OnSubmit" enabled="true" text="Save" icon="sap-icon://save" />
+				</OverflowToolbar>
+			</f:footer>
+		</f:DynamicPage>
+</mvc:View>

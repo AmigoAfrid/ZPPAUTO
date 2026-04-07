@@ -1,0 +1,1431 @@
+{
+  "_version": "1.73.1",
+  "sap.app": {
+    "id": "zautodesignapp",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.17.3",
+      "toolsId": "fe666469-86ec-4d96-bf36-6a27bab5426b"
+    },
+    "dataSources": {
+      "ZAU_FT_PROCESSORDER_SRVB_": {
+        "uri": "/sap/opu/odata/sap/ZAU_FT_PROCESSORDER_SRVB_/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZAU_FT_PROCESSORDER_SRVB_/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_AU_FT_HEADER": {
+        "uri": "/sap/opu/odata/sap/ZSB_AU_FT_HEADER/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZSB_AU_FT_HEADER/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_AU_FT_ITEM": {
+        "uri": "/sap/opu/odata/sap/ZSB_AU_FT_ITEM/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZSB_AU_FT_ITEM/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZAU_FT_PRODCONF_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZAU_FT_PRODCONF_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZAU_FT_PRODCONF_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZAU_FT_GR_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZAU_FT_GR_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZAU_FT_GR_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZAU_ACM_PROCESSORDER_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZAU_ACM_PROCESSORDER_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZAU_ACM_PROCESSORDER_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZAU_QA01_PROCESSORDER_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZAU_QA01_PROCESSORDER_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZAU_QA01_PROCESSORDER_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZAU_ATS_PROCESSORDER_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZAU_ATS_PROCESSORDER_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZAU_ATS_PROCESSORDER_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZDIPS_MASTER_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZDIPS_MASTER_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZDIPS_MASTER_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_AU_QA01_HEADER": {
+        "uri": "/sap/opu/odata/sap/ZSB_AU_QA01_HEADER/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZSB_AU_QA01_HEADER/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_AU_QA01_ITEM": {
+        "uri": "/sap/opu/odata/sap/ZSB_AU_QA01_ITEM/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZSB_AU_QA01_ITEM/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZAU_AIS_PROCESSORDER_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZAU_AIS_PROCESSORDER_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZAU_AIS_PROCESSORDER_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZAU_ACM_SAVE_DIPS_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZAU_ACM_SAVE_DIPS_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZAU_ACM_SAVE_DIPS_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_AU_TB_MAC_SPEED_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZSB_AU_TB_MAC_SPEED_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZSB_AU_TB_MAC_SPEED_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_AU_ACM_HEADER": {
+        "uri": "/sap/opu/odata/sap/ZSB_AU_ACM_HEADER/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZSB_AU_ACM_HEADER/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_AU_ACM_ITEM": {
+        "uri": "/sap/opu/odata/sap/ZSB_AU_ACM_ITEM/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZSB_AU_ACM_ITEM/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZCE_ACM_HEAD_CNF_SRB": {
+        "uri": "/sap/opu/odata/sap/ZCE_ACM_HEAD_CNF_SRB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZCE_ACM_HEAD_CNF_SRB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZDEFECTS_TABLE_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZDEFECTS_TABLE_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZDEFECTS_TABLE_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_AU_MASTERDATA": {
+        "uri": "/sap/opu/odata/sap/ZSB_AU_MASTERDATA/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZSB_AU_MASTERDATA/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZAU_ACM_UPDATE_DIPS_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZAU_ACM_UPDATE_DIPS_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZAU_ACM_UPDATE_DIPS_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_AU_QA03_HEADER": {
+        "uri": "/sap/opu/odata/sap/ZSB_AU_QA03_HEADER/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZSB_AU_QA03_HEADER/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_AU_QA03_ITEM": {
+        "uri": "/sap/opu/odata/sap/ZSB_AU_QA03_ITEM/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZSB_AU_QA03_ITEM/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZAU_QA03_PROCESSORDER_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZAU_QA03_PROCESSORDER_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZAU_QA03_PROCESSORDER_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_MATDOC_REV_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZSB_MATDOC_REV_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZSB_MATDOC_REV_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZC_ATS_HEAD_GD_CRT_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZC_ATS_HEAD_GD_CRT_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZC_ATS_HEAD_GD_CRT_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZATS_MATDOC_REV_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZATS_MATDOC_REV_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZATS_MATDOC_REV_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZAU_ACM_BOM_COMPONENT_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZAU_ACM_BOM_COMPONENT_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZAU_ACM_BOM_COMPONENT_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_AU_QA02_HEADER": {
+        "uri": "/sap/opu/odata/sap/ZSB_AU_QA02_HEADER/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZSB_AU_QA02_HEADER/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_AU_QA02_ITEM": {
+        "uri": "/sap/opu/odata/sap/ZSB_AU_QA02_ITEM/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZSB_AU_QA02_ITEM/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZDIFFECTS_TAB_QA03_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZDIFFECTS_TAB_QA03_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZDIFFECTS_TAB_QA03_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZAIS_HEAD_GD_CRT_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZAIS_HEAD_GD_CRT_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZAIS_HEAD_GD_CRT_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZAIS_FT_GR_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZAIS_FT_GR_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZAIS_FT_GR_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZAIS_MATDOC_REV_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZAIS_MATDOC_REV_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZAIS_MATDOC_REV_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZAU_PTG_PROCESSORDER_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZAU_PTG_PROCESSORDER_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZAU_PTG_PROCESSORDER_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZCE_ATS_BATCH_RUN_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZCE_ATS_BATCH_RUN_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZCE_ATS_BATCH_RUN_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZCE_AIS_BATCH_RUN_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZCE_AIS_BATCH_RUN_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZCE_AIS_BATCH_RUN_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZPTG01_BATCH_RUN_281_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZPTG01_BATCH_RUN_281_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZPTG01_BATCH_RUN_281_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZNC_FT_HD_ITEM_REPORT_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZNC_FT_HD_ITEM_REPORT_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZNC_FT_HD_ITEM_REPORT_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZAU_ACM_SAVE_DIPS_DATA_SB": {
+        "uri": "/sap/opu/odata/sap/ZAU_ACM_SAVE_DIPS_DATA_SB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZAU_ACM_SAVE_DIPS_DATA_SB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZAU_ACM_DOWNTIME_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZAU_ACM_DOWNTIME_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZAU_ACM_DOWNTIME_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZCE_ZCOUNT_HEAD_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZCE_ZCOUNT_HEAD_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZCE_ZCOUNT_HEAD_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_ZCOUNT_HEADER": {
+        "uri": "/sap/opu/odata/sap/ZSB_ZCOUNT_HEADER/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZSB_ZCOUNT_HEADER/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_ZCOUNT_ITEM": {
+        "uri": "/sap/opu/odata/sap/ZSB_ZCOUNT_ITEM/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZSB_ZCOUNT_ITEM/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZPTG_HEAD_GD_CRT__261_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZPTG_HEAD_GD_CRT__261_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZPTG_HEAD_GD_CRT__261_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZPTG_HEAD_GD_CRT_531_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZPTG_HEAD_GD_CRT_531_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZPTG_HEAD_GD_CRT_531_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZPTG01_BATCH_RUN_531_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZPTG01_BATCH_RUN_531_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZPTG01_BATCH_RUN_531_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZPTG_GR_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZPTG_GR_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZPTG_GR_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZCE_ZDTCOUNT_HEAD_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZCE_ZDTCOUNT_HEAD_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZCE_ZDTCOUNT_HEAD_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZCE_ZCOUNT_HEAD_SAVE_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZCE_ZCOUNT_HEAD_SAVE_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZCE_ZCOUNT_HEAD_SAVE_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZCE_USERBUSINESSROLE_SRB": {
+        "uri": "/sap/opu/odata/sap/ZCE_USERBUSINESSROLE_SRB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZCE_USERBUSINESSROLE_SRB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZCE_ZCOUNT_FORM_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZCE_ZCOUNT_FORM_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZCE_ZCOUNT_FORM_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZCE_WASTE_PRINT_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZCE_WASTE_PRINT_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZCE_WASTE_PRINT_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZPTG01_MATDOC_REV_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZPTG01_MATDOC_REV_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZPTG01_MATDOC_REV_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZCE_ZCOUNT_REPT_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZCE_ZCOUNT_REPT_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZCE_ZCOUNT_REPT_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZCE_BATCH_MATNR_F4_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZCE_BATCH_MATNR_F4_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZCE_BATCH_MATNR_F4_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_ACM_REPORT_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZSB_ACM_REPORT_VAN',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/ZSB_ACM_REPORT/ZSB_ACM_REPORT_VAN.xml"
+        }
+      },
+      "ZSB_ACM_REPORT": {
+        "uri": "/sap/opu/odata/sap/ZSB_ACM_REPORT/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "ZSB_ACM_REPORT_VAN"
+          ],
+          "localUri": "localService/ZSB_ACM_REPORT/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_ATS_REPORT_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZSB_ATS_REPORT_VAN',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/ZSB_ATS_REPORT/ZSB_ATS_REPORT_VAN.xml"
+        }
+      },
+      "ZSB_ATS_REPORT": {
+        "uri": "/sap/opu/odata/sap/ZSB_ATS_REPORT/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "ZSB_ATS_REPORT_VAN"
+          ],
+          "localUri": "localService/ZSB_ATS_REPORT/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_PTG_REPORT_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZSB_PTG_REPORT_VAN',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/ZSB_PTG_REPORT/ZSB_PTG_REPORT_VAN.xml"
+        }
+      },
+      "ZSB_PTG_REPORT": {
+        "uri": "/sap/opu/odata/sap/ZSB_PTG_REPORT/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "ZSB_PTG_REPORT_VAN"
+          ],
+          "localUri": "localService/ZSB_PTG_REPORT/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZPROC_HEAD_CONF_AIS_SRB": {
+        "uri": "/sap/opu/odata/sap/ZPROC_HEAD_CONF_AIS_SRB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZPROC_HEAD_CONF_AIS_SRB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZPROC_HEAD_CONF_PTG_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZPROC_HEAD_CONF_PTG_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZPROC_HEAD_CONF_PTG_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZCE_ZBCR_REPT_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZCE_ZBCR_REPT_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZCE_ZBCR_REPT_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZCE_CONF_REV_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZCE_CONF_REV_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZCE_CONF_REV_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_YAIS_FIELDS_VAN": {
+        "uri": "/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Annotations(TechnicalName='ZSB_YAIS_FIELDS_VAN',Version='0001')/$value/",
+        "type": "ODataAnnotation",
+        "settings": {
+          "localUri": "localService/ZSB_YAIS_FIELDS/ZSB_YAIS_FIELDS_VAN.xml"
+        }
+      },
+      "ZSB_YAIS_FIELDS": {
+        "uri": "/sap/opu/odata/sap/ZSB_YAIS_FIELDS/",
+        "type": "OData",
+        "settings": {
+          "annotations": [
+            "ZSB_YAIS_FIELDS_VAN"
+          ],
+          "localUri": "localService/ZSB_YAIS_FIELDS/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_LABEL_HEADER": {
+        "uri": "/sap/opu/odata/sap/ZSB_LABEL_HEADER/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZSB_LABEL_HEADER/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_LABEL_ITEM": {
+        "uri": "/sap/opu/odata/sap/ZSB_LABEL_ITEM/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZSB_LABEL_ITEM/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_CUSTOM_LABEL_HEAD": {
+        "uri": "/sap/opu/odata/sap/ZSB_CUSTOM_LABEL_HEAD/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZSB_CUSTOM_LABEL_HEAD/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZSB_ZLABEL_REPT": {
+        "uri": "/sap/opu/odata/sap/ZSB_ZLABEL_REPT/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZSB_ZLABEL_REPT/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZCE_ZLABEL_FORM_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZCE_ZLABEL_FORM_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZCE_ZLABEL_FORM_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZCE_YFCS_REPT_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZCE_YFCS_REPT_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZCE_YFCS_REPT_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZCE_YFCS_TAB_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZCE_YFCS_TAB_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZCE_YFCS_TAB_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      }
+    },
+    "crossNavigation": {
+      "inbounds": {
+        "zppauto-display": {
+          "semanticObject": "zppauto",
+          "action": "display",
+          "title": "{{zppauto-display.flpTitle}}",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "config": {
+      "fullWidth": true
+    },
+    "dependencies": {
+      "minUI5Version": "1.136.10",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "zautodesignapp.i18n.i18n"
+        }
+      },
+      "ZAU_FT_PROCESSORDER_SRVB_": {
+        "dataSource": "ZAU_FT_PROCESSORDER_SRVB_",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_AU_FT_HEADER": {
+        "dataSource": "ZSB_AU_FT_HEADER",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_AU_FT_ITEM": {
+        "dataSource": "ZSB_AU_FT_ITEM",
+        "preload": true,
+        "settings": {}
+      },
+      "ZAU_FT_PRODCONF_SRVB": {
+        "dataSource": "ZAU_FT_PRODCONF_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZAU_FT_GR_SRVB": {
+        "dataSource": "ZAU_FT_GR_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZAU_ACM_PROCESSORDER_SRVB": {
+        "dataSource": "ZAU_ACM_PROCESSORDER_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZAU_QA01_PROCESSORDER_SRVB": {
+        "dataSource": "ZAU_QA01_PROCESSORDER_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZAU_ATS_PROCESSORDER_SRVB": {
+        "dataSource": "ZAU_ATS_PROCESSORDER_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZDIPS_MASTER_SRVB": {
+        "dataSource": "ZDIPS_MASTER_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_AU_QA01_HEADER": {
+        "dataSource": "ZSB_AU_QA01_HEADER",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_AU_QA01_ITEM": {
+        "dataSource": "ZSB_AU_QA01_ITEM",
+        "preload": true,
+        "settings": {}
+      },
+      "ZAU_AIS_PROCESSORDER_SRVB": {
+        "dataSource": "ZAU_AIS_PROCESSORDER_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZAU_ACM_SAVE_DIPS_SRVB": {
+        "dataSource": "ZAU_ACM_SAVE_DIPS_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_AU_TB_MAC_SPEED_SRVB": {
+        "dataSource": "ZSB_AU_TB_MAC_SPEED_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_AU_ACM_HEADER": {
+        "dataSource": "ZSB_AU_ACM_HEADER",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_AU_ACM_ITEM": {
+        "dataSource": "ZSB_AU_ACM_ITEM",
+        "preload": true,
+        "settings": {}
+      },
+      "ZCE_ACM_HEAD_CNF_SRB": {
+        "dataSource": "ZCE_ACM_HEAD_CNF_SRB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZDEFECTS_TABLE_SRVB": {
+        "dataSource": "ZDEFECTS_TABLE_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_AU_MASTERDATA": {
+        "dataSource": "ZSB_AU_MASTERDATA",
+        "preload": true,
+        "settings": {}
+      },
+      "ZAU_ACM_UPDATE_DIPS_SRVB": {
+        "dataSource": "ZAU_ACM_UPDATE_DIPS_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_AU_QA03_HEADER": {
+        "dataSource": "ZSB_AU_QA03_HEADER",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_AU_QA03_ITEM": {
+        "dataSource": "ZSB_AU_QA03_ITEM",
+        "preload": true,
+        "settings": {}
+      },
+      "ZAU_QA03_PROCESSORDER_SRVB": {
+        "dataSource": "ZAU_QA03_PROCESSORDER_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_MATDOC_REV_SRVB": {
+        "dataSource": "ZSB_MATDOC_REV_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZC_ATS_HEAD_GD_CRT_SRVB": {
+        "dataSource": "ZC_ATS_HEAD_GD_CRT_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZATS_MATDOC_REV_SRVB": {
+        "dataSource": "ZATS_MATDOC_REV_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZAU_ACM_BOM_COMPONENT_SRVB": {
+        "dataSource": "ZAU_ACM_BOM_COMPONENT_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_AU_QA02_HEADER": {
+        "dataSource": "ZSB_AU_QA02_HEADER",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_AU_QA02_ITEM": {
+        "dataSource": "ZSB_AU_QA02_ITEM",
+        "preload": true,
+        "settings": {}
+      },
+      "ZDIFFECTS_TAB_QA03_SRVB": {
+        "dataSource": "ZDIFFECTS_TAB_QA03_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZAIS_HEAD_GD_CRT_SRVB": {
+        "dataSource": "ZAIS_HEAD_GD_CRT_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZAIS_FT_GR_SRVB": {
+        "dataSource": "ZAIS_FT_GR_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZAIS_MATDOC_REV_SRVB": {
+        "dataSource": "ZAIS_MATDOC_REV_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZAU_PTG_PROCESSORDER_SRVB": {
+        "dataSource": "ZAU_PTG_PROCESSORDER_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZCE_ATS_BATCH_RUN_SRVB": {
+        "dataSource": "ZCE_ATS_BATCH_RUN_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZCE_AIS_BATCH_RUN_SRVB": {
+        "dataSource": "ZCE_AIS_BATCH_RUN_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZPTG01_BATCH_RUN_281_SRVB": {
+        "dataSource": "ZPTG01_BATCH_RUN_281_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZNC_FT_HD_ITEM_REPORT_SRVB": {
+        "dataSource": "ZNC_FT_HD_ITEM_REPORT_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZAU_ACM_SAVE_DIPS_DATA_SB": {
+        "dataSource": "ZAU_ACM_SAVE_DIPS_DATA_SB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZAU_ACM_DOWNTIME_SRVB": {
+        "dataSource": "ZAU_ACM_DOWNTIME_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZCE_ZCOUNT_HEAD_SRVB": {
+        "dataSource": "ZCE_ZCOUNT_HEAD_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_ZCOUNT_HEADER": {
+        "dataSource": "ZSB_ZCOUNT_HEADER",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_ZCOUNT_ITEM": {
+        "dataSource": "ZSB_ZCOUNT_ITEM",
+        "preload": true,
+        "settings": {}
+      },
+      "ZPTG_HEAD_GD_CRT__261_SRVB": {
+        "dataSource": "ZPTG_HEAD_GD_CRT__261_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZPTG_HEAD_GD_CRT_531_SRVB": {
+        "dataSource": "ZPTG_HEAD_GD_CRT_531_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZPTG01_BATCH_RUN_531_SRVB": {
+        "dataSource": "ZPTG01_BATCH_RUN_531_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZPTG_GR_SRVB": {
+        "dataSource": "ZPTG_GR_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZCE_ZDTCOUNT_HEAD_SRVB": {
+        "dataSource": "ZCE_ZDTCOUNT_HEAD_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZCE_ZCOUNT_HEAD_SAVE_SRVB": {
+        "dataSource": "ZCE_ZCOUNT_HEAD_SAVE_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZCE_USERBUSINESSROLE_SRB": {
+        "dataSource": "ZCE_USERBUSINESSROLE_SRB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZCE_ZCOUNT_FORM_SRVB": {
+        "dataSource": "ZCE_ZCOUNT_FORM_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZCE_WASTE_PRINT_SRVB": {
+        "dataSource": "ZCE_WASTE_PRINT_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZPTG01_MATDOC_REV_SRVB": {
+        "dataSource": "ZPTG01_MATDOC_REV_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZCE_ZCOUNT_REPT_SRVB": {
+        "dataSource": "ZCE_ZCOUNT_REPT_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZCE_BATCH_MATNR_F4_SRVB": {
+        "dataSource": "ZCE_BATCH_MATNR_F4_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_ACM_REPORT": {
+        "dataSource": "ZSB_ACM_REPORT",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_ATS_REPORT": {
+        "dataSource": "ZSB_ATS_REPORT",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_PTG_REPORT": {
+        "dataSource": "ZSB_PTG_REPORT",
+        "preload": true,
+        "settings": {}
+      },
+      "ZPROC_HEAD_CONF_AIS_SRB": {
+        "dataSource": "ZPROC_HEAD_CONF_AIS_SRB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZPROC_HEAD_CONF_PTG_SRVB": {
+        "dataSource": "ZPROC_HEAD_CONF_PTG_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZCE_ZBCR_REPT_SRVB": {
+        "dataSource": "ZCE_ZBCR_REPT_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZCE_CONF_REV_SRVB": {
+        "dataSource": "ZCE_CONF_REV_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_YAIS_FIELDS": {
+        "dataSource": "ZSB_YAIS_FIELDS",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_LABEL_HEADER": {
+        "dataSource": "ZSB_LABEL_HEADER",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_LABEL_ITEM": {
+        "dataSource": "ZSB_LABEL_ITEM",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_CUSTOM_LABEL_HEAD": {
+        "dataSource": "ZSB_CUSTOM_LABEL_HEAD",
+        "preload": true,
+        "settings": {}
+      },
+      "ZSB_ZLABEL_REPT": {
+        "dataSource": "ZSB_ZLABEL_REPT",
+        "preload": true,
+        "settings": {}
+      },
+      "ZCE_ZLABEL_FORM_SRVB": {
+        "dataSource": "ZCE_ZLABEL_FORM_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZCE_YFCS_REPT_SRVB": {
+        "dataSource": "ZCE_YFCS_REPT_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZCE_YFCS_TAB_SRVB": {
+        "dataSource": "ZCE_YFCS_TAB_SRVB",
+        "preload": true,
+        "settings": {}
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "transition": "slide",
+        "type": "View",
+        "viewType": "XML",
+        "path": "zautodesignapp.view",
+        "async": true,
+        "viewPath": "zautodesignapp.view"
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "App",
+          "target": "App"
+        },
+        {
+          "pattern": "",
+          "name": "Home",
+          "target": "Home"
+        },
+        {
+          "pattern": "ftp_selectrange",
+          "name": "ftp_selectrange",
+          "target": "ftp_selectrange"
+        },
+        {
+          "pattern": "ftp_report",
+          "name": "ftp_report",
+          "target": "ftp_report"
+        },
+        {
+          "pattern": "acm_selectranges",
+          "name": "acm_selectranges",
+          "target": "acm_selectranges"
+        },
+        {
+          "pattern": "acm_downtime",
+          "name": "acm_downtime",
+          "target": "acm_downtime"
+        },
+        {
+          "pattern": "acm_downtimereport",
+          "name": "acm_downtimereport",
+          "target": "acm_downtimereport"
+        },
+        {
+          "pattern": "acm_report",
+          "name": "acm_report",
+          "target": "acm_report"
+        },
+        {
+          "pattern": "qa01_selectrange",
+          "name": "qa01_selectrange",
+          "target": "qa01_selectrange"
+        },
+        {
+          "pattern": "qa01_report",
+          "name": "qa01_report",
+          "target": "qa01_report"
+        },
+        {
+          "pattern": "ats_selectrange",
+          "name": "ats_selectrange",
+          "target": "ats_selectrange"
+        },
+        {
+          "pattern": "ats_report",
+          "name": "ats_report",
+          "target": "ats_report"
+        },
+        {
+          "pattern": "qa02_selectrange",
+          "name": "qa02_selectrange",
+          "target": "qa02_selectrange"
+        },
+        {
+          "pattern": "qa02_report",
+          "name": "qa02_report",
+          "target": "qa02_report"
+        },
+        {
+          "pattern": "ais_selectrange",
+          "name": "ais_selectrange",
+          "target": "ais_selectrange"
+        },
+        {
+          "pattern": "ais_report",
+          "name": "ais_report",
+          "target": "ais_report"
+        },
+        {
+          "pattern": "qa03_selectrange",
+          "name": "qa03_selectrange",
+          "target": "qa03_selectrange"
+        },
+        {
+          "pattern": "qa03_report",
+          "name": "qa03_report",
+          "target": "qa03_report"
+        },
+        {
+          "pattern": "ptg_selectrange",
+          "name": "ptg_selectrange",
+          "target": "ptg_selectrange"
+        },
+        {
+          "pattern": "ptg_report",
+          "name": "ptg_report",
+          "target": "ptg_report"
+        },
+        {
+          "pattern": "zcount_selectrange",
+          "name": "zcount_selectrange",
+          "target": "zcount_selectrange"
+        },
+        {
+          "pattern": "zcount_report",
+          "name": "zcount_report",
+          "target": "zcount_report"
+        },
+        {
+          "pattern": "ycount_report",
+          "name": "Wastage_report",
+          "target": "ycount_report"
+        },
+        {
+          "pattern": "ybcr_report",
+          "name": "ybcr_report",
+          "target": "ybcr_report"
+        },
+        {
+          "pattern": "dipscalculationport",
+          "name": "dipscalculation",
+          "target": "dipscalculation"
+        },
+        {
+          "pattern": "macspeed",
+          "name": "macspeed",
+          "target": "macspeed"
+        },
+        {
+          "pattern": "componentmaterial",
+          "name": "componentmaterial",
+          "target": "componentmaterial"
+        },
+        {
+          "pattern": "Wastage_report",
+          "name": "Wastage_report",
+          "target": "Wastage_report"
+        },
+        {
+          "pattern": "zlabel_report",
+          "name": "zlabel_report",
+          "target": "zlabel_report"
+        },
+        {
+          "pattern": "zlabel_selectrange",
+          "name": "zlabel_selectrange",
+          "target": "zlabel_selectrange"
+        },
+        {
+          "pattern": "yfcs_report",
+          "name": "yfcs_report",
+          "target": "yfcs_report"
+        }
+      ],
+      "targets": {
+        "App": {
+          "viewName": "App",
+          "viewLevel": 0,
+          "viewType": "XML"
+        },
+        "Home": {
+          "viewName": "Home",
+          "viewLevel": 1,
+          "viewType": "XML"
+        },
+        "ftp_selectrange": {
+          "viewName": "ftp/transaction/ftp_selectrange",
+          "viewLevel": 2,
+          "viewType": "XML"
+        },
+        "ftp_report": {
+          "viewName": "ftp/report/ftp_report",
+          "viewLevel": 3,
+          "viewType": "XML"
+        },
+        "acm_selectranges": {
+          "viewName": "acm/transaction/acm_selectrange",
+          "viewLevel": 4,
+          "viewType": "XML"
+        },
+        "acm_downtime": {
+          "viewName": "acm/downtime/acm_downtime",
+          "viewLevel": 5,
+          "viewType": "XML"
+        },
+        "acm_report": {
+          "viewName": "acm/report/acm_report",
+          "viewLevel": 6,
+          "viewType": "XML"
+        },
+        "acm_downtimereport": {
+          "viewName": "acm/downtimereport/downtime_report",
+          "viewLevel": 6,
+          "viewType": "XML"
+        },
+        "qa01_selectrange": {
+          "viewName": "qa01/transaction/qa01_selectrange",
+          "viewLevel": 7,
+          "viewType": "XML"
+        },
+        "qa01_report": {
+          "viewName": "qa01/report/qa01_report",
+          "viewLevel": 8,
+          "viewType": "XML"
+        },
+        "ats_selectrange": {
+          "viewName": "ats/transaction/ats_selectrange",
+          "viewLevel": 9,
+          "viewType": "XML"
+        },
+        "ats_report": {
+          "viewName": "ats/report/ats_report",
+          "viewLevel": 10,
+          "viewType": "XML"
+        },
+        "qa02_selectrange": {
+          "viewName": "qa02/transaction/qa02_selectrange",
+          "viewLevel": 11,
+          "viewType": "XML"
+        },
+        "qa02_report": {
+          "viewName": "qa02/report/qa02_report",
+          "viewLevel": 12,
+          "viewType": "XML"
+        },
+        "ais_selectrange": {
+          "viewName": "ais/transaction/ais_selectrange",
+          "viewLevel": 13,
+          "viewType": "XML"
+        },
+        "ais_report": {
+          "viewName": "ais/report/ais_report",
+          "viewLevel": 14,
+          "viewType": "XML"
+        },
+        "qa03_selectrange": {
+          "viewName": "qa03/transaction/qa03_selectrange",
+          "viewLevel": 15,
+          "viewType": "XML"
+        },
+        "qa03_report": {
+          "viewName": "qa03/report/qa03_report",
+          "viewLevel": 16,
+          "viewType": "XML"
+        },
+        "ptg_selectrange": {
+          "viewName": "ptg/transaction/ptg_selectrange",
+          "viewLevel": 17,
+          "viewType": "XML"
+        },
+        "ptg_report": {
+          "viewName": "ptg/report/ptg_report",
+          "viewLevel": 18,
+          "viewType": "XML"
+        },
+        "zcount_selectrange": {
+          "viewName": "zcount/transaction/zcount_selectrange",
+          "viewLevel": 19,
+          "viewType": "XML"
+        },
+        "zcount_report": {
+          "viewName": "zcount/report/zcount_report",
+          "viewLevel": 20,
+          "viewType": "XML"
+        },
+        "ycount_report": {
+          "viewName": "ycount/report/ycount_report",
+          "viewLevel": 21,
+          "viewType": "XML"
+        },
+        "ybcr_report": {
+          "viewName": "ybcr_report/report/ybcr_report",
+          "viewLevel": 22,
+          "viewType": "XML"
+        },
+        "dipscalculation": {
+          "viewName": "masterdata/dips/dipscalculation",
+          "viewLevel": 23,
+          "viewType": "XML"
+        },
+        "macspeed": {
+          "viewName": "masterdata/macspeed/macspeed",
+          "viewLevel": 24,
+          "viewType": "XML"
+        },
+        "componentmaterial": {
+          "viewName": "masterdata/componentmaterial/componentmaterial",
+          "viewLevel": 25,
+          "viewType": "XML"
+        },
+        "Wastage_report": {
+          "viewName": "Wastage_report/report/Wastage_report",
+          "viewLevel": 26,
+          "viewType": "XML"
+        },
+        "zlabel_report": {
+          "viewName": "zlabel/report/zlabel_report",
+          "viewLevel": 27,
+          "viewType": "XML"
+        },
+        "zlabel_selectrange": {
+          "viewName": "zlabel/transaction/zlabel_selectrange",
+          "viewLevel": 28,
+          "viewType": "XML"
+        },
+        "yfcs_report": {
+          "viewName": "yfcs/report/yfcs_report",
+          "viewLevel": 29,
+          "viewType": "XML"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "zautodesignapp.view.App",
+      "type": "XML",
+      "id": "App",
+      "async": true
+    }
+  }
+}

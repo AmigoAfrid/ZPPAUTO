@@ -1,0 +1,151 @@
+<core1:FragmentDefinition 
+    xmlns="sap.m"
+    xmlns:core1="sap.ui.core"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:u="sap.ui.unified"
+    xmlns:t="sap.ui.table"
+    xmlns:m="sap.f"
+    xmlns:layout1="sap.ui.layout"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:tnt="sap.tnt"
+    xmlns:core="sap.ui.core">
+
+    <Dialog  id="tableitptgs"  title="PTG Table item"  showHeader="true"  verticalScrolling="true"  horizontalScrolling="true"  contentHeight="50%"  contentWidth="100%"  resizable="true"  draggable="true">
+
+        <VBox class="sapUiSmallMargin">
+            <!-- Start Table create place -->
+            <t:Table rows="{CompDipsModels>/Datatabitems}" selectionMode="None" rowMode="fixed">
+                
+                <t:extension>
+                    <OverflowToolbar style="Clear">
+                        <Title text="Component Item Table"/>
+                    </OverflowToolbar>
+                </t:extension>
+                
+                <t:columns>
+                    <t:Column width="12rem" hAlign="Left">
+                        <Label text="Material"/>
+                        <t:template>
+                            <Text text="{CompDipsModels>material}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="14rem" hAlign="Left">
+                        <Label text="Description"/>
+                        <t:template>
+                            <Text text="{CompDipsModels>materialdescription}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="10rem" hAlign="Left">
+                        <Label text="Quantity"/>
+                        <t:template>
+                            <Text text="{CompDipsModels>quantity}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="5rem" hAlign="Left">
+                        <Label text="Base Unit"/>
+                        <t:template>
+                            <Text text="{CompDipsModels>base_unit}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="5rem" hAlign="Left">
+                        <Label text="Plant"/>
+                        <t:template>
+                            <Text text="{CompDipsModels>plant}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="10rem" hAlign="Left">
+                        <Label text="Storage Location"/>
+                        <t:template>
+                            <Text text="{CompDipsModels>storage_location}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="11rem" hAlign="Left">
+                        <Label text="Batch"/>
+                        <t:template>
+                         <!-- <Input value="{CompDipsModel>batch}" showValueHelp="true"  valueHelpRequest=".onValueHelpRequestBatch" /> -->
+                            <Text text="{CompDipsModels>batch}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="9rem" hAlign="Left">
+                        <Label text="Movement Type"/>
+                        <t:template>
+                            <!-- <Text text="{CompDipsModels>movement_type}"/> -->
+                            <tnt:InfoLabel text="{CompDipsModels>movement_type}" renderMode="Narrow" colorScheme="{= ${CompDipsModels>movement_type} === '261' ? 8 : 1 }"/>
+                        </t:template>
+                    </t:Column>
+
+                    <!-- <t:Column width="auto" hAlign="Left">
+                        <Label text="Cap Cut QTY(KG)"/>
+                        <t:template>
+                            <Text text="{CompDipsModels>cap_cut_qty}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="auto" hAlign="Left">
+                        <Label text="Body Cut QTY(KG)"/>
+                        <t:template>
+                            <Text text="{CompDipsModels>body_cut_qty}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="auto" hAlign="Left">
+                        <Label text="Cap Cake QTY(KG)"/>
+                        <t:template>
+                            <Text text="{CompDipsModels>cap_cake_qty}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="auto" hAlign="Left">
+                        <Label text="Body Cake QTY(KG)"/>
+                        <t:template>
+                            <Text text="{CompDipsModels>body_cake_qty}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="auto" hAlign="Left">
+                        <Label text="HFX"/>
+                        <t:template>
+                            <Text text="{CompDipsModels>hfx}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="auto" hAlign="Left">
+                        <Label text="Wastage"/>
+                        <t:template>
+                            <Text text="{CompDipsModels>wastage}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="auto" hAlign="Left">
+                        <Label text="Floor Wastage"/>
+                        <t:template>
+                            <Text text="{CompDipsModels>floor_wastage}"/>
+                        </t:template>
+                    </t:Column> -->
+
+                </t:columns>
+            </t:Table>
+            <!-- End Table create place -->
+        </VBox>
+
+        <!-- Start - Footer -->
+        <footer>
+            <OverflowToolbar>
+                <Button icon="sap-icon://warning2"  text="{ErrorModel>/Errors/0/text}"  type="Attention"  press="onMessageButtonPress"  visible="false" />
+                <ToolbarSpacer />
+                <Button type="Accept"  press="onQualitySubmits"  icon="sap-icon://save"  text="Submit"/>
+                <Button type="Reject"  press="onTableitemCancels"  icon="sap-icon://cancel"  text="Cancel"/>
+            </OverflowToolbar>
+        </footer>
+        <!-- End - Footer -->
+
+    </Dialog>
+</core1:FragmentDefinition>

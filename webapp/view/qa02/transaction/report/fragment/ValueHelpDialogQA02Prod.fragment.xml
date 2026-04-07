@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog" xmlns:m="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core">
+	<ValueHelpDialog supportMultiselect="true"  title=" Process Ord No." ok=".onValueHelpOkPresstQA02Proc" cancel=".onValueHelpCancelPressQA02Proc" afterClose=".onValueHelpAfterCloseQA02Proc" supportRanges="false" key="processorder" descriptionKey="">
+		<filterBar>
+			<fb:FilterBar  advancedMode="true" search=".onFilterBarSearchQA02Proc" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="processorder" label="Process Ord No" visibleInFilterBar="true">
+						<fb:control>
+								<m:Input name="Process Ord No." showSuggestion="true" showValueHelp="false" suggestionItems="{ path: 'ZSB_AU_QA02_ITEM>/ZC_AU_QA02ITEM', sorter: { path: 'processorder' }}">
+								<core:Item key="{ZSB_AU_QA02_ITEM>processorder}" text="{ZSB_AU_QA02_ITEM>processorder}" />
+							</m:Input>
+						</fb:control>
+					</fb:FilterGroupItem>
+				
+
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+		
+	</ValueHelpDialog>
+</core:FragmentDefinition> 

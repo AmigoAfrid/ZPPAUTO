@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="cds_zc_ats_head_gd_crt_svd" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="headerType" sap:label="Custom root view entity for zats_head_gd_crt table" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Materialdocument"/>
+                    <PropertyRef Name="Matdocyear"/>
+                    <PropertyRef Name="Postingdate"/>
+                    <PropertyRef Name="Goodsmovementcode"/>
+                </Key>
+                <Property Name="Materialdocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Material Document" sap:quickinfo="Number of Material Document" sap:updatable="false"/>
+                <Property Name="Matdocyear" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Material Doc. Year" sap:quickinfo="Material Document Year" sap:updatable="false"/>
+                <Property Name="Postingdate" Type="Edm.DateTime" Nullable="false" Precision="0" sap:display-format="Date" sap:label="Posting Date" sap:quickinfo="Posting Date in the Document" sap:updatable="false"/>
+                <Property Name="Goodsmovementcode" Type="Edm.String" Nullable="false" MaxLength="2" sap:updatable="false"/>
+                <Property Name="Response" Type="Edm.String" MaxLength="5000"/>
+                <Property Name="Errorresponse" Type="Edm.String" MaxLength="5000"/>
+                <NavigationProperty Name="toitem" Relationship="cds_zc_ats_head_gd_crt_svd.assoc_491D403D832CEF054212097AEE3F71DF" FromRole="FromRole_assoc_491D403D832CEF054212097AEE3F71DF" ToRole="ToRole_assoc_491D403D832CEF054212097AEE3F71DF"/>
+            </EntityType>
+            <EntityType Name="itemType" sap:label="View entity for zats_item_gd_crt table" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Batch"/>
+                    <PropertyRef Name="Material"/>
+                </Key>
+                <Property Name="Batch" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Batch" sap:quickinfo="Batch Number" sap:updatable="false"/>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number" sap:updatable="false"/>
+                <Property Name="Materialdocument" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Material Document" sap:quickinfo="Number of Material Document" sap:updatable="false"/>
+                <Property Name="matdocyear" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Material Doc. Year" sap:quickinfo="Material Document Year" sap:updatable="false"/>
+                <Property Name="postingdate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Posting Date" sap:quickinfo="Posting Date in the Document" sap:updatable="false"/>
+                <Property Name="goodsmovementcode" Type="Edm.String" MaxLength="2" sap:updatable="false"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
+                <Property Name="Storagelocation" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Storage Location"/>
+                <Property Name="Goodsmovementtype" Type="Edm.String" MaxLength="4"/>
+                <Property Name="Quantityinentryunit" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="Uom" sap:label="Quantity"/>
+                <Property Name="Uom" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="Manufacturingorder" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Order" sap:quickinfo="Order Number"/>
+                <Property Name="Manufacturingorderitem" Type="Edm.String" MaxLength="5000"/>
+                <Property Name="Manufacturedate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Created On" sap:quickinfo="Record Creation Date"/>
+                <NavigationProperty Name="toheader" Relationship="cds_zc_ats_head_gd_crt_svd.assoc_491D403D832CEF054212097AEE3F71DF" FromRole="ToRole_assoc_491D403D832CEF054212097AEE3F71DF" ToRole="FromRole_assoc_491D403D832CEF054212097AEE3F71DF"/>
+            </EntityType>
+            <Association Name="assoc_491D403D832CEF054212097AEE3F71DF" sap:content-version="1">
+                <End Type="cds_zc_ats_head_gd_crt_svd.headerType" Multiplicity="1" Role="FromRole_assoc_491D403D832CEF054212097AEE3F71DF">
+                    <OnDelete Action="Cascade"/>
+                </End>
+                <End Type="cds_zc_ats_head_gd_crt_svd.itemType" Multiplicity="*" Role="ToRole_assoc_491D403D832CEF054212097AEE3F71DF"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_assoc_491D403D832CEF054212097AEE3F71DF">
+                        <PropertyRef Name="Goodsmovementcode"/>
+                        <PropertyRef Name="Postingdate"/>
+                        <PropertyRef Name="Matdocyear"/>
+                        <PropertyRef Name="Materialdocument"/>
+                    </Principal>
+                    <Dependent Role="ToRole_assoc_491D403D832CEF054212097AEE3F71DF">
+                        <PropertyRef Name="goodsmovementcode"/>
+                        <PropertyRef Name="postingdate"/>
+                        <PropertyRef Name="matdocyear"/>
+                        <PropertyRef Name="Materialdocument"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="cds_zc_ats_head_gd_crt_svd_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="header" EntityType="cds_zc_ats_head_gd_crt_svd.headerType" sap:content-version="1"/>
+                <EntitySet Name="item" EntityType="cds_zc_ats_head_gd_crt_svd.itemType" sap:content-version="1"/>
+                <AssociationSet Name="assoc_491D403D832CEF054212097AEE3F71DF" Association="cds_zc_ats_head_gd_crt_svd.assoc_491D403D832CEF054212097AEE3F71DF" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="header" Role="FromRole_assoc_491D403D832CEF054212097AEE3F71DF"/>
+                    <End EntitySet="item" Role="ToRole_assoc_491D403D832CEF054212097AEE3F71DF"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <Annotations Target="cds_zc_ats_head_gd_crt_svd.cds_zc_ats_head_gd_crt_svd_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cds_zc_ats_head_gd_crt_svd.headerType/toitem" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Composition"/>
+            </Annotations>
+            <Annotations Target="cds_zc_ats_head_gd_crt_svd.cds_zc_ats_head_gd_crt_svd_Entities/header" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Response"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Errorresponse"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="toitem"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="true"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>Response</PropertyPath>
+                                <PropertyPath>Errorresponse</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonUpdatableNavigationProperties">
+                            <Collection>
+                                <PropertyPath>toitem</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zc_ats_head_gd_crt_svd.cds_zc_ats_head_gd_crt_svd_Entities/item" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="Manufacturingorderitem"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>Manufacturingorderitem</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonUpdatableNavigationProperties">
+                            <Collection>
+                                <PropertyPath>toheader</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zc_ats_head_gd_crt_svd.headerType/Goodsmovementcode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_zc_ats_head_gd_crt_svd.headerType/Matdocyear" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_zc_ats_head_gd_crt_svd.headerType/Materialdocument" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_zc_ats_head_gd_crt_svd.headerType/Postingdate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_zc_ats_head_gd_crt_svd.itemType/Batch" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_zc_ats_head_gd_crt_svd.itemType/Material" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_zc_ats_head_gd_crt_svd.itemType/Materialdocument" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_zc_ats_head_gd_crt_svd.itemType/goodsmovementcode" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_zc_ats_head_gd_crt_svd.itemType/matdocyear" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_zc_ats_head_gd_crt_svd.itemType/postingdate" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_zc_ats_head_gd_crt_svd.cds_zc_ats_head_gd_crt_svd_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Org.OData.Capabilities.V1.BatchSupport">
+                    <Record Type="Org.OData.Capabilities.V1.BatchSupportType">
+                        <PropertyValue Property="ReferencesAcrossChangeSetsSupported" Bool="true"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/sap/ZAIS_HEAD_GD_CRT_SRVB/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/sap/ZAIS_HEAD_GD_CRT_SRVB/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

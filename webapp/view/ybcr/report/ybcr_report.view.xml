@@ -1,0 +1,460 @@
+<mvc:View
+    controllerName="zautodesignapp.controller.ybcr.report.ybcr_report"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:form="sap.ui.layout.form"
+    xmlns="sap.m"
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table"
+    xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout"
+    height="100%">
+
+    <f:DynamicPage
+		visible="{= ${ScreenVisible>/openscreen} === 'screen1' }"
+        class="sapUiTinyMarginTop sapUiTinyMarginBegin"
+        preserveHeaderStateOnScroll="true"
+        showFooter="true"
+        fitContent="true">
+
+        <!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="ZBCR" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <!-- DynamicPage Header -->
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <FlexBox alignItems="Start" justifyContent="SpaceBetween">
+                    <items>
+                        <Panel backgroundDesign="Transparent" class="sapUiNoContentPadding">
+                            <content>
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  customWidth">
+
+                                    <Label text="Select Date Range :" tooltip="DatePicker" design="Bold" required="false" class="sapUiSmallMarginBegin" />
+                                    <DateRangeSelection id="Datess" valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd" tooltip="DatePicker" width="10rem" value="" />
+
+                                </layout:VerticalLayout>
+
+                                <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin ">
+
+                                    <Label text="Batch No." design="Bold"  required="false" labelFor="multiInputWithSuggestions"/>
+                                    
+                                    <MultiInput maxLength="10" required="true" width="12.5rem" id="idmaterialdocument" placeholder="Select Batch No." editable="true" enabled="true"   showValueHelp="true" valueHelpRequest=".onValueHelpRequest"  suggest=".OnSuggest_User" suggestionItems="{
+                                        path: 'ZCE_ZCOUNT_HEAD_SRVB>/ZCE_ZCOUNT_BATCH_F4HELP',
+                                        sorter: { path: 'batch' }}" showSuggestion="true"  suggestionItemSelected=".ondocumentsuggestselected">
+                                        <suggestionItems>
+
+                                            <core:Item key="{ZCE_ZCOUNT_HEAD_SRVB>batch}"></core:Item>
+
+                                        </suggestionItems>
+                                    
+                                    </MultiInput>
+
+
+                                    <!-- <Label text="Batch No." design="Bold"  required="false" labelFor="multiInputWithSuggestions"/>
+
+                                    <MultiInput maxLength="10" required="true" width="12.5rem" id="idmaterialdocument" placeholder="Select Batch No." editable="true" enabled="true"   showValueHelp="true" valueHelpRequest=".onValueHelpRequest"  suggest=".OnSuggest_User" suggestionItems="{
+                                        path: 'ZSB_AU_FT_HEADER>/ZC_AU_FT_HEADER',
+                                        sorter: { path: 'Acmbatchno' }}" showSuggestion="true"  suggestionItemSelected=".ondocumentsuggestselected">
+                                    <suggestionItems>
+
+                                    <core:Item key="{ZSB_AU_FT_HEADER>Acmbatchno}"></core:Item>
+
+                                    </suggestionItems>
+                                    
+                                    </MultiInput> -->
+
+                                     <!-- <Label text="Process Ord No." design="Bold"  required="false" labelFor="multiInputWithSuggestions"/>
+                                    
+                                    <MultiInput maxLength="10" required="true" width="12.5rem" id="ProcOrd" placeholder="Select Process Ord No." editable="true" enabled="true"   showValueHelp="true" valueHelpRequest=".onValueHelpRequest_"  suggest=".OnSuggest_User_" suggestionItems="{
+                                        path: 'ZSB_ZCOUNT_ITEM>/ZCE_ZCOUNT_ITEM',
+                                        sorter: { path: 'process_order' }}" showSuggestion="true"  suggestionItemSelected=".ondocumentsuggestselected_">
+                                    <suggestionItems>
+                                    <core:Item key="{ZSB_ZCOUNT_ITEM>ProcOrd}"></core:Item>
+                                    </suggestionItems>
+                                    </MultiInput> -->
+
+                                    <layout:HorizontalLayout class=" sapUiLargeMarginBegin "><layout:HorizontalLayout class=" sapUiLargeMarginBegin "></layout:HorizontalLayout>
+
+
+                                    <Button text="Go" tooltip="Execute" type="Emphasized" press="OnGoItemPage" enabled="true" />
+                                    </layout:HorizontalLayout>
+
+                                </layout:VerticalLayout>		
+
+                                <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin ">
+
+                                    <!-- <Label text="Batch No." design="Bold"  required="false" labelFor="multiInputWithSuggestions"/>
+                                    
+                                    <MultiInput maxLength="10" required="true" width="12.5rem" id="idmaterialdocument" placeholder="Select Batch No." editable="true" enabled="true"   showValueHelp="true" valueHelpRequest=".onValueHelpRequest"  suggest=".OnSuggest_User" suggestionItems="{
+                                        path: 'ZCE_ZCOUNT_HEAD_SRVB>/ZCE_ZCOUNT_BATCH_F4HELP',
+                                        sorter: { path: 'batch' }}" showSuggestion="true"  suggestionItemSelected=".ondocumentsuggestselected">
+                                    <suggestionItems>
+
+                                    <core:Item key="{ZCE_ZCOUNT_HEAD_SRVB>batch}"></core:Item>
+
+                                    </suggestionItems>
+                                    
+                                    </MultiInput> -->
+
+                                   
+                                </layout:VerticalLayout>
+
+                                <!-- <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin ">
+
+                                    <Label text="Plant No." design="Bold"  required="false" labelFor="multiInputWithSuggestions"/>
+                                    
+                                    <MultiInput maxLength="10" required="true" width="12.5rem" id="idPlantInput" placeholder="Select Plant" editable="true" enabled="true"   showValueHelp="true" valueHelpRequest=".onValueHelpRequestPlant"  suggest=".OnSuggest_UserPlant" suggestionItems="{
+                                    path: 'ZCE_ZCOUNT_HEAD_SRVB>/ZCE_PLANT_F4HELP',
+                                    sorter: { path: 'plant' }}" showSuggestion="true"  suggestionItemSelected=".ondocumentsuggestselectedPlant">
+                                    
+                                    <suggestionItems>
+                                    
+                                    <core:Item key="{ZCE_ZCOUNT_HEAD_SRVB>plant}"></core:Item>
+                                    
+                                    </suggestionItems>
+                                    
+                                    </MultiInput>
+                                   
+                                </layout:VerticalLayout> -->
+
+                                <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin ">
+
+                                    <!-- <Label text="Production Ord No." design="Bold"  required="false" labelFor="multiInputWithSuggestions"/>
+                                    
+                                    <MultiInput maxLength="10" required="true" width="12.5rem" id="ProdDoc" placeholder="Select Production Ord No." editable="true" enabled="true"   showValueHelp="true" valueHelpRequest=".onValueHelpRequest_"  suggest=".OnSuggest_User_" suggestionItems="{
+				path: 'ZSB_AU_FT_HEADER>/ZC_AU_FT_HEADER',
+				sorter: { path: 'Prodorderno' }}" showSuggestion="true"  suggestionItemSelected=".ondocumentsuggestselected_">
+                    <suggestionItems>
+                    <core:Item key="{ZSB_AU_FT_HEADER>ProdDoc}"></core:Item>
+                    </suggestionItems>
+                    </MultiInput> -->
+                                   
+                                </layout:VerticalLayout>
+
+                            </content>
+                        </Panel>
+                    </items>
+                </FlexBox>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <!-- DynamicPage Content -->
+        <f:content>
+            <t:Table
+                id="idItemTable"
+                rows="{path:'TabModel>/ItemData', sorter: { path: 'sno', descending: false }}"
+                selectionMode="MultiToggle"
+                selectionBehavior="RowSelector"
+                
+                enableSelectAll="true"
+                rowMode="Auto"
+                enableBusyIndicator="true"
+                threshold="100"
+                rowSelectionChange=".onRowSelectionChange">
+
+
+                
+                   <t:extension>
+						<OverflowToolbar  style="Clear">
+							<ToolbarSpacer/>
+							<ToolbarSpacer/>
+                   			 <Button id="_IDGenButtonYBCRscreen" icon="sap-icon://excel-attachment" press="OnExportExl"/>
+						</OverflowToolbar>
+					</t:extension>
+
+                <t:columns>
+				
+                    <!-- <t:Column tooltip="Report Id" width="7rem">
+                        <Label text="Report Id" />
+                        <t:template>
+                            <Text text="{path:'TabModel>report_id'}" />
+                        </t:template>
+                    </t:Column> -->
+
+                    <t:Column tooltip="Batch" width="7rem">
+                        <Label text="Batch" />
+                        <t:template>
+                            <Text text="{path:'TabModel>batch'}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Customer Name" width="10rem">
+                        <Label text="Customer Name" />
+                        <t:template>
+                            <Text text="{TabModel>CustomerName}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Status" width="7rem">
+                        <Label text="Status" />
+                        <t:template>
+                            <Input value="{TabModel>status}" editable="{= !${TabModel>status} }" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Remark" width="7rem">
+                        <Label text="Remark" />
+                        <t:template>
+                            <Input value="{TabModel>remark}" editable="{= !${TabModel>remark} }"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Product Description" width="10rem">
+                        <Label text="Product Description" />
+                        <t:template>
+                            <Text text="{TabModel>ProductDescription}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Material" width="7rem">
+                        <Label text="Material" />
+                        <t:template>
+                            <Text text="{TabModel>material}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Ft Qty" width="7rem">
+                        <Label text="FT QTY" />
+                        <t:template>
+                            <Text text="{TabModel>ft_qty}" />
+                        </t:template>
+                    </t:Column>
+                    
+                    <t:Column tooltip="FT status" width="7rem">
+                        <Label text="FT Status" />
+                        <t:template>
+                            <Text text="{TabModel>ft_status}" />
+                        </t:template>
+                    </t:Column>
+
+                    <!-- <t:Column tooltip="Unit" width="7rem">
+                        <Label text="Unit" />
+                        <t:template>
+                            <Text text="{TabModel>unit}" />
+                        </t:template>
+                    </t:Column> -->
+
+                    <t:Column tooltip="Acm Qty" width="7rem">
+                        <Label text="ACM QTY" />
+                        <t:template>
+                            <Text text="{TabModel>acm_qty}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Acm status" width="7rem">
+                        <Label text="ACM Status" />
+                        <t:template>
+                            <Text text="{TabModel>acm_status}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Acm Waste" width="7rem">
+                        <Label text="ACM Waste" />
+                        <t:template>
+                            <Text text="{TabModel>acm_wast}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Ats Qty" width="7rem">
+                        <Label text="ATS QTY" />
+                        <t:template>
+                            <Text text="{TabModel>ats_qty}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Ats Waste" width="9rem">
+                        <Label text="ATS Wastage KGS" />
+                        <t:template>
+                            <Text text="{TabModel>ats_wast}" />
+                        </t:template>
+                    </t:Column>
+
+                     <t:Column tooltip="ATS Loss %" width="7rem">
+                        <Label text="ATS Loss %" />
+                        <t:template>
+                            <Text text="{TabModel>atsloss_per}" />                            
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Ats Hfx" width="7rem">
+                        <Label text="ATS HFX" />
+                        <t:template>
+                            <Text text="{TabModel>ats_hfx}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Ats Box" width="7rem">
+                        <Label text="ATS Box" />
+                        <t:template>
+                            <Text text="{TabModel>ats_box}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Ais Qty" width="7rem">
+                        <Label text="AIS QTY" />
+                        <t:template>
+                            <Text text="{TabModel>ais_qty}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Ais Waste" width="9rem">
+                        <Label text="AIS Wastage KGS" />
+                        <t:template>
+                            <Text text="{TabModel>ais_wast}" />
+                        </t:template>
+                    </t:Column>
+
+                     <t:Column tooltip="AIS Loss %" width="7rem">
+                        <Label text="AIS Loss %" />
+                        <t:template>
+                            <Text text="{TabModel>aisloss_per}" />
+                        </t:template>
+                    </t:Column>
+                    
+                    <t:Column tooltip="Total Loss in Lakhs" width="10rem">
+                        <Label text="Total Loss in Lakhs" />
+                        <t:template>
+                            <!-- <Text text="{parts: [ {path: 'TabModel>acm_qty'},{path: 'TabModel>packed_qty'}],formatter: '.formatTotalLoss'}"/> -->
+                            <Text text="{TabModel>total_loss_lakhs}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Total Loss %" width="7rem">
+                        <Label text="Total Loss %" />
+                        <t:template>
+                            <Text text="{TabModel>total_loss_per}" />
+                            
+                        </t:template>
+                    </t:Column> 
+
+                     <t:Column tooltip="Convertiblity" width="7rem">
+                        <Label text="Convertiblity" />
+                        <t:template>
+                            <Text text="{TabModel>convertiblity}" />                            
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Ais Box" width="7rem">
+                        <Label text="AIS Box" />
+                        <t:template>
+                            <Text text="{TabModel>ais_box}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Ptg Qty" width="7rem">
+                        <Label text="PTG QTY" />
+                        <t:template>
+                            <Text text="{TabModel>ptg_qty}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Ptg status" width="7rem">
+                        <Label text="PTG Status" />
+                        <t:template>
+                            <Text text="{TabModel>ptg_status}" />
+                        </t:template>
+                    </t:Column>
+
+                     <t:Column tooltip="Ptg wastage" width="9rem">
+                        <Label text="PTG Wastage KGS" />
+                        <t:template>
+                            <Text text="{TabModel>ptg_wast}" />
+                        </t:template>
+                    </t:Column>
+
+                     <t:Column tooltip="Printing loss %" width="7rem">
+                        <Label text="Printing Loss %" />
+                        <t:template>
+                            <Text text="{TabModel>ptgloss_per}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Start Date" width="7rem">
+                        <Label text="Start Date" />
+                        <t:template>
+                            <Text text="{path:'TabModel>start_date',formatter: '.OnDateChangeValue'}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column tooltip="End Date" width="7rem">
+                        <Label text="End Date" />
+                        <t:template>
+                            <Text text="{path:'TabModel>end_date',formatter: '.OnDateChangeValue'}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Packed Qty" width="7rem">
+                        <Label text="Packed Qty" />
+                        <t:template>
+                            <Text text="{TabModel>packed_qty}" />
+                        </t:template>
+                    </t:Column>
+
+                    <!-- packing_status -->
+
+<!-- "{path:'TabModel>packed_date',formatter: '.OnDateChangeValue'}" -->
+
+                     <t:Column tooltip="Packed Date" width="7rem">
+                        <Label text="Packed Date" />
+                        <t:template>
+                            <Text text="{path:'TabModel>packed_date',formatter: '.OnDateChangeValue'}" />
+                        </t:template>
+                    </t:Column>
+
+
+                    <t:Column tooltip="Packing Status" width="7rem">
+                        <Label text="Packing Status" />
+                        <t:template>
+                            <Text text="{TabModel>packing_status}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Dispatched Qty" width="7rem">
+                        <Label text="Dispatched Qty" />
+                        <t:template>
+                            <Text text="{TabModel>dispatched_qty}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Reference No" width="7rem">
+                        <Label text="Reference No" />
+                        <t:template>
+                            <Text text="{TabModel>reference_no}" />
+                        </t:template>
+                    </t:Column>  
+                </t:columns>
+
+            </t:Table>
+        </f:content>
+        <!-- DynamicPage Footer -->
+                <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+
+                <!-- <Button text="Update" icon="sap-icon://drill-up" press="onSaveRows">
+                    <customData>
+                        <core:CustomData key="table-id" value="idItemTable" />
+                    </customData>
+                </Button>
+
+                <Button text="Save" icon="sap-icon://save" press="onCreatePress">
+                    <customData>
+                        <core:CustomData key="table-id" value="idItemTable" />
+                    </customData>
+                </Button> -->
+
+                 <Button text="Save" icon="sap-icon://save" press="onSaveOrCreateRows">
+                    <customData>
+                        <core:CustomData key="table-id" value="idItemTable" />
+                    </customData>
+                </Button>
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+
+</mvc:View>

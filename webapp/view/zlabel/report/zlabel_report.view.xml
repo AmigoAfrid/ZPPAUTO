@@ -1,0 +1,293 @@
+<mvc:View
+    controllerName="zautodesignapp.controller.zlabel.report.zlabel_report"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:form="sap.ui.layout.form"
+    xmlns="sap.m"
+    xmlns:c="sap.ui.core"
+    xmlns:u="sap.ui.unified"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table"
+    xmlns:f="sap.f"
+    xmlns:layout="sap.ui.layout"
+    height="100%">
+
+    <f:DynamicPage
+		visible="{= ${ScreenVisible>/openscreen} === 'screen1' }"
+        class="sapUiTinyMarginTop sapUiTinyMarginBegin"
+        preserveHeaderStateOnScroll="true"
+        showFooter="true"
+        fitContent="true">
+
+        <!-- DynamicPage Title -->
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Report - YCOUNT" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <!-- DynamicPage Header -->
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <FlexBox alignItems="Start" justifyContent="SpaceBetween">
+                    <items>
+                        <Panel backgroundDesign="Transparent" class="sapUiNoContentPadding">
+                            <content>
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  customWidth">
+
+                                    <Label text="Select Date Range :" tooltip="DatePicker" design="Bold" required="false"  />
+                                    <DateRangeSelection id="Dates_" valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd" tooltip="DatePicker" width="10rem" value="" />
+
+                                </layout:VerticalLayout>
+
+                                <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin ">
+
+                                    <Label text="Process Ord No." design="Bold"  required="false" labelFor="multiInputWithSuggestions"/>
+                                    
+                                    <MultiInput maxLength="10" required="true" width="12.5rem" id="ProcessOrderId" placeholder="Select Process Ord No." editable="true" enabled="true"   showValueHelp="true"
+                                                valueHelpRequest=".onValueHelpRequest_Process"  suggest=".OnSuggest_User_Process" 
+                                                suggestionItems="{path: 'ZSB_ZCOUNT_ITEM>/ZCE_ZCOUNT_ITEM',sorter: { path: 'process_order' }}" 
+                                                showSuggestion="true"  suggestionItemSelected=".ondocumentsuggestselected_Process">
+                                    <suggestionItems>
+                                    <core:Item key="{ZSB_ZCOUNT_ITEM>ProcOrd}"></core:Item>
+                                    </suggestionItems>
+                                    </MultiInput>
+
+                                    <layout:HorizontalLayout class=" sapUiLargeMarginBegin "><layout:HorizontalLayout class=" sapUiLargeMarginBegin "></layout:HorizontalLayout>
+
+
+                                    <Button text="Go" tooltip="Execute" type="Emphasized" press="OnGoZLabelItemPage" enabled="true" /></layout:HorizontalLayout>
+
+                                </layout:VerticalLayout>		
+
+                                <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin ">
+
+                                    <Label text="Batch No:" design="Bold"  required="false" labelFor="multiInputWithSuggestions"/>
+                                    
+                                    <MultiInput maxLength="10" required="true" width="12.5rem" id="BatchId" placeholder="Select Batch No." editable="true" enabled="true"   showValueHelp="true" 
+                                                valueHelpRequest=".onValueHelpRequest_Batch"  suggest=".OnSuggest_User_Batch" 
+                                                suggestionItems="{path: 'ZCE_ZCOUNT_HEAD_SRVB>/ZCE_ZCOUNT_BATCH_F4HELP',sorter: { path: 'batch' }}" 
+                                                showSuggestion="true"  suggestionItemSelected=".ondocumentsuggestselected_Batch">
+                                    <suggestionItems>
+
+                                    <core:Item key="{ZCE_ZCOUNT_HEAD_SRVB>batch}"></core:Item>
+
+                                    </suggestionItems>
+                                    
+                                    </MultiInput>
+
+                                   
+                                </layout:VerticalLayout>
+
+                                <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin ">
+
+                                    <Label text="Plant No:" design="Bold"  required="false" labelFor="multiInputWithSuggestions"/>
+                                    
+                                    <MultiInput maxLength="10" required="true" width="12.5rem" id="PlantInputId" placeholder="Select Plant" editable="true" enabled="true"   showValueHelp="true" 
+                                                valueHelpRequest=".onValueHelpRequest_Plant"  suggest=".OnSuggest_User_Plant" 
+                                                suggestionItems="{path: 'ZCE_ZCOUNT_HEAD_SRVB>/ZCE_PLANT_F4HELP',sorter: { path: 'plant' }}" 
+                                                showSuggestion="true"  suggestionItemSelected=".ondocumentsuggestselected_Plant">
+                                    
+                                    <suggestionItems>
+                                    
+                                    <core:Item key="{ZCE_ZCOUNT_HEAD_SRVB>plant}"></core:Item>
+                                    
+                                    </suggestionItems>
+                                    
+                                    </MultiInput>
+                                   
+                                </layout:VerticalLayout>
+
+                                <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin ">
+
+                                    <!-- <Label text="Production Ord No." design="Bold"  required="false" labelFor="multiInputWithSuggestions"/>
+                                    
+                                    <MultiInput maxLength="10" required="true" width="12.5rem" id="ProdDoc" placeholder="Select Production Ord No." editable="true" enabled="true"   showValueHelp="true" valueHelpRequest=".onValueHelpRequest_"  suggest=".OnSuggest_User_" suggestionItems="{
+				path: 'ZSB_AU_FT_HEADER>/ZC_AU_FT_HEADER',
+				sorter: { path: 'Prodorderno' }}" showSuggestion="true"  suggestionItemSelected=".ondocumentsuggestselected_">
+                    <suggestionItems>
+                    <core:Item key="{ZSB_AU_FT_HEADER>ProdDoc}"></core:Item>
+                    </suggestionItems>
+                    </MultiInput> -->
+                                   
+                                </layout:VerticalLayout>
+
+
+                                
+                            </content>
+                        </Panel>
+                    </items>
+                </FlexBox>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <!-- DynamicPage Content -->
+        <f:content>
+
+            <t:Table
+                rows="{TabModel>/ItemData}"
+                selectionMode="None"
+                enableSelectAll="false"
+                id = "zlabel_report_table"
+                rowMode="Auto" fixedColumnCount="3">
+
+                
+                   <t:extension>
+						<OverflowToolbar  style="Clear">
+							<ToolbarSpacer/>
+							<ToolbarSpacer/>
+                   			 <Button id="_IDGenButtonzlabelscreen" icon="sap-icon://excel-attachment" press="OnExportExl"/>
+						</OverflowToolbar>
+					</t:extension>
+
+                <t:columns>
+				
+                    <t:Column tooltip="Date" width="7rem">
+                        <Label text="Date" />
+                        <t:template>
+                            <DatePicker value="{path: 'TabModel>createdat',type: 'sap.ui.model.type.Date',formatOptions: {pattern: 'dd-MM-yyyy'}}" editable="false" />
+                            <!-- <Text text="{path:'TabModel>createdat',formatter: '.OnDateChangeValue'}" /> -->
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Process Ord" width="8rem">
+                        <Label text="Process Ord" />
+                        <t:template>
+                            <Text text="{path:'TabModel>process_order',formatter:'.formatTrimmedValue'}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Batch" width="7rem">
+                        <Label text="Batch" />
+                        <t:template>
+                            <Text text="{TabModel>batch}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Plant" width="4rem">
+                        <Label text="Plant" />
+                        <t:template>
+                            <Text text="{TabModel>plant}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Box No" width="4rem">
+                        <Label text="Box No" />
+                        <t:template>
+                            <Text text="{TabModel>boxno}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Drum No" width="4rem">
+                        <Label text="Drum No" />
+                        <t:template>
+                            <Text text="{TabModel>drum_no}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Avg Wt" width="4rem">
+                        <Label text="Avg Wt" />
+                        <t:template>
+                            <Text text="{TabModel>avrgwt}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Qty" width="4rem">
+                        <Label text="Qty" />
+                        <t:template>
+                            <Text text="{TabModel>qty}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Qty Lakhs" width="4rem">
+                        <Label text="Qty Lakhs" />
+                        <t:template>
+                            <Text text="{TabModel>qty_lac}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Tare Weight" width="4rem">
+                        <Label text="Tare Weight" />
+                        <t:template>
+                            <Text text="{TabModel>tare_wt}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Net Weight" width="4rem">
+                        <Label text="Net Weight" />
+                        <t:template>
+                            <Text text="{TabModel>netwt}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Gross Weight" width="4rem">
+                        <Label text="Gross Weight" />
+                        <t:template>
+                            <Text text="{TabModel>grosswt}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Target Qty" width="4rem">
+                        <Label text="Target Qty" />
+                        <t:template>
+                            <Text text="{TabModel>target_qty}" />
+                        </t:template>
+                    </t:Column>
+
+                    <!-- <t:Column tooltip="Cby Name" width="4rem">
+                        <Label text="Cby Name" />
+                        <t:template>
+                            <Text text="{TabModel>cbyname}" />
+                        </t:template>
+                    </t:Column> -->
+
+                    <t:Column tooltip="packedby" width="6rem">
+                        <Label text="Packed By" />
+                        <t:template>
+                            <Text text="{TabModel>packedby}" />
+                        </t:template>
+                    </t:Column>
+
+                      <t:Column tooltip="verified By" width="6rem">
+                        <Label text="Verified By" />
+                        <t:template>
+                            <Text text="{TabModel>verified_by}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Customer Name" width="14rem">
+                        <Label text="Customer Name" />
+                        <t:template>
+                            <Text text="{TabModel>customername}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Material" width="14rem">
+                        <Label text="Material" />
+                        <t:template>
+                            <Text text="{TabModel>material}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Cap Printing" width="7rem">
+                        <Label text="Cap Printing" />
+                        <t:template>
+                            <Text text="{TabModel>capprinting}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column tooltip="Body Printing" width="7rem">
+                        <Label text="Body Printing" />
+                        <t:template>
+                            <Text text="{TabModel>bodyprinting}" />
+                        </t:template>
+                    </t:Column>
+
+                </t:columns>
+
+            </t:Table>
+        </f:content>
+        <!-- DynamicPage Footer -->
+    </f:DynamicPage>
+
+</mvc:View>

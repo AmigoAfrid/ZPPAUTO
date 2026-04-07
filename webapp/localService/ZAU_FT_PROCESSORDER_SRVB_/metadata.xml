@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="cds_zau_ft_processorder_srvd" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="ZCDS_COMPONENT_F4HELPType" sap:label="F4 Help for Component Material" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Material"/>
+                </Key>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
+            </EntityType>
+            <EntityType Name="headerType" sap:label="Custom root view entity for zats_head_gd_crt table" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="processorder"/>
+                    <PropertyRef Name="sap_uid"/>
+                </Key>
+                <Property Name="processorder" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase" sap:label="Order" sap:quickinfo="Order Number" sap:updatable="false"/>
+                <Property Name="sap_uid" Type="Edm.String" Nullable="false" MaxLength="40" sap:updatable="false"/>
+                <Property Name="materialdocument" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Material Document" sap:quickinfo="Number of Material Document"/>
+                <Property Name="matdocyear" Type="Edm.String" MaxLength="4" sap:display-format="NonNegative" sap:label="Material Doc. Year" sap:quickinfo="Material Document Year"/>
+                <Property Name="orderoperation" Type="Edm.String" MaxLength="4"/>
+                <Property Name="ordersuboperation" Type="Edm.String" MaxLength="4"/>
+                <Property Name="ordertype" Type="Edm.String" MaxLength="4"/>
+                <Property Name="confirmationyieldquantity" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="opconfirmedworkquantity1" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="opworkquantityunit1" Type="Edm.String" MaxLength="3" sap:label="Internal UoM" sap:quickinfo="Unit of Measurement" sap:semantics="unit-of-measure"/>
+                <Property Name="opconfirmedworkquantity2" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="opworkquantityunit2" Type="Edm.String" MaxLength="3" sap:label="Internal UoM" sap:quickinfo="Unit of Measurement" sap:semantics="unit-of-measure"/>
+                <Property Name="opconfirmedworkquantity3" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="opworkquantityunit3" Type="Edm.String" MaxLength="3" sap:label="Internal UoM" sap:quickinfo="Unit of Measurement" sap:semantics="unit-of-measure"/>
+                <Property Name="opconfirmedworkquantity4" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="opworkquantityunit4" Type="Edm.String" MaxLength="3" sap:label="Internal UoM" sap:quickinfo="Unit of Measurement" sap:semantics="unit-of-measure"/>
+                <Property Name="isfinalconfirmation" Type="Edm.String" MaxLength="1"/>
+                <Property Name="response" Type="Edm.String" MaxLength="5000"/>
+                <Property Name="errorresponse" Type="Edm.String" MaxLength="5000"/>
+                <Property Name="sequence" Type="Edm.String" MaxLength="4"/>
+                <Property Name="confirmationgroup" Type="Edm.String" MaxLength="10"/>
+                <Property Name="confirmationcount" Type="Edm.String" MaxLength="8"/>
+                <Property Name="tcode" Type="Edm.String" MaxLength="3"/>
+                <NavigationProperty Name="toitem" Relationship="cds_zau_ft_processorder_srvd.assoc_491D403D832CEF054212097AEE3F71DF" FromRole="FromRole_assoc_491D403D832CEF054212097AEE3F71DF" ToRole="ToRole_assoc_491D403D832CEF054212097AEE3F71DF"/>
+            </EntityType>
+            <EntityType Name="itemType" sap:label="CDS View for Item Data to Proccess Order Confirmation" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="processorder"/>
+                    <PropertyRef Name="sap_uid"/>
+                </Key>
+                <Property Name="processorder" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase" sap:label="Order" sap:quickinfo="Order Number" sap:updatable="false"/>
+                <Property Name="sap_uid" Type="Edm.String" Nullable="false" MaxLength="40" sap:updatable="false"/>
+                <Property Name="ordertype" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Sales Document Type"/>
+                <Property Name="material" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
+                <Property Name="plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
+                <Property Name="batch" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Batch" sap:quickinfo="Batch Number"/>
+                <Property Name="quantityinentryunit" Type="Edm.Decimal" Precision="13" Scale="3"/>
+                <Property Name="entryunit" Type="Edm.String" MaxLength="3" sap:label="Internal UoM" sap:quickinfo="Unit of Measurement" sap:semantics="unit-of-measure"/>
+                <Property Name="storagelocation" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Storage Location"/>
+                <Property Name="goodsmovementtype" Type="Edm.String" MaxLength="3" sap:display-format="UpperCase" sap:label="Movement Type" sap:quickinfo="Movement Type (Inventory Management)"/>
+                <Property Name="inventoryspecialstocktype" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Special Stock" sap:quickinfo="Special Stock Indicator"/>
+                <Property Name="salesorder" Type="Edm.String" MaxLength="10"/>
+                <Property Name="salesorderitem" Type="Edm.String" MaxLength="6"/>
+                <NavigationProperty Name="toheader" Relationship="cds_zau_ft_processorder_srvd.assoc_491D403D832CEF054212097AEE3F71DF" FromRole="ToRole_assoc_491D403D832CEF054212097AEE3F71DF" ToRole="FromRole_assoc_491D403D832CEF054212097AEE3F71DF"/>
+            </EntityType>
+            <EntityType Name="ZCE_FT_BATCH_VHType" sap:label="custom entity for BATCH VH" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Plant"/>
+                    <PropertyRef Name="Material"/>
+                </Key>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
+                <Property Name="Batch" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Batch" sap:quickinfo="Batch Number"/>
+            </EntityType>
+            <EntityType Name="ZCE_FT_PROCESSORDERType" sap:label="Custom Entity for FT ProcessOrder" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ManufacturingOrder"/>
+                    <PropertyRef Name="MfgOrderActualStartDate"/>
+                    <PropertyRef Name="Reservation"/>
+                </Key>
+                <Property Name="ManufacturingOrder" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase" sap:label="Order" sap:quickinfo="Order Number"/>
+                <Property Name="MfgOrderActualStartDate" Type="Edm.DateTime" Nullable="false" Precision="0" sap:display-format="Date" sap:label="Actual start date"/>
+                <Property Name="Reservation" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="NonNegative" sap:label="Reservation" sap:quickinfo="Number of reservation/dependent requirements"/>
+                <Property Name="ProductionPlant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
+                <Property Name="StorageLocation" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Storage Location"/>
+                <Property Name="Batch" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Batch" sap:quickinfo="Batch Number"/>
+                <Property Name="Product" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
+                <Property Name="ProductDescription" Type="Edm.String" MaxLength="40" sap:label="Material Description"/>
+                <Property Name="SalesOrder" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="SD Document" sap:quickinfo="Sales and Distribution Document Number"/>
+                <Property Name="Customer" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Customer" sap:quickinfo="Customer Number"/>
+                <Property Name="CustomerName" Type="Edm.String" MaxLength="35" sap:label="Name"/>
+                <Property Name="MfgOrderPlannedTotalQty" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="ProductionUnit" sap:label="Quantity"/>
+                <Property Name="ProductionUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="Zsize" Type="Edm.String" MaxLength="2"/>
+                <Property Name="Colour" Type="Edm.String" MaxLength="20"/>
+                <Property Name="cap_Body" Type="Edm.String" MaxLength="20"/>
+                <Property Name="FT_Sl_No" Type="Edm.String" MaxLength="10"/>
+                <Property Name="Rem_Qty" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="ProductionUnit" sap:label="Quantity"/>
+                <Property Name="Status" Type="Edm.String" MaxLength="100"/>
+                <Property Name="CreationDate" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Created On" sap:quickinfo="Record Creation Date"/>
+                <Property Name="OpPlannedYieldQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="ProductionUnit" sap:label="Quantity"/>
+                <Property Name="WorkCenterStandardWorkQtyUnit1" Type="Edm.String" MaxLength="3" sap:label="Internal UoM" sap:quickinfo="Unit of Measurement" sap:semantics="unit-of-measure"/>
+                <Property Name="WorkCenterStandardWorkQty1" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="ProductionUnit" sap:label="Quantity"/>
+                <Property Name="WorkCenterStandardWorkQtyUnit2" Type="Edm.String" MaxLength="3" sap:label="Internal UoM" sap:quickinfo="Unit of Measurement" sap:semantics="unit-of-measure"/>
+                <Property Name="WorkCenterStandardWorkQty2" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="ProductionUnit" sap:label="Quantity"/>
+                <Property Name="WorkCenterStandardWorkQtyUnit3" Type="Edm.String" MaxLength="3" sap:label="Internal UoM" sap:quickinfo="Unit of Measurement" sap:semantics="unit-of-measure"/>
+                <Property Name="WorkCenterStandardWorkQty3" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="ProductionUnit" sap:label="Quantity"/>
+                <Property Name="WorkCenterStandardWorkQtyUnit4" Type="Edm.String" MaxLength="3" sap:label="Internal UoM" sap:quickinfo="Unit of Measurement" sap:semantics="unit-of-measure"/>
+                <Property Name="WorkCenterStandardWorkQty4" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="ProductionUnit" sap:label="Quantity"/>
+                <Property Name="ordertype" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Sales Document Type"/>
+                <Property Name="OperationReferenceQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="ProductionUnit" sap:label="Quantity"/>
+                <Property Name="StatusCode" Type="Edm.String" MaxLength="5" sap:display-format="UpperCase" sap:label="Status" sap:quickinfo="Object status"/>
+                <Property Name="StatusIsActive" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Status inactive" sap:quickinfo="Indicator: Status Is Inactive"/>
+                <Property Name="StatusIsInactive" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Status inactive" sap:quickinfo="Indicator: Status Is Inactive"/>
+                <NavigationProperty Name="to_RESB" Relationship="cds_zau_ft_processorder_srvd.assoc_77007A50BB14AE1DBB76F89BCC7D8633" FromRole="FromRole_assoc_77007A50BB14AE1DBB76F89BCC7D8633" ToRole="ToRole_assoc_77007A50BB14AE1DBB76F89BCC7D8633"/>
+            </EntityType>
+            <EntityType Name="ZCE_FT_RESERVATIONType" sap:label="Custom Entity for FT Reservation" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Reservation"/>
+                    <PropertyRef Name="ReservationItem"/>
+                </Key>
+                <Property Name="Reservation" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="NonNegative" sap:label="Reservation" sap:quickinfo="Number of reservation/dependent requirements"/>
+                <Property Name="ReservationItem" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Item no." sap:quickinfo="Item Number of Reservation / Dependent Requirements"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Plant"/>
+                <Property Name="StorageLocation" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Storage Location"/>
+                <Property Name="Product" Type="Edm.String" MaxLength="18" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Material Number"/>
+                <Property Name="ProductName" Type="Edm.String" MaxLength="40" sap:label="Material Description"/>
+                <Property Name="Batch" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:label="Batch" sap:quickinfo="Batch Number"/>
+                <Property Name="ResvnItmRequiredQtyInEntryUnit" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="EntryUnit" sap:label="Quantity"/>
+                <Property Name="QA_Conf" Type="Edm.String" MaxLength="1"/>
+                <Property Name="EntryUnit" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="Sr_no" Type="Edm.Int32"/>
+            </EntityType>
+            <EntityType Name="ZCE_PO_STATUSType" sap:label="Custom Entity for Process Order Status" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="ManufacturingOrder"/>
+                    <PropertyRef Name="StatusCode"/>
+                </Key>
+                <Property Name="ManufacturingOrder" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase" sap:label="Manufacturing Order" sap:quickinfo="Manufacturing Order ID"/>
+                <Property Name="StatusCode" Type="Edm.String" Nullable="false" MaxLength="5" sap:display-format="UpperCase" sap:label="Status" sap:quickinfo="Object status"/>
+                <Property Name="StatusIsActive" Type="Edm.Boolean" sap:label="Status Is Active"/>
+                <Property Name="StatusIsInactive" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Status inactive" sap:quickinfo="Indicator: Status Is Inactive"/>
+            </EntityType>
+            <EntityType Name="ZC_FT_PROCESSORDEROPERATIONType" sap:label="Consumption View for Process Order Operation" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="MfgOrderInternalID"/>
+                    <PropertyRef Name="OrderOperationInternalID"/>
+                </Key>
+                <Property Name="MfgOrderInternalID" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="NonNegative" sap:label="Order Internal ID"/>
+                <Property Name="OrderOperationInternalID" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="NonNegative" sap:label="Operation Internal ID" sap:quickinfo="Internal Identifier of an Operation or Activity"/>
+                <Property Name="ManufacturingOrder" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Manufacturing Order" sap:quickinfo="Manufacturing Order ID"/>
+                <Property Name="ManufacturingOrderSequence" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Sequence" sap:quickinfo="Manufacturing Order Sequence"/>
+                <Property Name="ManufacturingOrderOperation" Type="Edm.String" MaxLength="4"/>
+                <Property Name="ManufacturingOrderOperation_2" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Operation or Phase" sap:quickinfo="Operation or Phase Number"/>
+                <Property Name="MfgOrderOperationIsPhase" Type="Edm.Boolean" sap:label="Indicator: Phase"/>
+                <Property Name="OperationControlProfile" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Control Profile" sap:quickinfo="Operation Control Profile"/>
+                <Property Name="OperationReferenceQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="OperationUnit" sap:label="Base Quantity"/>
+                <Property Name="OpPlannedTotalQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="OperationUnit" sap:label="Operation Quantity" sap:quickinfo="Operation Total Quantity"/>
+                <Property Name="WorkCenterStandardWorkQty1" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="OperationUnit" sap:label="Standard Work Quantity 1"/>
+                <Property Name="WorkCenterStandardWorkQty2" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="OperationUnit" sap:label="Standard Work Quantity 2"/>
+                <Property Name="WorkCenterStandardWorkQty3" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="OperationUnit" sap:label="Standard Work Quantity 3"/>
+                <Property Name="WorkCenterStandardWorkQty4" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="OperationUnit" sap:label="Standard Work Quantity 4"/>
+                <Property Name="WorkCenterStandardWorkQty5" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="OperationUnit" sap:label="Standard Work Quantity 5"/>
+                <Property Name="WorkCenterStandardWorkQty6" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="OperationUnit" sap:label="Standard Work Quantity 6"/>
+                <Property Name="OperationUnit" Type="Edm.String" MaxLength="3" sap:label="Operation Unit" sap:quickinfo="Operation Unit of Measure" sap:semantics="unit-of-measure"/>
+            </EntityType>
+            <Association Name="assoc_77007A50BB14AE1DBB76F89BCC7D8633" sap:content-version="1">
+                <End Type="cds_zau_ft_processorder_srvd.ZCE_FT_PROCESSORDERType" Multiplicity="1" Role="FromRole_assoc_77007A50BB14AE1DBB76F89BCC7D8633"/>
+                <End Type="cds_zau_ft_processorder_srvd.ZCE_FT_RESERVATIONType" Multiplicity="*" Role="ToRole_assoc_77007A50BB14AE1DBB76F89BCC7D8633"/>
+            </Association>
+            <Association Name="assoc_491D403D832CEF054212097AEE3F71DF" sap:content-version="1">
+                <End Type="cds_zau_ft_processorder_srvd.headerType" Multiplicity="1" Role="FromRole_assoc_491D403D832CEF054212097AEE3F71DF">
+                    <OnDelete Action="Cascade"/>
+                </End>
+                <End Type="cds_zau_ft_processorder_srvd.itemType" Multiplicity="*" Role="ToRole_assoc_491D403D832CEF054212097AEE3F71DF"/>
+                <ReferentialConstraint>
+                    <Principal Role="FromRole_assoc_491D403D832CEF054212097AEE3F71DF">
+                        <PropertyRef Name="sap_uid"/>
+                        <PropertyRef Name="processorder"/>
+                    </Principal>
+                    <Dependent Role="ToRole_assoc_491D403D832CEF054212097AEE3F71DF">
+                        <PropertyRef Name="sap_uid"/>
+                        <PropertyRef Name="processorder"/>
+                    </Dependent>
+                </ReferentialConstraint>
+            </Association>
+            <EntityContainer Name="cds_zau_ft_processorder_srvd_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ZCDS_COMPONENT_F4HELP" EntityType="cds_zau_ft_processorder_srvd.ZCDS_COMPONENT_F4HELPType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="header" EntityType="cds_zau_ft_processorder_srvd.headerType" sap:content-version="1"/>
+                <EntitySet Name="item" EntityType="cds_zau_ft_processorder_srvd.itemType" sap:content-version="1"/>
+                <EntitySet Name="ZCE_FT_BATCH_VH" EntityType="cds_zau_ft_processorder_srvd.ZCE_FT_BATCH_VHType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZCE_FT_PROCESSORDER" EntityType="cds_zau_ft_processorder_srvd.ZCE_FT_PROCESSORDERType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZCE_FT_RESERVATION" EntityType="cds_zau_ft_processorder_srvd.ZCE_FT_RESERVATIONType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZCE_PO_STATUS" EntityType="cds_zau_ft_processorder_srvd.ZCE_PO_STATUSType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZC_FT_PROCESSORDEROPERATION" EntityType="cds_zau_ft_processorder_srvd.ZC_FT_PROCESSORDEROPERATIONType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <AssociationSet Name="assoc_491D403D832CEF054212097AEE3F71DF" Association="cds_zau_ft_processorder_srvd.assoc_491D403D832CEF054212097AEE3F71DF" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="header" Role="FromRole_assoc_491D403D832CEF054212097AEE3F71DF"/>
+                    <End EntitySet="item" Role="ToRole_assoc_491D403D832CEF054212097AEE3F71DF"/>
+                </AssociationSet>
+                <AssociationSet Name="assoc_77007A50BB14AE1DBB76F89BCC7D8633" Association="cds_zau_ft_processorder_srvd.assoc_77007A50BB14AE1DBB76F89BCC7D8633" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1">
+                    <End EntitySet="ZCE_FT_PROCESSORDER" Role="FromRole_assoc_77007A50BB14AE1DBB76F89BCC7D8633"/>
+                    <End EntitySet="ZCE_FT_RESERVATION" Role="ToRole_assoc_77007A50BB14AE1DBB76F89BCC7D8633"/>
+                </AssociationSet>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <Annotations Target="cds_zau_ft_processorder_srvd.cds_zau_ft_processorder_srvd_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_processorder_srvd.headerType/toitem" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.Composition"/>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_processorder_srvd.cds_zau_ft_processorder_srvd_Entities/ZCDS_COMPONENT_F4HELP" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_processorder_srvd.cds_zau_ft_processorder_srvd_Entities/ZCE_FT_BATCH_VH" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_processorder_srvd.cds_zau_ft_processorder_srvd_Entities/ZCE_FT_PROCESSORDER" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_processorder_srvd.cds_zau_ft_processorder_srvd_Entities/ZCE_FT_RESERVATION" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_processorder_srvd.cds_zau_ft_processorder_srvd_Entities/ZCE_PO_STATUS" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_processorder_srvd.cds_zau_ft_processorder_srvd_Entities/ZC_FT_PROCESSORDEROPERATION" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_processorder_srvd.cds_zau_ft_processorder_srvd_Entities/header" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="response"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="errorresponse"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.NavigationRestrictions">
+                    <Record>
+                        <PropertyValue Property="RestrictedProperties">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="NavigationProperty" NavigationPropertyPath="toitem"/>
+                                    <PropertyValue Property="InsertRestrictions">
+                                        <Record>
+                                            <PropertyValue Property="Insertable" Bool="true"/>
+                                        </Record>
+                                    </PropertyValue>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>response</PropertyPath>
+                                <PropertyPath>errorresponse</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonUpdatableProperties">
+                            <Collection>
+                                <PropertyPath>processorder</PropertyPath>
+                                <PropertyPath>sap_uid</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="NonUpdatableNavigationProperties">
+                            <Collection>
+                                <PropertyPath>toitem</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_processorder_srvd.headerType/processorder" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_processorder_srvd.headerType/sap_uid" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_processorder_srvd.itemType/processorder" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_processorder_srvd.itemType/sap_uid" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_processorder_srvd.cds_zau_ft_processorder_srvd_Entities/item" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonUpdatableProperties">
+                            <Collection>
+                                <PropertyPath>processorder</PropertyPath>
+                                <PropertyPath>sap_uid</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                        <PropertyValue Property="NonUpdatableNavigationProperties">
+                            <Collection>
+                                <PropertyPath>toheader</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_processorder_srvd.cds_zau_ft_processorder_srvd_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Org.OData.Capabilities.V1.BatchSupport">
+                    <Record Type="Org.OData.Capabilities.V1.BatchSupportType">
+                        <PropertyValue Property="ReferencesAcrossChangeSetsSupported" Bool="true"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="/sap/opu/odata/sap/ZAU_FT_PROCESSORDER_SRVB_/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="/sap/opu/odata/sap/ZAU_FT_PROCESSORDER_SRVB_/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

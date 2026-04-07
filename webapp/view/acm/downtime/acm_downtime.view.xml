@@ -1,0 +1,258 @@
+<mvc:View
+    controllerName="zautodesignapp.controller.acm.downtime.acm_downtime"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+	xmlns:u="sap.ui.unified"
+	xmlns:core="sap.ui.core"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.f"
+	xmlns:layout="sap.ui.layout"
+    height="100%">
+	<!-- screen 1 -->
+	<f:DynamicPage
+        
+        visible="{= ${ScreenVisible>/openscreen} === 'screen1' }"
+        class="sapUiTinyMarginTop sapUiTinyMarginBegin"
+        preserveHeaderStateOnScroll="true"
+        showFooter="true"
+        fitContent="true">
+		<!-- DynamicPage Title -->
+		<f:title>
+			<f:DynamicPageTitle>
+				<f:heading>
+					<Title text="Down Time Selection Screen" />
+				</f:heading>
+			</f:DynamicPageTitle>
+		</f:title>
+		<!-- DynamicPage Header -->
+		<f:header>
+			<f:DynamicPageHeader  pinnable="true">
+				<FlexBox id="idflexboxacm" alignItems="Start" justifyContent="SpaceBetween">
+					<items>
+						<Panel
+                           
+                            backgroundDesign="Transparent"
+                            class="sapUiNoContentPadding">
+							<content>
+								<layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  customWidth">
+									<Label text="Select Date Range :" tooltip="DatePicker" design="Bold" required="true" />
+									<DatePicker valueFormat="yyyy-MM-dd" displayFormat="yyyy-MM-dd" tooltip="DatePicker" width="11.5rem" value="{downtimeModel>/HeaderData/0/daterange}" />
+								</layout:VerticalLayout>
+							
+
+
+								<layout:VerticalLayout  class="ssapUiSmallMarginBegin sapUiSmallMarginEnd  customWidth" >
+									<Label tooltip="Select Machine No"  required="true"  text="Select Machine No" design="Bold" />
+								   <Input 
+                                           id="iddowntimevalue"
+                                            type="Text"
+                                            editable="true"
+                                            showValueHelp="true"
+                                            value="{downtimeModel>/HeaderData/0/selectedMachine}"
+                                            valueHelpIconSrc="sap-icon://value-help"
+                                            valueHelpRequest="OnDownTimeCheck"/>
+								</layout:VerticalLayout>
+
+
+								<Toolbar style="Clear">
+									<ToolbarSpacer />
+									<Button text="Go" tooltip="Execute" type="Emphasized" press="GoDowntimeselect" enabled="true" />
+									<ToolbarSpacer />
+								</Toolbar>
+							</content>
+						</Panel>
+					</items>
+				</FlexBox>
+			</f:DynamicPageHeader>
+		</f:header>
+	
+		<f:content>
+
+		<!--  -->
+			<t:Table visible="{downtimeModel>/TableVisible}" 
+                rows="{path:'tabdwontimeModel>/ItemData'}" 
+                selectionMode="Single"
+            rowMode="Auto"
+				rowSelectionChange="onRowSelect" >
+				<t:extension>
+					<OverflowToolbar style="Clear">
+						<Title text="Items" />
+						<ToolbarSpacer />
+						<ToolbarSpacer />
+				
+					</OverflowToolbar>
+				</t:extension>
+				<t:columns>
+					<t:Column tooltip="ACM No." width="4rem">
+						<Label text="ACM No." />
+						<t:template>
+							<Text  text="{tabdwontimeModel>acmno}" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="Speed" width="8rem">
+						<Label text="Speed" />
+						<t:template>
+							<Text  text="{tabdwontimeModel>speed}" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="No Bar" width="6rem">
+						<Label text="No Bar" />
+						<t:template>
+							<Text  text="{tabdwontimeModel>No_bar}" />
+						</t:template>
+					</t:Column>
+
+						<t:Column tooltip="Shift" width="6rem">
+						<Label text="Shift" />
+						<t:template>
+							<Text  text="{tabdwontimeModel>shift}" />
+						</t:template>
+					</t:Column>
+
+					<t:Column tooltip="Date" width="6rem">
+						<Label text="Date" />
+						<t:template>
+                         <!-- tabdwontimeModel>dates -->
+
+						 	
+						
+							<Text  text="{'path':'tabdwontimeModel>dates',
+									'type':'sap.ui.model.type.Date',
+									'formatOptions': {
+										'pattern': 'dd-MM-yyyy'
+									}}" />
+						</t:template>
+					</t:Column>
+
+				
+					<t:Column tooltip="CUR DIPS" width="6rem">
+						<Label text="CUR DIPS" />
+						<t:template>
+							<Text  text="{tabdwontimeModel>cur_dips}" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="Total Down Time" width="6rem">
+						<Label text="Total Down Time" />
+						<t:template>
+							<Text  text="{tabdwontimeModel>total_down_time}" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="Color Change" width="6rem">
+						<Label text="Color Change" />
+						<t:template>
+							<Input  value="{tabdwontimeModel>color_change}" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="Mechanical" width="6rem">
+						<Label text="Mechanical" />
+						<t:template>
+							<Input  value="{tabdwontimeModel>mechanical}" />
+						</t:template>
+					</t:Column>
+
+						<t:Column tooltip="Process" width="6rem">
+						<Label text="Process" />
+						<t:template>
+							<Input  value="{tabdwontimeModel>process}" />
+						</t:template>
+					</t:Column>
+
+					
+					<t:Column tooltip="Electrical" width="6rem">
+						<Label text="Electrical" />
+						<t:template>
+							<Input  value="{tabdwontimeModel>electrical}" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="AC" width="6rem">
+						<Label text="AC" />
+						<t:template>
+							<Input  value="{tabdwontimeModel>a_c}" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="GEL Room" width="6rem">
+						<Label text="GEL Room" />
+						<t:template>
+							<Input  value="{tabdwontimeModel>gel_room}" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="QC_QA" width="6rem">
+						<Label text="QC_QA" />
+						<t:template>
+							<Input  value="{tabdwontimeModel>qc_qa}" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="Power off" width="6rem">
+						<Label text="Power off" />
+						<t:template>
+							<Input  value="{tabdwontimeModel>power_off}" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="Preventive" width="6rem">
+						<Label text="Preventive" />
+						<t:template>
+							<Input  value="{tabdwontimeModel>preventive}" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="PLC " width="6rem">
+						<Label text="PLC" />
+						<t:template>
+							<Input  value="{tabdwontimeModel>plc}" />
+						</t:template>
+					</t:Column>
+
+						<t:Column tooltip="Modification" width="6rem">
+						<Label text="Modification" />
+						<t:template>
+							<Input  value="{tabdwontimeModel>modification}" />
+						</t:template>
+					</t:Column>
+
+						<t:Column tooltip="Power Shutdown" width="6rem">
+						<Label text="Power Shutdown" />
+						<t:template>
+							<Input  value="{tabdwontimeModel>power_shutdown}" />
+						</t:template>
+					</t:Column>
+
+
+					<t:Column tooltip="ELEC Shutdown" width="6rem">
+						<Label text="ELEC Shutdown" />
+						<t:template>
+							<Input  value="{tabdwontimeModel>elec_shutdown}" />
+						</t:template>
+					</t:Column>
+					<t:Column tooltip="Size Change" width="6rem">
+						<Label text="Size Change" />
+						<t:template>
+							<Input  value="{tabdwontimeModel>size_change}" />
+						</t:template>
+					</t:Column>
+
+
+						<t:Column tooltip="NO Order" width="6rem">
+						<Label text="NO Order" />
+						<t:template>
+							<Input  value="{tabdwontimeModel>no_order}" />
+						</t:template>
+					</t:Column>
+				</t:columns>
+			</t:Table>
+		
+		</f:content>
+
+		<f:footer>
+			<OverflowToolbar >
+
+			<ToolbarSpacer />
+
+
+				<Button tooltip="Create" type="Default" press=".onCreatePress" enabled="true" text="Create" />
+				<!-- <Button tooltip="Go Back" type="Default" press="onGoToScreen1" enabled="true" text="Back" icon="sap-icon://close-command-field" /> -->
+			</OverflowToolbar>
+		</f:footer>
+		
+	</f:DynamicPage>
+
+</mvc:View>

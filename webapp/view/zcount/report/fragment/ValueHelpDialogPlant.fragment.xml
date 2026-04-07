@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog" xmlns:m="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core">
+	<ValueHelpDialog supportMultiselect="true"  title=" Plant No." ok=".onValueHelpOkPressPlant" cancel=".onValueHelpCancelPressPlant" afterClose=".onValueHelpAfterClosePlant" supportRanges="false" key="plant" descriptionKey="">
+		<filterBar>
+			<fb:FilterBar  advancedMode="true" search=".onFilterBarSearchPlant" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="plant" label="Plant No." visibleInFilterBar="true">
+						<fb:control>
+								<m:Input name="Plant No." showSuggestion="true" showValueHelp="false" suggestionItems="{ path: 'ZCE_ZCOUNT_HEAD_SRVB>/ZCE_PLANT_F4HELP', sorter: { path: 'plant' }}">
+								<core:Item key="{ZCE_ZCOUNT_HEAD_SRVB>plant}" text="{ZCE_ZCOUNT_HEAD_SRVB>plant}" />
+							</m:Input>
+						</fb:control>
+					</fb:FilterGroupItem>
+				
+
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+		
+	</ValueHelpDialog>
+</core:FragmentDefinition> 

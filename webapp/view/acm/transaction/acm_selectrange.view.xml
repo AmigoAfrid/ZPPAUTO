@@ -1,0 +1,605 @@
+<mvc:View
+    controllerName="zautodesignapp.controller.acm.transaction.acm_selectrange"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:c="sap.ui.core"
+	xmlns:u="sap.ui.unified"
+	xmlns:core="sap.ui.core"
+	xmlns:t="sap.ui.table"
+	xmlns:f="sap.f"
+	xmlns:layout="sap.ui.layout"
+    height="100%">
+
+
+    <!-- Screen 1 -->
+    <f:DynamicPage
+        visible="{= ${ScreenVisible>/openscreen} === 'screen1' }"
+        class="sapUiTinyMarginTop sapUiTinyMarginBegin"
+        preserveHeaderStateOnScroll="true"
+        showFooter="true"
+        fitContent="true">
+
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="ACM Selection Screen" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <FlexBox id="idflexboxacm" alignItems="Start" justifyContent="SpaceBetween">
+                    <items>
+                        <Panel backgroundDesign="Transparent" class="sapUiNoContentPadding">
+                            <content>
+
+                                <layout:VerticalLayout
+                                    visible="true"
+                                    class="sapUiSmallMarginBegin sapUiSmallMarginEnd customWidth">
+                                    <Label text="Select Date Range :" tooltip="DatePicker" design="Bold" required="true" />
+                                    <DateRangeSelection
+                                        valueFormat="yyyy-MM-dd"
+                                        displayFormat="yyyy-MM-dd"
+                                        tooltip="DatePicker"
+                                        width="11.5rem"
+                                        value="{acmModel>/HeaderData/0/daterange}" />
+                                </layout:VerticalLayout>
+
+                                <layout:VerticalLayout class="sapUiSmallMarginBegin sapUiSmallMarginEnd customWidth">
+                                    <Label tooltip="Select Machine No" required="true" text="Select Machine No" design="Bold" />
+                                    <Input
+                                        id="idacmvalue"
+                                        type="Text"
+                                        editable="true"
+                                        showValueHelp="true"
+                                        value="{acmModel>/HeaderData/0/selectedMachine}"
+                                        valueHelpIconSrc="sap-icon://value-help"
+                                        valueHelpRequest="OnAcmCheck" />
+                                </layout:VerticalLayout>
+
+                                <Toolbar style="Clear">
+                                    <ToolbarSpacer />
+                                    <Button text="Go" tooltip="Execute" type="Emphasized" press="GoAcmselect" enabled="true" />
+                                    <ToolbarSpacer />
+                                </Toolbar>
+
+                            </content>
+                        </Panel>
+                    </items>
+                </FlexBox>
+            </f:DynamicPageHeader>
+        </f:header>
+
+        <f:content>
+            <t:Table
+                visible="{acmModel>/TableVisible}"
+                rows="{path:'tabACMModel>/ItemData'}"
+                selectionMode="Single"
+                enableSelectAll="false"
+                rowMode="Auto" fixedColumnCount="2"
+                rowSelectionChange="onRowSelect">
+
+                <t:extension>
+                    <OverflowToolbar style="Clear">
+                        <Title text="Items" />
+                        <ToolbarSpacer />
+                        <ToolbarSpacer />
+                    </OverflowToolbar>
+                </t:extension>
+
+                <t:columns>
+                    <t:Column tooltip="ACM No." width="4.6rem">
+                        <Label text="ACM No." />
+                        <t:template>
+                            <Text text="{tabACMModel>ACMNO}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column tooltip="Production Order" width="6rem">
+                        <Label text="Production Order" />
+                        <t:template>
+                            <Text text="{tabACMModel>ProcessOrder}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column tooltip="Start Date" width="6rem">
+                        <Label text="Start Date" />
+                        <t:template>
+                            <Text text="{path:'tabACMModel>CreationDate', formatter: '.OnDateFormatChange'}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column tooltip="Batch" width="5rem">
+                        <Label text="Batch" />
+                        <t:template>
+                            <Text text="{tabACMModel>Batch}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column visible="false" tooltip="Material" width="9rem">
+                        <Label text="Material" />
+                        <t:template>
+                            <Text text="{tabACMModel>Product}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column tooltip="Material Description" width="9rem">
+                        <Label text="Material Description" />
+                        <t:template>
+                            <Text text="{tabACMModel>ProductDescription}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column tooltip="Sales order -Item" width="6rem">
+                        <Label text="Sales order -Item" />
+                        <t:template>
+                            <Text text="{tabACMModel>SalesOrder}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column visible="false" tooltip="Customer" width="9rem">
+                        <Label text="Customer" />
+                        <t:template>
+                            <Text text="{tabACMModel>Customer}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column tooltip="Customer Name" width="8rem">
+                        <Label text="Customer Name" />
+                        <t:template>
+                            <Text text="{tabACMModel>CustomerName}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column tooltip="Order QTY" width="6rem">
+                        <Label text="Order QTY" />
+                        <t:template>
+                            <Text text="{tabACMModel>QtytoMfdLakhs}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column tooltip="Size" width="4rem">
+                        <Label text="Size" />
+                        <t:template>
+                            <Text text="{tabACMModel>Zsize}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column tooltip="Cap colour" width="6rem">
+                        <Label text="Cap colour" />
+                        <t:template>
+                            <Text text="{tabACMModel>CapColor}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column tooltip="Body Colour" width="6rem">
+                        <Label text="Body Colour" />
+                        <t:template>
+                            <Text text="{tabACMModel>BodyColor}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column tooltip="QTY to MFD(Lakhs)" width="5rem">
+                        <Label text="QTY to MFD(Lakhs)" />
+                        <t:template>
+                            <Text text="{tabACMModel>QtytoMfdLakhs}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column tooltip="QTY to MFD(DIPS)" width="5rem">
+                        <Label text="QTY to MFD(DIPS)" />
+                        <t:template>
+                            <Text text="{tabACMModel>QtytoMfdDips}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column tooltip="Status" width="5rem">
+                        <Label text="Status" />
+                        <t:template>
+                            <Text text="{tabACMModel>Status}" />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+        </f:content>
+    </f:DynamicPage>
+
+
+
+ <!-- Screen 2 -->
+    <f:DynamicPage
+        visible="{= ${ScreenVisible>/openscreen} === 'screen2' }"
+        class="sapUiTinyMarginTop sapUiTinyMarginBegin"
+        preserveHeaderStateOnScroll="true"
+        showFooter="true"
+        fitContent="true">
+
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="ACM Process" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:header>
+            <f:DynamicPageHeader pinnable="true">
+                <FlexBox id="idflexboxsacm" alignItems="Start" justifyContent="SpaceBetween">
+                    <items>
+                        <Panel backgroundDesign="Transparent" class="sapUiNoContentPadding"> 
+                            <content>
+                                <!-- Various fields displaying header data -->
+                                <layout:VerticalLayout class="sapUiSmallMarginBegin sapUiSmallMarginEnd customWidth" visible="true">
+                                    <Label text="ACM No:" class="sapUiSmallMarginTop" />
+                                    <Input value="{screen2model>/HEADERDATA/ACMNO}" editable="false" />
+                                </layout:VerticalLayout>
+
+                                <layout:VerticalLayout class="sapUiSmallMarginBegin sapUiSmallMarginEnd customWidth" visible="true">
+                                    <Label text="Process Order:" class="sapUiSmallMarginTop" />
+                                    <Input value="{screen2model>/HEADERDATA/ProcessOrder}" editable="false" />
+                                </layout:VerticalLayout>
+
+                                <layout:VerticalLayout class="sapUiSmallMarginBegin sapUiSmallMarginEnd customWidth" visible="true">
+                                    <Label text="Body Colour:" class="sapUiSmallMarginTop" />
+                                    <Input value="{screen2model>/HEADERDATA/BodyColor}" editable="false" />
+                                </layout:VerticalLayout>
+
+                                <layout:VerticalLayout class="sapUiSmallMarginBegin sapUiSmallMarginEnd customWidth" visible="true">
+                                    <Label text="Cap Colour:" class="sapUiSmallMarginTop" />
+                                    <Input value="{screen2model>/HEADERDATA/CapColor}" editable="false" />
+                                </layout:VerticalLayout>
+
+                                <layout:VerticalLayout class="sapUiSmallMarginBegin sapUiSmallMarginEnd customWidth" visible="true">
+                                    <Label text="QTY to MFD(Lakhs):" class="sapUiSmallMarginTop" />
+                                    <Input value="{screen2model>/HEADERDATA/QtytoMfdLakhs}" editable="false" />
+                                </layout:VerticalLayout>
+
+                                <layout:VerticalLayout class="sapUiSmallMarginBegin sapUiSmallMarginEnd customWidth" visible="true">
+                                    <Label text="QTY to MFD(DIPS):" class="sapUiSmallMarginTop" />
+                                    <Input value="{screen2model>/HEADERDATA/QtytoMfdDips}" editable="false" />
+                                </layout:VerticalLayout>
+
+                                <layout:VerticalLayout class="sapUiSmallMarginBegin sapUiSmallMarginEnd customWidth" visible="true">
+                                    <Label text="Material :" class="sapUiSmallMarginTop" />
+                                    <Input value="{screen2model>/HEADERDATA/Product}" editable="false" />
+                                </layout:VerticalLayout>
+
+
+                                <layout:VerticalLayout class="sapUiSmallMarginBegin sapUiSmallMarginEnd customWidth" visible="true">
+                                    <Label text="Customer Name :" class="sapUiSmallMarginTop" />
+                                    <Input value="{screen2model>/HEADERDATA/CustomerName}" editable="false" />
+                                </layout:VerticalLayout>
+
+                                <layout:VerticalLayout class="sapUiSmallMarginBegin sapUiSmallMarginEnd customWidth" visible="true">
+                                    <Label text="Description :" class="sapUiSmallMarginTop" />
+                                    <Input value="{screen2model>/HEADERDATA/ProductDescription}" editable="false" />
+                                </layout:VerticalLayout>
+
+                                <layout:VerticalLayout class="sapUiSmallMarginBegin sapUiSmallMarginEnd customWidth" visible="true">
+                                    <Label text="Size :" class="sapUiSmallMarginTop" />
+                                    <Input value="{screen2model>/HEADERDATA/Zsize}" editable="false" />
+                                </layout:VerticalLayout>
+
+                                <layout:VerticalLayout class="sapUiSmallMarginBegin sapUiSmallMarginEnd customWidth" visible="true">
+                                    <Label text="Acm Speed:" class="sapUiSmallMarginTop" />
+                                    <Input value="{screen2model>/HEADERDATA/speed}" editable="false" />
+                                </layout:VerticalLayout>
+
+                                <layout:VerticalLayout class="sapUiSmallMarginBegin sapUiSmallMarginEnd customWidth" visible="true">
+                                    <Label text="Batch:" class="sapUiSmallMarginTop" />
+                                    <Input value="{screen2model>/HEADERDATA/Batch}" editable="false" />
+                                </layout:VerticalLayout>
+
+
+                                    <layout:VerticalLayout class="sapUiSmallMarginBegin sapUiSmallMarginEnd customWidth" visible="true">
+                                    <Label text="Plant:" class="sapUiSmallMarginTop" />
+                                    <Input value="{screen2model>/HEADERDATA/plant}" editable="false" />
+                                </layout:VerticalLayout>
+
+                                <layout:VerticalLayout class="sapUiSmallMarginBegin sapUiSmallMarginEnd customWidth" visible="true">
+                                    <Label text="Start Date :" class="sapUiSmallMarginTop" />
+                                    <Input value="{path:'screen2model>/HEADERDATA/CreationDate',formatter: '.OnDateFormatChange'}" editable="false" />
+                                </layout:VerticalLayout>
+
+                                <layout:VerticalLayout class="sapUiSmallMarginBegin sapUiSmallMarginEnd customWidth" visible="true">
+                                    <Label text="No.Of Bar :" class="sapUiSmallMarginTop" />
+                                    <Input value="{screen2model>/HEADERDATA/bar}" editable="false" />
+                                </layout:VerticalLayout>
+
+                                <layout:VerticalLayout class="sapUiSmallMarginBegin sapUiSmallMarginEnd customWidth" visible="true">
+                                    <Label text="Start Time:" class="sapUiSmallMarginTop" />
+                                    <Input value="{screen2model>/HEADERDATA/currentTime}" editable="false" />
+                                </layout:VerticalLayout>
+                            
+                            
+                            
+                            </content>
+                        </Panel>
+                    </items>
+                </FlexBox>
+            </f:DynamicPageHeader>
+        </f:header>		
+		
+
+        <!-- selectionMode="MultiToggle"
+          enableSelectAll="true" -->
+		<f:content>
+            <t:Table
+                visible="true"
+                rows="{path:'TabItemModel>/Datatabitem'}"
+                selectionMode="None"
+                enableSelectAll="false"
+                fixedColumnCount="4"
+                rowMode="Auto"
+                rowSelectionChange="onRowSelectedtab">
+
+                <t:extension>
+                    <OverflowToolbar>
+                        <Title text="Items" />
+                        <ToolbarSpacer />
+                        <Button text="Add" icon="sap-icon://add" press=".OnTableItemAdd" />
+                        <!-- <Button text="Remove" icon="sap-icon://delete" press="OnRowDelete" /> -->
+                    </OverflowToolbar>
+                </t:extension>
+
+                <t:columns>
+                
+                    <t:Column tooltip="Actions" width="6.5rem"> 
+                        <Label text="Action" required="false" /> 
+                        <t:template>
+                            <MenuButton visible="{= ${TabItemModel>itemstatus} === 'open' ? true : false}" text="Action">
+                                <menu>
+                                    <Menu itemSelected="onMenuAction">
+                                        <MenuItem text="CapCut Print" icon="sap-icon://print" key="0"/>
+                                        <MenuItem text="BodyCut Print" icon="sap-icon://print" key="1" />
+                                           <MenuItem text="CapCake Print" icon="sap-icon://print" key="2" />
+                                              <MenuItem text="BodyCake Print" icon="sap-icon://print" key="3" />
+                                        <MenuItem text="Post Issue" icon="sap-icon://create-entry-time" key="4" enabled="{= ${TabItemModel>materialdocumentno} === '' ? true : false}"/>
+                                       <!-- <MenuItem 
+    text="Reverse" 
+    icon="sap-icon://refresh" 
+    key="3"
+    enabled="{
+        parts: [
+            {path: 'TabItemModel>materialdocumentno'},
+            {path: 'UserModel>/roles'}
+        ],
+        formatter: '.formatter.isReverseEnabled'
+    }"
+/> -->
+                                        <!-- <MenuItem text="Reverse" icon="sap-icon://refresh" key="3" enabled="{= ${TabItemModel>materialdocumentno} === '' || ${AdminPanelAuth>/Samples/Role} === false ? false : true}"/> -->
+                                        <!-- <MenuItem text="Reverse" icon="sap-icon://refresh" key="3" enabled="{= ${TabItemModel>materialdocumentno} === '' ? false : true}" visible="{= ${AdminPanelAuth>/Samples/Role} === true ? true : false }"/> -->
+                                        <MenuItem text="Reverse" icon="sap-icon://refresh" key="5" enabled="{= ${TabItemModel>materialdocumentno} === '' ? false : true}"/>
+                                        <!-- <MenuItem  text="Delete" icon="sap-icon://delete" key="4" enabled="{= ${TabItemModel>materialdocumentno} === '' ? true : false}"/> -->
+                                    </Menu>
+                                </menu>
+                            </MenuButton>
+                        </t:template>
+                    </t:Column>
+                
+                    <!-- <t:Column tooltip="Press to post GR" width="3rem"> 
+                        <Label text="Post GR" required="false" />
+                        <t:template>
+                            <Button press=".OnApiPost_MatDoc" icon="sap-icon://print" visible="{= ${TabItemModel>itemstatus} === 'open' ? true : false}" enabled="{= ${TabItemModel>itemstatus} === 'open' ? true : false}" tooltip="Cut print"/>
+                        </t:template>
+                    </t:Column>
+                
+                    <t:Column tooltip="Cut Print" width="3rem"> 
+                        <Label text="" required="false" />
+                        <t:template>
+                            <Button press=".onCapCutPrint" icon="sap-icon://print" visible="{= ${TabItemModel>itemstatus} === 'open' ? true : false}" enabled="{= ${TabItemModel>itemstatus} === 'open' ? true : false}" tooltip="Cut print"/>
+                        </t:template>
+                    </t:Column>
+                
+                    <t:Column tooltip="Cake print" width="3rem"> 
+                        <Label text="" required="false" />
+                        <t:template>
+                            <Button press=".onBodyCutPrint" icon="sap-icon://print" visible="{= ${TabItemModel>itemstatus} === 'open' ? true : false}" enabled="{= ${TabItemModel>itemstatus} === 'open' ? true : false}" tooltip="Cut print"/>
+                        </t:template>
+                    </t:Column> -->
+                
+                    <t:Column tooltip="Select" width="3rem"> 
+                        <Label text="" required="false" />
+                         <!-- <CheckBox   visible="{= ${TabItemModel>itemstatus} === '' ? true : true}"  select=".onCheckBoxSelect" /> -->
+                        <t:template>
+                            <CheckBox visible="{= ${TabItemModel>itemstatus} === '' ? true : false}" selected="{TabItemModel>selected}"   select=".onCheckBoxSelect"  />
+                            <!-- <CheckBox visible="{= ${TabItemModel>itemstatus} === '' || ${TabItemModel>materialdocumentno} ==='' ? true : false}" selected="{= ${TabItemModel>itemstatus} === 'open' ? false : false}" select=".onCheckBoxSelect" enabled="{= ${TabItemModel>itemstatus} === 'open' ? false : true}"/> -->
+                        </t:template>
+                    </t:Column>
+                
+                    <t:Column tooltip="Date" width="9rem" >
+                        <Label text="Date" required="true" />
+                        <t:template>
+                            <DatePicker valueFormat="yyyy-MM-dd" displayFormat="dd-MM-yyyy" editable="{= ${TabItemModel>itemstatus} === 'open' ? false : true}"
+                            value="{ 'path':'TabItemModel>zdate', 'type':'sap.ui.model.type.Date', 'formatOptions': { 'pattern': 'dd-MM-yyyy' } }" 
+                            change=".onDateOrShiftChange"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Shift" width="5rem">
+                        <Label text="Shift" required="true" />
+                        <t:template>
+                            <ComboBox selectedKey="{TabItemModel>shift}" width="11rem" items="{path: 'shiftmodel>/shfitsample'}" editable="{= ${TabItemModel>itemstatus} === 'open' ? false : true}" change=".onDateOrShiftChange">
+                                <core:Item key="{shiftmodel>shiftname}" text="{shiftmodel>shiftname}" />
+                            </ComboBox>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Balance Qty" width="6rem">
+                        <Label text="Balance Qty" />
+                        <t:template>
+                            <Text text="{TabItemModel>balanceqty}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Dips Upto Previous" width="8rem">
+                        <Label text="Dips Upto Previous" />
+                        <t:template>
+                            <Text text="{TabItemModel>dipsuptoprevious}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Dips Cur" width="6rem">
+                        <Label text="Dips Cur" required="true" />
+                        <t:template>
+                            <Input value="{TabItemModel>dipscurrent}" change=".onchangedipscur" editable="{= ${TabItemModel>itemstatus} === 'open' ? false : true}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Dips Cumulative" width="6rem">
+                        <Label text="Dips Cumulative" />
+                        <t:template>
+                            <Text text="{TabItemModel>cumulative}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Cumulative QTY Lakhs" width="6rem">
+                        <Label text="Cumulative QTY Lakhs" />
+                        <t:template>
+                            <Text text="{TabItemModel>cummulativeinlaksh}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Dips QTY Lakhs" width="6rem">
+                        <Label text="Dips QTY Lakhs" />
+                        <t:template>
+                            <Text text="{TabItemModel>dipsqtylakh}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Cap Cut QTY(KG)" width="6rem">
+                        <Label text="Cap Cut QTY(KG)" />
+                        <t:template>
+                            <Input value="{TabItemModel>capcutqty}"  editable="{= ${TabItemModel>itemstatus} === 'open' ? false : true}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Body Cut QTY(KG)" width="6rem">
+                        <Label text="Body Cut QTY (KG)" />
+                        <t:template>
+                            <Input value="{TabItemModel>bodycutqty}"  editable="{= ${TabItemModel>itemstatus} === 'open' ? false : true}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Cap Cake QTY(KG)" width="6rem">
+                        <Label text="Cap Cake QTY(KG)" />
+                        <t:template>
+                            <Input value="{TabItemModel>capcakeqty}"  editable="{= ${TabItemModel>itemstatus} === 'open' ? false : true}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Body Cake QTY(KG)" width="6rem">
+                        <Label text="Body Cake QTY(KG)" />
+                        <t:template>
+                            <Input value="{TabItemModel>bodycakeqty}" editable="{= ${TabItemModel>itemstatus} === 'open' ? false : true}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="HFX" width="6rem">
+                        <Label text="HFX" />
+                        <t:template>
+                            <Input value="{TabItemModel>hfx}"  editable="{= ${TabItemModel>itemstatus} === 'open' ? false : true}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Wastage" width="6rem">
+                        <Label text="Wastage" />
+                        <t:template>
+                            <Input value="{TabItemModel>wastage}"  editable="{= ${TabItemModel>itemstatus} === 'open' ? false : true}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Floor Wastage" width="6rem">
+                        <Label text="Floor Wastage" />
+                        <t:template>
+                            <Input value="{TabItemModel>floorwastage}"  editable="{= ${TabItemModel>itemstatus} === 'open' ? false : true}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Operator in ZPP auto ACM Screen" width="6rem">
+                        <Label text="Operator in ZPP auto ACM Screen" required="true" />
+                        <t:template>
+                            <Input maxLength="40" value="{TabItemModel>operatorname}"  editable="{= ${TabItemModel>itemstatus} === 'open' ? false : true}"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Material Document No" width="6rem">
+                        <Label text="Material Document No" />
+                        <t:template>
+                            <Text text="{TabItemModel>materialdocumentno}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column tooltip="Material Document Year" width="6rem">
+                        <Label text="Material Document Year" />
+                        <t:template>
+                            <Text text="{TabItemModel>materialdocumentyear}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column visible="false"  tooltip="Status" width="6rem">
+                        <Label text="Status" />
+                        <t:template>
+                            <Text text="{TabItemModel>status}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column visible="false"   tooltip="Item Status" width="6rem">
+                        <Label text="Item Status" />
+                        <t:template>
+                            <Text text="{TabItemModel>itemstatus}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column visible="false"   tooltip="id" width="6rem">
+                        <Label text="id" />
+                        <t:template>
+                            <Text text="{TabItemModel>id}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column  visible="false"   tooltip="processorder" width="6rem">
+                        <Label text="processorder" />
+                        <t:template>
+                            <Text text="{TabItemModel>processorder}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column  visible="false"  tooltip="acmno" width="6rem">
+                        <Label text="acmno" />
+                        <t:template>
+                            <Text text="{TabItemModel>acmno}" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column  visible="false"  tooltip="acmno" width="6rem">
+                        <Label text="" />
+                        <t:template>
+                            <Text text="{TabItemModel>abacd}" />
+                        </t:template>
+                    </t:Column>
+                    
+                    <t:Column tooltip="Delete Item" width="6rem">  <!-- 18 abacd--> 
+						<Label text="Delete" />
+						<t:template>
+							<Button press="onDeleteItemPress" type="Reject" icon="sap-icon://delete" visible="{= ${TabItemModel>materialdocumentno} === '' ? true : false}"/>
+						</t:template>
+					</t:Column>
+
+
+                </t:columns>
+            </t:Table>
+        </f:content>
+
+        <f:footer>
+			<OverflowToolbar >
+					<!-- <MenuButton text="" icon="sap-icon://information" menuPosition="BeginTop" activeIcon="false" visible="false">
+						<menu>
+							<Menu>
+								<MenuItem text="FTP - Ref Doc No 	 : {screen2model>/HEADERDATA/Ref_No}" />
+								<MenuItem text="Goods Issue Doc No   : {screen2model>/HEADERDATA/goods_issue}" />
+								<MenuItem text="Goods receipt Doc No : {screen2model>/HEADERDATA/goods_receipt}" />
+							</Menu>
+						</menu>
+					</MenuButton> -->
+
+				<!-- <MessageStrip text="{FinalStatus>/MSGSTRIP/text}" type="{FinalStatus>/MSGSTRIP/type}" visible="{FinalStatus>/MSGSTRIP/visible}" showIcon="true" showCloseButton="true"></MessageStrip> -->
+				<ToolbarSpacer  />
+				<Button tooltip="Go Back" type="Default" press="onGoToScreen1" enabled="true" text="Back" icon="sap-icon://close-command-field" />
+				<!-- <Button tooltip="Save the document internally" type="Default" press=".onSubmitacm01screen" enabled="{ButtonStatus>/Buttons/create}" text="Save" icon="sap-icon://save" /> -->
+				<Button tooltip="Save the document internally" type="Default" press=".onSubmitacm01screen" text="Save" icon="sap-icon://save" />
+				<!-- <Button tooltip="POST the document to API" type="Default" press=".OnApiPost_MatDoc" text="Post GR" icon="sap-icon://create-entry-time" /> -->
+                <!-- Here 1st i'm opening fragment and save to DB. Fragment have a post button will push to DB -->
+			</OverflowToolbar>
+		</f:footer>
+
+
+    </f:DynamicPage>
+
+
+</mvc:View>

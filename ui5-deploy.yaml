@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "3.1"
+metadata:
+  name: zautodesignapp
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          destination: my421042_DEV
+          url: https://my421042.s4hana.cloud.sap
+          authenticationType: reentranceTicket # SAML support for vscode
+        app:
+          name: ZF_PP_AUTO_REPO
+          description: PP Auto App
+          package: ZFIORI
+          transport:  P42K900816
+        exclude:
+          - /test/

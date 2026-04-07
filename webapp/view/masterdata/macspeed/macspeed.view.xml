@@ -1,0 +1,116 @@
+<mvc:View
+		xmlns:c="sap.ui.core"
+		controllerName="zautodesignapp.controller.masterdata.macspeed.macspeed"
+		xmlns:mvc="sap.ui.core.mvc"
+		xmlns:u="sap.ui.unified"
+		xmlns="sap.m"
+        xmlns:core="sap.ui.core"
+		xmlns:t="sap.ui.table"
+		xmlns:fb="sap.ui.comp.filterbar"
+		xmlns:svm="sap.ui.comp.smartvariants"
+		xmlns:f="sap.f"
+		xmlns:tnt="sap.tnt"
+		xmlns:layout="sap.ui.layout"
+
+		height="100%">
+		<f:DynamicPage id="iddynamicpage" class="sapUiTinyMarginTop sapUiTinyMarginBegin" headerExpanded="false" preserveHeaderStateOnScroll="false" showFooter="true" fitContent="true">
+			<!-- DynamicPage Title -->
+			<f:title>
+				<f:DynamicPageTitle>
+				
+					<f:expandedContent>
+						<Label class="Titleexpanded" text="MAC Speed" />
+						<tnt:InfoLabel visible="false" id="headercount" text="Total MAC Speed : " />
+						<tnt:InfoLabel visible="false" id="headercount2" text="" />
+						<tnt:InfoLabel visible="false" id="modelcount" text="" />
+					</f:expandedContent>
+					<f:snappedContent>
+						<Label class="Titleclassssnap" text="MAC Speed" />
+						<tnt:InfoLabel visible="false" id="headercount1" text="Total MAC Speed : " />
+					</f:snappedContent>
+					
+				</f:DynamicPageTitle>
+			</f:title>
+
+			<!-- DynamicPage Header -->
+
+			<f:content>
+				<t:Table enableBusyIndicator="true" threshold="100"  rowSelectionChange="onRowSelect"
+				rows="{path: 'TabModel>/Datass'}" selectionBehavior="Row" selectionMode="Multi" id="idtable" enableSelectAll="true"	rowMode="Auto">
+					<t:extension>
+						<OverflowToolbar id="idovrflow" style="Clear">
+							<Title id = "ittabprod" text=" MAC Speed"/>
+							<!-- <SearchField placeholder="Filter" value="{ui>/filterValue}" search="handleTxtFilter" width="15rem"/> -->
+							<ToolbarSpacer/>
+							<ToolbarSpacer/>
+								<Button text="add" icon="sap-icon://add" press="OnGateAdd"/>
+                   			 	<Button id="idmultidelete" icon="sap-icon://delete" press="OnTableRowRemove"/>
+
+						</OverflowToolbar>
+					</t:extension>
+					<t:columns>
+
+					 	<t:Column width="3rem" sortProperty="macno" tooltip="ACM M/C No"> <!-- 0 -->
+							<Label required="true" text="ACM M/C No" />
+							<t:template>
+								<Input type="Number" value="{TabModel>macno}" change=".OnValidateMacNo"/>
+							</t:template>
+						</t:Column>
+
+					 	<t:Column width="auto" sortProperty="f_date" tooltip="From Date"><!--  1-->
+							<Label required="true" text="From Date" />
+							<t:template>
+							<DatePicker valueFormat="yyyy-MM-dd" displayFormat="dd-MM-yyyy"  
+							value="{ 'path':'TabModel>f_date', 'type':'sap.ui.model.type.Date', 'formatOptions': { 'pattern': 'dd-MM-YYYY' } }" />
+							</t:template>
+						</t:Column>
+
+					 	<t:Column width="auto" sortProperty="to_date" tooltip="To Date"><!--  2-->
+							<Label required="true" text="To Date" />
+							<t:template>
+							<DatePicker valueFormat="yyyy-MM-dd" displayFormat="dd-MM-yyyy" 
+							value="{ 'path':'TabModel>to_date', 'type':'sap.ui.model.type.Date', 'formatOptions': { 'pattern': 'dd-MM-YYYY' } }" />
+							
+							</t:template>
+						</t:Column>
+
+					 	<t:Column width="auto" sortProperty="no_bar" tooltip="No Bar"><!--  3-->
+							<Label required="true" text="No Bar" />
+							<t:template>
+								<Input value="{TabModel>no_bar}"/>
+							</t:template>
+						</t:Column>
+
+						<t:Column width="auto" sortProperty="speed" tooltip="Speed"><!-- 4 -->
+							<Label  text="Speed" />
+							<t:template>
+								<Input value="{TabModel>speed}" />
+							</t:template>
+						</t:Column>
+
+					 	<t:Column width="auto" sortProperty="mac_size" tooltip="Mac Size"><!--  5-->
+							<Label  text="Mac Size" />
+							<t:template>
+								<Input value="{TabModel>mac_size}" />
+							</t:template>
+						</t:Column>
+
+					 	<t:Column width="auto" sortProperty="remarks" tooltip="Remarks"><!--  6-->
+							<Label  text="Remarks" />
+							<t:template>
+								<TextArea value="{TabModel>remarks}"/>
+							</t:template>
+						</t:Column>
+												
+					</t:columns>
+				</t:Table>
+			</f:content>
+			<!-- DynamicPage Footer -->
+			<f:footer>
+				<OverflowToolbar>
+					<ToolbarSpacer  />
+					<Button tooltip="Save the document internally" type="Default" press=".OnSubmit" enabled="true" text="Save" icon="sap-icon://save" />
+				</OverflowToolbar>
+			</f:footer>
+		</f:DynamicPage>
+</mvc:View>

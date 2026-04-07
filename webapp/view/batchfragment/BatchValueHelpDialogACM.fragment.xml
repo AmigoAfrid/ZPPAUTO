@@ -1,0 +1,51 @@
+<core:FragmentDefinition
+    xmlns="sap.ui.comp.valuehelpdialog"
+    xmlns:m="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core"
+>
+    <ValueHelpDialog
+        supportMultiselect="false"
+        title="Batch No."
+        ok=".onValueHelpOkPressBatch"
+        cancel=".onValueHelpCancelPressBatch"
+        afterClose=".onValueHelpAfterCloseBatch"
+        supportRanges="false"
+        key="Batch"
+        descriptionKey="StorageLocation"
+    >
+        <filterBar>
+            <fb:FilterBar
+                advancedMode="true"
+                search=".onFilterBarSearchBatch"
+                isRunningInValueHelpDialog="true"
+            >
+                <fb:filterGroupItems>
+                    <!-- ACM Batch Field -->
+                    <fb:FilterGroupItem
+                        groupName="__$INTERNAL$"
+                        name="Batch"
+                        label="ACM BATCH"
+                        visibleInFilterBar="true"
+                    >
+                        <fb:control>
+                            <m:Input
+                                name="Batch No."
+                                showSuggestion="true"
+                                showValueHelp="false"
+                                suggestionItems="{ path: 'oJSONBatchModel>/Datas', sorter: { path: 'Batch'}}"
+                            >
+                                <core:Item
+                                    key="{oJSONBatchModel>Batch}"
+                                    text="{oJSONBatchModel>StorageLocation}"
+                                />
+                            </m:Input>
+                        </fb:control>
+                    </fb:FilterGroupItem>
+     
+                    
+                </fb:filterGroupItems>
+            </fb:FilterBar>
+        </filterBar>
+    </ValueHelpDialog>
+</core:FragmentDefinition>

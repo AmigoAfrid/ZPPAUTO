@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_AGGREGATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Aggregation.V1" Alias="Aggregation"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ANALYTICS',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Analytics.v1" Alias="Analytics"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CODELIST',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.CodeList.v1" Alias="SAP__CodeList"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_MEASURES',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_ODM',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.ODM.v1" Alias="SAP__ODM"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_PERSONALDATA',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.PersonalData.v1" Alias="PersonalData"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/iwfnd/catalogservice;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_VALIDATION',Version='0001',SAP__Origin='')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Validation.V1" Alias="Validation"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="cds_zau_ft_prodconf_srvd" xml:lang="en" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="ZC_PROCESSORDERCONFIRMATIONType" sap:label="Process order confirmation" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="MfgOrderInternalID"/>
+                    <PropertyRef Name="OrderOperationInternalID"/>
+                </Key>
+                <Property Name="MfgOrderInternalID" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="NonNegative" sap:label="Order Internal ID"/>
+                <Property Name="OrderOperationInternalID" Type="Edm.String" Nullable="false" MaxLength="8" sap:display-format="NonNegative" sap:label="Operation Internal ID" sap:quickinfo="Internal Identifier of an Operation or Activity"/>
+                <Property Name="ManufacturingOrder" Type="Edm.String" MaxLength="12" sap:display-format="UpperCase" sap:label="Manufacturing Order" sap:quickinfo="Manufacturing Order ID"/>
+                <Property Name="ManufacturingOrderSequence" Type="Edm.String" MaxLength="6" sap:display-format="UpperCase" sap:label="Sequence" sap:quickinfo="Manufacturing Order Sequence"/>
+                <Property Name="ManufacturingOrderOperation" Type="Edm.String" MaxLength="4"/>
+                <Property Name="ManufacturingOrderOperation_2" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Operation or Phase" sap:quickinfo="Operation or Phase Number"/>
+                <Property Name="MfgOrderOperationIsPhase" Type="Edm.Boolean" sap:label="Indicator: Phase"/>
+                <Property Name="OperationControlProfile" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Control Profile" sap:quickinfo="Operation Control Profile"/>
+                <Property Name="OperationReferenceQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="OperationUnit" sap:label="Base Quantity"/>
+                <Property Name="OpPlannedTotalQuantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="OperationUnit" sap:label="Operation Quantity" sap:quickinfo="Operation Total Quantity"/>
+                <Property Name="WorkCenterStandardWorkQty1" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="OperationUnit" sap:label="Standard Work Quantity 1"/>
+                <Property Name="WorkCenterStandardWorkQty2" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="OperationUnit" sap:label="Standard Work Quantity 2"/>
+                <Property Name="WorkCenterStandardWorkQty3" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="OperationUnit" sap:label="Standard Work Quantity 3"/>
+                <Property Name="WorkCenterStandardWorkQty4" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="OperationUnit" sap:label="Standard Work Quantity 4"/>
+                <Property Name="WorkCenterStandardWorkQty5" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="OperationUnit" sap:label="Standard Work Quantity 5"/>
+                <Property Name="WorkCenterStandardWorkQty6" Type="Edm.Decimal" Precision="9" Scale="3" sap:unit="OperationUnit" sap:label="Standard Work Quantity 6"/>
+                <Property Name="OperationUnit" Type="Edm.String" MaxLength="3" sap:label="Operation Unit" sap:quickinfo="Operation Unit of Measure" sap:semantics="unit-of-measure"/>
+            </EntityType>
+            <EntityType Name="ZC_TB_FT_PRODCONFType" sap:label="Consumption View for ZTB_FT_PRODCONF" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="orderid"/>
+                    <PropertyRef Name="orderoperation"/>
+                    <PropertyRef Name="materialdocument"/>
+                    <PropertyRef Name="matdocyear"/>
+                </Key>
+                <Property Name="orderid" Type="Edm.String" Nullable="false" MaxLength="12" sap:display-format="UpperCase" sap:label="Order" sap:quickinfo="Order Number" sap:updatable="false"/>
+                <Property Name="orderoperation" Type="Edm.String" Nullable="false" MaxLength="4" sap:updatable="false"/>
+                <Property Name="materialdocument" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="UpperCase" sap:label="Material Document" sap:quickinfo="Number of Material Document" sap:updatable="false"/>
+                <Property Name="matdocyear" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="NonNegative" sap:label="Material Doc. Year" sap:quickinfo="Material Document Year" sap:updatable="false"/>
+                <Property Name="ordersuboperation" Type="Edm.String" MaxLength="4"/>
+                <Property Name="confirmationyieldquantity" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="uom" sap:label="Quantity"/>
+                <Property Name="opconfirmedworkquantity1" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="uom" sap:label="Quantity"/>
+                <Property Name="opconfirmedworkquantity2" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="uom" sap:label="Quantity"/>
+                <Property Name="opconfirmedworkquantity3" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="uom" sap:label="Quantity"/>
+                <Property Name="opconfirmedworkquantity4" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="uom" sap:label="Quantity"/>
+                <Property Name="opconfirmedworkquantity5" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="uom" sap:label="Quantity"/>
+                <Property Name="opconfirmedworkquantity6" Type="Edm.Decimal" Precision="13" Scale="3" sap:unit="uom" sap:label="Quantity"/>
+                <Property Name="uom" Type="Edm.String" MaxLength="3" sap:label="Base Unit of Measure" sap:semantics="unit-of-measure"/>
+                <Property Name="response" Type="Edm.String" MaxLength="5000"/>
+                <Property Name="errorresponse" Type="Edm.String" MaxLength="5000"/>
+                <Property Name="sequence" Type="Edm.String" MaxLength="4"/>
+                <Property Name="confirmationgroup" Type="Edm.String" MaxLength="10"/>
+                <Property Name="confirmationcount" Type="Edm.String" MaxLength="8"/>
+            </EntityType>
+            <EntityContainer Name="cds_zau_ft_prodconf_srvd_Entities" m:IsDefaultEntityContainer="true" sap:message-scope-supported="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="ZC_PROCESSORDERCONFIRMATION" EntityType="cds_zau_ft_prodconf_srvd.ZC_PROCESSORDERCONFIRMATIONType" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZC_TB_FT_PRODCONF" EntityType="cds_zau_ft_prodconf_srvd.ZC_TB_FT_PRODCONFType" sap:content-version="1"/>
+            </EntityContainer>
+            <Annotation Term="Core.SchemaVersion" String="1.0.0" xmlns="http://docs.oasis-open.org/odata/ns/edm"/>
+            <Annotations Target="cds_zau_ft_prodconf_srvd.cds_zau_ft_prodconf_srvd_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Common.ApplyMultiUnitBehaviorForSortingAndFiltering" Bool="true"/>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_prodconf_srvd.cds_zau_ft_prodconf_srvd_Entities/ZC_PROCESSORDERCONFIRMATION" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.DeleteRestrictions">
+                    <Record>
+                        <PropertyValue Property="Deletable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="false"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.UpdateRestrictions">
+                    <Record>
+                        <PropertyValue Property="Updatable" Bool="false"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_prodconf_srvd.cds_zau_ft_prodconf_srvd_Entities/ZC_TB_FT_PRODCONF" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Capabilities.FilterRestrictions">
+                    <Record>
+                        <PropertyValue Property="FilterExpressionRestrictions">
+                            <Collection>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="response"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                                <Record>
+                                    <PropertyValue Property="Property" PropertyPath="errorresponse"/>
+                                    <PropertyValue Property="AllowedExpressions" String="SearchExpression"/>
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+                <Annotation Term="Capabilities.InsertRestrictions">
+                    <Record>
+                        <PropertyValue Property="Insertable" Bool="true"/>
+                    </Record>
+                </Annotation>
+                <Annotation Term="SAP__core.OptimisticConcurrency">
+                    <Collection/>
+                </Annotation>
+                <Annotation Term="Capabilities.SortRestrictions">
+                    <Record>
+                        <PropertyValue Property="NonSortableProperties">
+                            <Collection>
+                                <PropertyPath>response</PropertyPath>
+                                <PropertyPath>errorresponse</PropertyPath>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_prodconf_srvd.ZC_TB_FT_PRODCONFType/matdocyear" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_prodconf_srvd.ZC_TB_FT_PRODCONFType/materialdocument" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_prodconf_srvd.ZC_TB_FT_PRODCONFType/orderid" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_prodconf_srvd.ZC_TB_FT_PRODCONFType/orderoperation" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="SAP__core.Immutable"/>
+            </Annotations>
+            <Annotations Target="cds_zau_ft_prodconf_srvd.cds_zau_ft_prodconf_srvd_Entities" xmlns="http://docs.oasis-open.org/odata/ns/edm">
+                <Annotation Term="Org.OData.Capabilities.V1.BatchSupport">
+                    <Record Type="Org.OData.Capabilities.V1.BatchSupportType">
+                        <PropertyValue Property="ReferencesAcrossChangeSetsSupported" Bool="true"/>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <atom:link rel="self" href="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/sap/ZAU_FT_PRODCONF_SRVB/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://my421040-api.s4hana.cloud.sap/sap/opu/odata/sap/ZAU_FT_PRODCONF_SRVB/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

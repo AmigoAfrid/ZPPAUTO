@@ -1,0 +1,20 @@
+<core:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog" xmlns:m="sap.m" xmlns:fb="sap.ui.comp.filterbar" xmlns:core="sap.ui.core">
+	<ValueHelpDialog supportMultiselect="true"  title=" Material" ok=".onValueHelpOkPressMaterial" cancel=".onValueHelpCancelPressMaterial" afterClose=".onValueHelpMaterial" supportRanges="false" key="Material" descriptionKey="">
+		<filterBar>
+			<fb:FilterBar  advancedMode="true" search=".onFilterBarSearchMaterial" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="Material" label="Material" visibleInFilterBar="true">
+						<fb:control>
+								<m:Input name="Material" showSuggestion="true" showValueHelp="false" suggestionItems="{ path: 'ZAU_FT_PROCESSORDER_SRVB_>/ZCDS_COMPONENT_F4HELP', sorter: { path: 'Material'}}">
+								<core:Item key="{ZAU_FT_PROCESSORDER_SRVB_>Material}" text="{ZAU_FT_PROCESSORDER_SRVB_>Material}" />
+							</m:Input>
+						</fb:control>
+					</fb:FilterGroupItem>
+				
+
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+		
+	</ValueHelpDialog>
+</core:FragmentDefinition> 
