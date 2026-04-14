@@ -67,7 +67,8 @@
 							</content>
 						</Panel>
 					</items>
-				</FlexBox>
+				</FlexBox>  
+				
 			</f:DynamicPageHeader>
 		</f:header>
 		<!-- DynamicPage Content -->
