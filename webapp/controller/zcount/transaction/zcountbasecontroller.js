@@ -1417,9 +1417,9 @@ sap.ui.define([
 
                 // entry.Qty = totalQtyLac.toFixed(3); // This will appear in the PDF under Quantity
 
-                 let QTYS = Number(entry.Qty).toFixed(3)
-                 let finalValue = Number(QTYS) * 100000;
-               
+                let QTYS = Number(entry.Qty).toFixed(3)
+                let finalValue = Number(QTYS) * 100000;
+
                 // let QTYS = Math.floor(Number(entry.Qty));
 
                 const htmlContent = this._generatePDFContent(
@@ -1749,7 +1749,7 @@ sap.ui.define([
         </tr>
         <tr>
             <td>CUST MAT CODE</td>
-            <td>: N.A</td>
+            <td>:${entry.materialbycustomer || ""}</td>
         </tr>
     </table>
  
@@ -1790,7 +1790,7 @@ sap.ui.define([
          <div class="box">
             BOX NO : ${entry.boxno}/${entry.Batch || ""}
             <div class="flex-container1">
-               <div class="centered1">${(entry.cap_colour || "").replace(/['":]/g, "").split("(")[0].trim()}</div>
+            <div class="centered1">${((entry.cap_colour || "").replace(/['":]/g, "").split("(")[0].trim())}</div>
                <div class="centered2">${(entry.body_colour || "").replace(/['":]/g, "").split("(")[0].trim()}</div>
                <div class="centered">${entry.zsize}</div>
             </div>
@@ -2205,10 +2205,10 @@ sap.ui.define([
                 urlParameters: {
                     "$orderby": "createdat desc",  // Order by createdat (most recent first)
                     //"$skip": 15,                   // Skip the first 15 records (to get the last 10)
-                   // "$top": 10
+                    // "$top": 10
 
-                   "$top": "5000",
-                   "$skip": "0"
+                    "$top": "5000",
+                    "$skip": "0"
                 },
                 success: (oData) => {
                     const aItems = oData.results || [];
@@ -2253,57 +2253,57 @@ sap.ui.define([
                     sap.ui.core.BusyIndicator.hide();
                 }
             });
-        
-        
+
+
 
             // latest 10 record 
-        // Step 1: Get total count
-// oModel.read("/ZCE_ZCOUNT_ITEM/$count", {
-//     filters: [oFilter],
-//     success: (iCount) => {
-//         const skipValue = Math.max(0, iCount - 10); // skip until last 10
+            // Step 1: Get total count
+            // oModel.read("/ZCE_ZCOUNT_ITEM/$count", {
+            //     filters: [oFilter],
+            //     success: (iCount) => {
+            //         const skipValue = Math.max(0, iCount - 10); // skip until last 10
 
-//         // Step 2: Read last 10
-//         oModel.read("/ZCE_ZCOUNT_ITEM", {
-//             filters: [oFilter],
-//             urlParameters: {
-//                 "$orderby": "createdat asc", // oldest first
-//                 "$skip": skipValue.toString(),
-//                 "$top": "10"
-//             },
-//             success: (oData) => {
-//                 const aItems = oData.results || [];
+            //         // Step 2: Read last 10
+            //         oModel.read("/ZCE_ZCOUNT_ITEM", {
+            //             filters: [oFilter],
+            //             urlParameters: {
+            //                 "$orderby": "createdat asc", // oldest first
+            //                 "$skip": skipValue.toString(),
+            //                 "$top": "10"
+            //             },
+            //             success: (oData) => {
+            //                 const aItems = oData.results || [];
 
-//                 const aUpdatedItems = aItems.map(item => ({
-//                     ...item,
-//                     process_order: item.process_order.replace(/^0+/, ""),
-//                     isEditMode: false,
-//                     isTareEditable: true,
-//                     isTareEdited: false
-//                 }));
+            //                 const aUpdatedItems = aItems.map(item => ({
+            //                     ...item,
+            //                     process_order: item.process_order.replace(/^0+/, ""),
+            //                     isEditMode: false,
+            //                     isTareEditable: true,
+            //                     isTareEdited: false
+            //                 }));
 
-//                 const oTableModel = new sap.ui.model.json.JSONModel({ DatasZitem: aUpdatedItems });
-//                 oView.setModel(oTableModel, "TabZcountItemModel");
+            //                 const oTableModel = new sap.ui.model.json.JSONModel({ DatasZitem: aUpdatedItems });
+            //                 oView.setModel(oTableModel, "TabZcountItemModel");
 
-//                 sap.ui.core.BusyIndicator.hide();
-//             },
-//             error: (oError) => {
-//                 console.error("Failed to read last 10 items:", oError);
-//                 sap.m.MessageToast.show("Error reading last 10 records.");
-//                 sap.ui.core.BusyIndicator.hide();
-//             }
-//         });
-//     },
-//     error: (oError) => {
-//         console.error("Failed to get count:", oError);
-//         sap.m.MessageToast.show("Error getting record count.");
-//         sap.ui.core.BusyIndicator.hide();
-//     }
-// });
+            //                 sap.ui.core.BusyIndicator.hide();
+            //             },
+            //             error: (oError) => {
+            //                 console.error("Failed to read last 10 items:", oError);
+            //                 sap.m.MessageToast.show("Error reading last 10 records.");
+            //                 sap.ui.core.BusyIndicator.hide();
+            //             }
+            //         });
+            //     },
+            //     error: (oError) => {
+            //         console.error("Failed to get count:", oError);
+            //         sap.m.MessageToast.show("Error getting record count.");
+            //         sap.ui.core.BusyIndicator.hide();
+            //     }
+            // });
 
-        
-        
-        
+
+
+
         },
 
         onTarewtupate: async function () {
