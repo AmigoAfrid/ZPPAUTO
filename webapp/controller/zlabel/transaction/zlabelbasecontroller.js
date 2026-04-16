@@ -1430,6 +1430,7 @@ sap.ui.define([
 .table-wrapper {
     width: 530px;
     display: flex;
+    margin-top :10px;
 }
  
 /* Both tables share same layout */
@@ -1523,7 +1524,7 @@ sap.ui.define([
          border: 6px solid white;
          margin: 20px auto;
          position: relative;
-         padding: 10px;
+         padding: 30px 10px 10px 10px;
          }
          .header { text-align: center; border-bottom: 2px solid white; padding-bottom: 0px; }
          .header h1 { margin: 0; font-size: 18px; color: white;  color: #000000;}
