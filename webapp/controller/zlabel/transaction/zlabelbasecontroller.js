@@ -355,7 +355,7 @@ sap.ui.define([
                 return;
             }
 
-             if (target_qty === 0 || target_qty === "0.000" || target_qty === "0.00") {
+            if (target_qty === 0 || target_qty === "0.000" || target_qty === "0.00") {
                 sap.m.MessageToast.show("Target Qty is not available.");
                 return;
             }
@@ -416,7 +416,7 @@ sap.ui.define([
                 var skipValue = 0;
                 // Fetch data with pagination
                 oDataModel.read("/ZLABEL_ITEM_DD", {
-                     urlParameters: {
+                    urlParameters: {
                         "$top": topValue,
                         "$skip": skipValue
                     },
@@ -1246,9 +1246,9 @@ sap.ui.define([
                 entry.Batch = String(entry.Batch).replace(/^00/, '');
                 // entry.Qty = totalQtyLac.toFixed(3); // This will appear in the PDF under Quantity
 
-               // let QTYS = Math.floor(Number(entry.Qty));
-               let QTYS = Number(entry.Qty).toFixed(3)
-                 let finalValue = Number(QTYS) * 100000;
+                // let QTYS = Math.floor(Number(entry.Qty));
+                let QTYS = Number(entry.Qty).toFixed(3)
+                let finalValue = Number(QTYS) * 100000;
 
 
                 const htmlContent = this._generatePDFContent(
@@ -1409,10 +1409,10 @@ sap.ui.define([
             capprinting,
             SalesOrder
         ) {
-      
 
-         return `
-           <!DOCTYPE html>
+
+            return `
+             <!DOCTYPE html>
 <html lang="en">
    <head>
       <meta charset="UTF-8">
@@ -1580,7 +1580,7 @@ sap.ui.define([
         </tr>
         <tr>
             <td>CUST MAT CODE</td>
-            <td>: ${entry.materialbycustomer || ""} </td>
+            <td>:${entry.materialbycustomer||""}</td>
         </tr>
     </table>
  
@@ -1637,8 +1637,7 @@ sap.ui.define([
          </div>
       </div>
    </body>
-</html>
-`;
+</html>`;
         },
 
 
@@ -1698,9 +1697,9 @@ sap.ui.define([
                         const sap_uuid = header.sap_uuid;
 
                         const rawProcessOrder = header.ProcessOrder ? header.ProcessOrder.toString() : "";
-                        
+
                         const processOrderFinal = rawProcessOrder.padStart(12, "0").slice(-12);  // max length 12
-                        
+
                         const batchFinal = header.Batch
 
                         const generatedUUID = rawProcessOrder + batchFinal
@@ -1712,9 +1711,9 @@ sap.ui.define([
                             // --- Create new header ---
                             oHeaderEntry = {
 
-                                sap_uuid : generatedUUID,
+                                sap_uuid: generatedUUID,
                                 id: generatedUUID,
-                                batch:batchFinal,
+                                batch: batchFinal,
                                 process_order: processOrderFinal,
                                 salesorder: header.SalesOrder,
                                 plant: header.plant,
@@ -1794,7 +1793,7 @@ sap.ui.define([
                             const boxno = item.boxno || "00000";
                             const process_order = item.process_order;
                             const rawItemProcessOrder = item.process_order ? item.process_order.toString() : "";
-                             const itemProcessOrderFinal = rawItemProcessOrder.padStart(12, "0").slice(-12);
+                            const itemProcessOrderFinal = rawItemProcessOrder.padStart(12, "0").slice(-12);
                             const item_uuid = `${boxno.toString().padStart(5, "0")}${itemProcessOrderFinal}`;
 
                             const Itempayload = {
@@ -2028,13 +2027,13 @@ sap.ui.define([
 
             oModel.read("/ZLABEL_ITEM_DD", {
                 filters: [oFilter],
-                   urlParameters: {
+                urlParameters: {
                     "$orderby": "createdat desc",  // Order by createdat (most recent first)
                     //"$skip": 15,                   // Skip the first 15 records (to get the last 10)
-                   // "$top": 10
+                    // "$top": 10
 
-                   "$top": "5000",
-                   "$skip": "0"
+                    "$top": "5000",
+                    "$skip": "0"
                 },
                 success: (oData) => {
                     const aItems = oData.results || [];
@@ -2081,49 +2080,49 @@ sap.ui.define([
 
 
 
-//latest 10 records 
-// oModel.read("/ZLABEL_ITEM_DD/$count", {
-//     filters: [oFilter],
-//     success: (iCount) => {
-//         const skipValue = Math.max(0, iCount - 10); // skip until last 10
+            //latest 10 records 
+            // oModel.read("/ZLABEL_ITEM_DD/$count", {
+            //     filters: [oFilter],
+            //     success: (iCount) => {
+            //         const skipValue = Math.max(0, iCount - 10); // skip until last 10
 
-//         // Step 2: Read last 10
-//         oModel.read("/ZLABEL_ITEM_DD", {
-//             filters: [oFilter],
-//             urlParameters: {
-//                 "$orderby": "createdat asc", // oldest first
-//                 "$skip": skipValue.toString(),
-//                 "$top": "10"
-//             },
-//             success: (oData) => {
-//                 const aItems = oData.results || [];
+            //         // Step 2: Read last 10
+            //         oModel.read("/ZLABEL_ITEM_DD", {
+            //             filters: [oFilter],
+            //             urlParameters: {
+            //                 "$orderby": "createdat asc", // oldest first
+            //                 "$skip": skipValue.toString(),
+            //                 "$top": "10"
+            //             },
+            //             success: (oData) => {
+            //                 const aItems = oData.results || [];
 
-//                 const aUpdatedItems = aItems.map(item => ({
-//                     ...item,
-//                     process_order: item.process_order.replace(/^0+/, ""),
-//                     isEditMode: false,
-//                     isTareEditable: true,
-//                     isTareEdited: false
-//                 }));
+            //                 const aUpdatedItems = aItems.map(item => ({
+            //                     ...item,
+            //                     process_order: item.process_order.replace(/^0+/, ""),
+            //                     isEditMode: false,
+            //                     isTareEditable: true,
+            //                     isTareEdited: false
+            //                 }));
 
-//                const oTableModel = new sap.ui.model.json.JSONModel({ DatasZitem: aUpdatedItems });
-//                     oView.setModel(oTableModel, "TabZlabelItemModel");
+            //                const oTableModel = new sap.ui.model.json.JSONModel({ DatasZitem: aUpdatedItems });
+            //                     oView.setModel(oTableModel, "TabZlabelItemModel");
 
-//                 sap.ui.core.BusyIndicator.hide();
-//             },
-//             error: (oError) => {
-//                 console.error("Failed to read last 10 items:", oError);
-//                 sap.m.MessageToast.show("Error reading last 10 records.");
-//                 sap.ui.core.BusyIndicator.hide();
-//             }
-//         });
-//     },
-//     error: (oError) => {
-//         console.error("Failed to get count:", oError);
-//         sap.m.MessageToast.show("Error getting record count.");
-//         sap.ui.core.BusyIndicator.hide();
-//     }
-// });
+            //                 sap.ui.core.BusyIndicator.hide();
+            //             },
+            //             error: (oError) => {
+            //                 console.error("Failed to read last 10 items:", oError);
+            //                 sap.m.MessageToast.show("Error reading last 10 records.");
+            //                 sap.ui.core.BusyIndicator.hide();
+            //             }
+            //         });
+            //     },
+            //     error: (oError) => {
+            //         console.error("Failed to get count:", oError);
+            //         sap.m.MessageToast.show("Error getting record count.");
+            //         sap.ui.core.BusyIndicator.hide();
+            //     }
+            // });
 
 
 

@@ -1414,7 +1414,7 @@ sap.ui.define(
 
                 aCols.push({
                     label: "Total Lakhs",
-                    property: "tot_lac",
+                    property: "qty_lac",
                     type: EdmType.Decimal
                 });
 
@@ -1456,7 +1456,7 @@ sap.ui.define(
 
                 aCols.push({
                     label: "Packing Operator",
-                    property: "packingoperator",
+                    property: "packedby",
                     type: EdmType.String
                 });
 

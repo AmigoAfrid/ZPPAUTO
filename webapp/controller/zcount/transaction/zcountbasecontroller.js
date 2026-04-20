@@ -1749,7 +1749,7 @@ sap.ui.define([
         </tr>
         <tr>
             <td>CUST MAT CODE</td>
-            <td>:${entry.materialbycustomer || ""}</td>
+            <td>:${entry.materialbycustomer||""}</td>
         </tr>
     </table>
  
