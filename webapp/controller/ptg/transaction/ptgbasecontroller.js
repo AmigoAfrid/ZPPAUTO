@@ -89,11 +89,11 @@ sap.ui.define(
                         //let FilterQa03Status = new sap.ui.model.Filter("qa03_status", sap.ui.model.FilterOperator.EQ, "X");
 
                         let Filter01 = new sap.ui.model.Filter("ManufacturingOrder", sap.ui.model.FilterOperator.EQ, values);
-                         let filterstatusactive =  new sap.ui.model.Filter("StatusIsActive", sap.ui.model.FilterOperator.EQ, true);
+                        let filterstatusactive = new sap.ui.model.Filter("StatusIsActive", sap.ui.model.FilterOperator.EQ, true);
                         let datasqa01item = await this.Qa01tableItemFetch(ItemModel, Filterbatch);
-                 let ManuFacorderModel = this.getView().getModel("ZAU_FT_PROCESSORDER_SRVB_");
+                        let ManuFacorderModel = this.getView().getModel("ZAU_FT_PROCESSORDER_SRVB_");
 
-                         let GetProcessOrderStatus = await this.ToCheckProcOrderStatus(ManuFacorderModel, Filter01,filterstatusactive);
+                        let GetProcessOrderStatus = await this.ToCheckProcOrderStatus(ManuFacorderModel, Filter01, filterstatusactive);
                         if (GetProcessOrderStatus.results.length === 0) {
                             sap.m.MessageBox.error("Please release the process order...");
                             sap.ui.core.BusyIndicator.hide();
@@ -143,14 +143,14 @@ sap.ui.define(
             },
 
 
-               ToCheckProcOrderStatus: function (ManuFacorderModel, Filter01,filterstatusactive) {
+            ToCheckProcOrderStatus: function (ManuFacorderModel, Filter01, filterstatusactive) {
                 return new Promise(function (resolve, reject) {
                     // var that = this;
                     sap.ui.core.BusyIndicator.show(); // Show busy indicator
 
                     try {
                         ManuFacorderModel.read("/ZCE_PO_STATUS", {
-                            filters: [Filter01,filterstatusactive],
+                            filters: [Filter01, filterstatusactive],
                             success: function (oData) {
                                 // sap.ui.core.BusyIndicator.hide(); // Hide busy indicator on success
                                 resolve(oData);
@@ -244,11 +244,11 @@ sap.ui.define(
                 return new Promise(function (resolve, reject) {
                     sap.ui.core.BusyIndicator.show();
 
-                      var topValue = 5000;
+                    var topValue = 5000;
                     var skipValue = 0;
                     ItemModel.read("/ZC_AU_QA03_ITEM", {
 
-                          urlParameters: {
+                        urlParameters: {
                             "$top": topValue,
                             "$skip": skipValue
                         },
@@ -268,143 +268,143 @@ sap.ui.define(
 
             },
 
-onCheckBoxSelect: function (oEvent) {
-    const input = oEvent.getSource();
-    const context = input.getBindingContext("TabModelsitems");
+            onCheckBoxSelect: function (oEvent) {
+                const input = oEvent.getSource();
+                const context = input.getBindingContext("TabModelsitems");
 
-    if (!this.selectedData) {
-        this.selectedData = [];
-    }
+                if (!this.selectedData) {
+                    this.selectedData = [];
+                }
 
-    if (context) {
-        const rowPath = context.getPath();
-        const rowIndex = parseInt(rowPath.split("/")[2], 10);
-        const model = this.getView().getModel("TabModelsitems");
-        const selectedItem = model.getProperty("/ItemDatas/" + rowIndex);
+                if (context) {
+                    const rowPath = context.getPath();
+                    const rowIndex = parseInt(rowPath.split("/")[2], 10);
+                    const model = this.getView().getModel("TabModelsitems");
+                    const selectedItem = model.getProperty("/ItemDatas/" + rowIndex);
 
-        const existingIndex = this.selectedData.findIndex(item => item === selectedItem);
-        if (existingIndex !== -1) {
-            this.selectedData.splice(existingIndex, 1);
-            model.setProperty("/ItemDatas/" + rowIndex + "/selected", false);
-        } else {
-            this.selectedData.push(selectedItem);
-            model.setProperty("/ItemDatas/" + rowIndex + "/selected", true);
-        }
-
-        this.rowdatamodel = new sap.ui.model.json.JSONModel({
-            itemdatas: this.selectedData
-        });
-        this.getView().setModel(this.rowdatamodel, "rowdatamodel");
-
-        model.refresh(true);
-        console.log("Selected items for update:", this.selectedData);
-    } else {
-        console.log("No binding context found.");
-    }
-},
-
-onUpdateItemData: function () {
-    const data = this.rowdatamodel?.getProperty("/itemdatas");
-    const itemsToUpdate = Array.isArray(data) ? data : [data];
-    const that = this;
-    const model = this.getView().getModel("TabModelsitems");
-
-    sap.m.MessageBox.warning("Do you want to submit this data?", {
-        actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.CANCEL],
-        emphasizedAction: sap.m.MessageBox.Action.YES,
-        onClose: async function (sAction) {
-            if (sAction === "YES") {
-                sap.ui.core.BusyIndicator.show(0);
-
-                try {
-                    console.log("Updating Data:", itemsToUpdate);
-
-                    for (let n = 0; n < itemsToUpdate.length; n++) {
-                        const rowData = itemsToUpdate[n];
-
-                        if (!that.isValidData(rowData)) {
-                            sap.m.MessageToast.show("Validation failed. Please check the data.");
-                            sap.ui.core.BusyIndicator.hide();
-                            return;
-                        }
-
-                        const PTGWastage = rowData.grageptg === "D"
-                            ? rowData.ptgwaste
-                            : rowData.aisweight;
-
-                        const getitem = {
-                            ptgweight: String(rowData.ptgweight),
-                            ptgdate: rowData.zdate ? new Date(rowData.zdate.toLocaleDateString('en-CA')) : null,
-                            agradeweight: String(rowData.agradeweight),
-                            cumulativeqty: String(rowData.cumulativeqty),
-                            cumulativeagrade: String(rowData.cumulativeagrade),
-                            remarks: String(rowData.remarks),
-                            hfx: String(rowData.hfx),
-                            floorwastage: String(rowData.floorwastage),
-                            qtylitre: String(rowData.qtylitre),
-                            qaname: String(rowData.qaname),
-                            operatorname: String(rowData.operatorname),
-                            ptgmachneno: String(rowData.ptgmachneno),
-                            ptgwaste: PTGWastage,
-                            ptgwastageinlac : String(rowData.ptgwastageinlac)
-                        };
-
-                        await that.ToUpdatetableItem(rowData, getitem);
+                    const existingIndex = this.selectedData.findIndex(item => item === selectedItem);
+                    if (existingIndex !== -1) {
+                        this.selectedData.splice(existingIndex, 1);
+                        model.setProperty("/ItemDatas/" + rowIndex + "/selected", false);
+                    } else {
+                        this.selectedData.push(selectedItem);
+                        model.setProperty("/ItemDatas/" + rowIndex + "/selected", true);
                     }
 
-                    // ✅ Clear checkbox selection
-                    const itemList = model.getProperty("/ItemDatas");
-                    itemsToUpdate.forEach((item) => {
-                        const itemIndex = itemList.findIndex(i => i === item);
-                        if (itemIndex !== -1) {
-                            model.setProperty(`/ItemDatas/${itemIndex}/selected`, false);
-                        }
+                    this.rowdatamodel = new sap.ui.model.json.JSONModel({
+                        itemdatas: this.selectedData
                     });
-
-                    // ✅ Clear selectedData and rowdatamodel
-                    that.selectedData = [];
-                    that.rowdatamodel.setData({ itemdatas: [] });
+                    this.getView().setModel(this.rowdatamodel, "rowdatamodel");
 
                     model.refresh(true);
-                    sap.m.MessageBox.success("Table item data updated successfully.");
-                } catch (error) {
-                    console.error("Error updating table item data:", error);
-                    sap.m.MessageBox.error("Failed to update table item data. Please try again.");
-                } finally {
-                    sap.ui.core.BusyIndicator.hide();
+                    console.log("Selected items for update:", this.selectedData);
+                } else {
+                    console.log("No binding context found.");
                 }
-            } else {
-                sap.m.MessageToast.show("Cancelled");
-                sap.ui.core.BusyIndicator.hide();
-            }
-        }
-    });
-},
+            },
 
-isValidData: function (rowData) {
-    if (rowData.grageptg === "D") {
-        if (!rowData.ptgweight || rowData.ptgweight === "0.000" || rowData.ptgweight === "0.00" || isNaN(rowData.ptgweight)) {
-            sap.m.MessageBox.error("Please enter PTG Weight.");
-            return false;
-        }
-    }
+            onUpdateItemData: function () {
+                const data = this.rowdatamodel?.getProperty("/itemdatas");
+                const itemsToUpdate = Array.isArray(data) ? data : [data];
+                const that = this;
+                const model = this.getView().getModel("TabModelsitems");
 
-    if (!rowData.ptgmachneno || rowData.ptgmachneno === "0") {
-        sap.m.MessageBox.error("Please enter a PTG Machine number");
-        sap.ui.core.BusyIndicator.hide();
-        return false;
-    }
+                sap.m.MessageBox.warning("Do you want to submit this data?", {
+                    actions: [sap.m.MessageBox.Action.YES, sap.m.MessageBox.Action.CANCEL],
+                    emphasizedAction: sap.m.MessageBox.Action.YES,
+                    onClose: async function (sAction) {
+                        if (sAction === "YES") {
+                            sap.ui.core.BusyIndicator.show(0);
 
-    if (rowData.ptgshift === "C") {
-        if (!rowData.floorwastage || rowData.floorwastage === "0.00" || isNaN(rowData.floorwastage)) {
-            sap.m.MessageBox.error("Please enter Floor wastage.");
-            sap.ui.core.BusyIndicator.hide();
-            return false;
-        }
-    }
+                            try {
+                                console.log("Updating Data:", itemsToUpdate);
 
-    return true;
-},
+                                for (let n = 0; n < itemsToUpdate.length; n++) {
+                                    const rowData = itemsToUpdate[n];
+
+                                    if (!that.isValidData(rowData)) {
+                                        sap.m.MessageToast.show("Validation failed. Please check the data.");
+                                        sap.ui.core.BusyIndicator.hide();
+                                        return;
+                                    }
+
+                                    const PTGWastage = rowData.grageptg === "D"
+                                        ? rowData.ptgwaste
+                                        : rowData.aisweight;
+
+                                    const getitem = {
+                                        ptgweight: String(rowData.ptgweight),
+                                        ptgdate: rowData.zdate ? new Date(rowData.zdate.toLocaleDateString('en-CA')) : null,
+                                        agradeweight: String(rowData.agradeweight),
+                                        cumulativeqty: String(rowData.cumulativeqty),
+                                        cumulativeagrade: String(rowData.cumulativeagrade),
+                                        remarks: String(rowData.remarks),
+                                        hfx: String(rowData.hfx),
+                                        floorwastage: String(rowData.floorwastage),
+                                        qtylitre: String(rowData.qtylitre),
+                                        qaname: String(rowData.qaname),
+                                        operatorname: String(rowData.operatorname),
+                                        ptgmachneno: String(rowData.ptgmachneno),
+                                        ptgwaste: PTGWastage,
+                                        ptgwastageinlac: String(rowData.ptgwastageinlac)
+                                    };
+
+                                    await that.ToUpdatetableItem(rowData, getitem);
+                                }
+
+                                // ✅ Clear checkbox selection
+                                const itemList = model.getProperty("/ItemDatas");
+                                itemsToUpdate.forEach((item) => {
+                                    const itemIndex = itemList.findIndex(i => i === item);
+                                    if (itemIndex !== -1) {
+                                        model.setProperty(`/ItemDatas/${itemIndex}/selected`, false);
+                                    }
+                                });
+
+                                // ✅ Clear selectedData and rowdatamodel
+                                that.selectedData = [];
+                                that.rowdatamodel.setData({ itemdatas: [] });
+
+                                model.refresh(true);
+                                sap.m.MessageBox.success("Table item data updated successfully.");
+                            } catch (error) {
+                                console.error("Error updating table item data:", error);
+                                sap.m.MessageBox.error("Failed to update table item data. Please try again.");
+                            } finally {
+                                sap.ui.core.BusyIndicator.hide();
+                            }
+                        } else {
+                            sap.m.MessageToast.show("Cancelled");
+                            sap.ui.core.BusyIndicator.hide();
+                        }
+                    }
+                });
+            },
+
+            isValidData: function (rowData) {
+                if (rowData.grageptg === "D") {
+                    if (!rowData.ptgweight || rowData.ptgweight === "0.000" || rowData.ptgweight === "0.00" || isNaN(rowData.ptgweight)) {
+                        sap.m.MessageBox.error("Please enter PTG Weight.");
+                        return false;
+                    }
+                }
+
+                if (!rowData.ptgmachneno || rowData.ptgmachneno === "0") {
+                    sap.m.MessageBox.error("Please enter a PTG Machine number");
+                    sap.ui.core.BusyIndicator.hide();
+                    return false;
+                }
+
+                if (rowData.ptgshift === "C") {
+                    if (!rowData.floorwastage || rowData.floorwastage === "0.00" || isNaN(rowData.floorwastage)) {
+                        sap.m.MessageBox.error("Please enter Floor wastage.");
+                        sap.ui.core.BusyIndicator.hide();
+                        return false;
+                    }
+                }
+
+                return true;
+            },
 
 
 
@@ -588,9 +588,9 @@ isValidData: function (rowData) {
                 });
 
             },
-    
-    
-    
+
+
+
             // Toworkcenter: function (oFilter1) {
             //     return new Promise((resolve, reject) => {
             //         let getheaderdatas = this.getView().getModel("ZAU_PTG_PROCESSORDER_SRVB");
@@ -648,7 +648,8 @@ isValidData: function (rowData) {
                     let PostArrs = [];
                     for (let i = 0; i < getcomponentdata.length; i++) {
                         PostArrs.push({
-                            processorder: getcomponentdata[i].ProcessOrder,
+                            // processorder: getcomponentdata[i].ProcessOrder,
+                            processorder: getHeaderData.ManufacturingOrder,
                             sap_uid: "",
                             ordertype: getHeaderData.ordertype,
                             material: getcomponentdata[i].material,
@@ -660,7 +661,7 @@ isValidData: function (rowData) {
                             storagelocation: getcomponentdata[i].storage_location,
                             inventoryspecialstocktype: getcomponentdata[i].InventorySpecialStockType,
                             salesorder: getcomponentdata[i].SpecialStockIdfgSalesOrder,
-                            salesorderitem : getcomponentdata[i].SpecialStockIdfgSalesOrderItem
+                            salesorderitem: getcomponentdata[i].SpecialStockIdfgSalesOrderItem
 
                         });
                     }
@@ -675,7 +676,7 @@ isValidData: function (rowData) {
                     //     return acc;
                     // }, []);
 
-                     console.log("PostArrs",PostArrs);
+                    console.log("PostArrs", PostArrs);
                     const that = this;
                     sap.ui.core.BusyIndicator.hide();
                     sap.m.MessageBox.warning("Do you want to post this data.", {
@@ -690,25 +691,25 @@ isValidData: function (rowData) {
                                     const oModelGet = that.getView().getModel("ZPROC_HEAD_CONF_PTG_SRVB");
                                     const oItemSrv_qa02 = that.getView().getModel("ZSB_AU_QA03_ITEM");
 
-                                   function formatDecimal(value) {
-                        return parseFloat(value).toFixed(3); 
-                    }
+                                    function formatDecimal(value) {
+                                        return parseFloat(value).toFixed(3);
+                                    }
 
 
-                    var opconfirmedworkquantity2 = formatDecimal(
-                        (getHeaderData.WorkCenterStandardWorkQty2 * getHeaderData.OpPlannedYieldQuantity) / getHeaderData.OperationReferenceQuantity
-                    );
+                                    var opconfirmedworkquantity2 = formatDecimal(
+                                        (getHeaderData.WorkCenterStandardWorkQty2 * getHeaderData.OpPlannedYieldQuantity) / getHeaderData.OperationReferenceQuantity
+                                    );
 
-                    var opconfirmedworkquantity3 = formatDecimal(
-                        (getHeaderData.WorkCenterStandardWorkQty3 * getHeaderData.OpPlannedYieldQuantity) / getHeaderData.OperationReferenceQuantity
-                    );
+                                    var opconfirmedworkquantity3 = formatDecimal(
+                                        (getHeaderData.WorkCenterStandardWorkQty3 * getHeaderData.OpPlannedYieldQuantity) / getHeaderData.OperationReferenceQuantity
+                                    );
 
-                    var opconfirmedworkquantity4 = formatDecimal(
-                        (getHeaderData.WorkCenterStandardWorkQty4 * getHeaderData.OpPlannedYieldQuantity) / getHeaderData.OperationReferenceQuantity
-                    );
+                                    var opconfirmedworkquantity4 = formatDecimal(
+                                        (getHeaderData.WorkCenterStandardWorkQty4 * getHeaderData.OpPlannedYieldQuantity) / getHeaderData.OperationReferenceQuantity
+                                    );
 
-                    var confirmationyieldquantity = formatDecimal(getHeaderData.OpPlannedYieldQuantity);
-                    var opconfirmedworkquantity1 = formatDecimal(getHeaderData.WorkCenterStandardWorkQty1);
+                                    var confirmationyieldquantity = formatDecimal(getHeaderData.OpPlannedYieldQuantity);
+                                    var opconfirmedworkquantity1 = formatDecimal(getHeaderData.WorkCenterStandardWorkQty1);
 
                                     var oEntry = {
 
@@ -720,15 +721,15 @@ isValidData: function (rowData) {
                                         orderoperation: ManufacturingOrderOperation,
                                         ordersuboperation: "0000",
                                         ordertype: getHeaderData.ordertype,
-                                        confirmationyieldquantity: confirmationyieldquantity,          
-                                            opconfirmedworkquantity1: opconfirmedworkquantity1,            
-                                            opworkquantityunit1: getHeaderData.WorkCenterStandardWorkQtyUnit1,
-                                            opconfirmedworkquantity2: opconfirmedworkquantity2,          
-                                            opworkquantityunit2: getHeaderData.WorkCenterStandardWorkQtyUnit2,
-                                            opconfirmedworkquantity3: opconfirmedworkquantity3,        
-                                            opworkquantityunit3: getHeaderData.WorkCenterStandardWorkQtyUnit3,
-                                            opconfirmedworkquantity4: opconfirmedworkquantity4,          
-                                            opworkquantityunit4: getHeaderData.WorkCenterStandardWorkQtyUnit4,
+                                        confirmationyieldquantity: confirmationyieldquantity,
+                                        opconfirmedworkquantity1: opconfirmedworkquantity1,
+                                        opworkquantityunit1: getHeaderData.WorkCenterStandardWorkQtyUnit1,
+                                        opconfirmedworkquantity2: opconfirmedworkquantity2,
+                                        opworkquantityunit2: getHeaderData.WorkCenterStandardWorkQtyUnit2,
+                                        opconfirmedworkquantity3: opconfirmedworkquantity3,
+                                        opworkquantityunit3: getHeaderData.WorkCenterStandardWorkQtyUnit3,
+                                        opconfirmedworkquantity4: opconfirmedworkquantity4,
+                                        opworkquantityunit4: getHeaderData.WorkCenterStandardWorkQtyUnit4,
                                         //isfinalconfirmation :  "X",
                                         tcode: 'PTG',
                                         toitem: PostArrs
@@ -984,7 +985,7 @@ isValidData: function (rowData) {
                 this.tableitemfrags.close();
             },
 
-   OnApiPost_MatDoc_GI_531: async function (oEvent) {
+            OnApiPost_MatDoc_GI_531: async function (oEvent) {
 
                 sap.ui.core.BusyIndicator.show();
                 this.OEvent = oEvent;
@@ -1075,7 +1076,7 @@ isValidData: function (rowData) {
 
             ToConfirmIssueAPIPost531: async function (ManufacturingOrderOperation) {
                 // sap.ui.core.BusyIndicator.show();
-                 const input = this.OEvent.getSource() /// the Input field
+                const input = this.OEvent.getSource() /// the Input field
                 const context = input.getBindingContext("TabModelsitems");
                 let getHeaderData = this.screen2headermodel.getProperty("/HEADERDATA/");
                 let Screen1SelectHeaderdata = this.SelectScreen1Data;
@@ -1090,7 +1091,7 @@ isValidData: function (rowData) {
                     //let ToFetchUpdateDipss = await this.ToFetchUpdateDips_KKS(UPDATE_DIPS_MODELS, rowData, aFilters);
                     //debugger
 
-                    
+
                     let getcomponentdata = this.CompDipsModels.getProperty("/Datatabitems");
 
                     let PostArrS = [];
@@ -1108,7 +1109,7 @@ isValidData: function (rowData) {
                             storagelocation: getcomponentdata[i].storage_location,
                             inventoryspecialstocktype: getcomponentdata[i].InventorySpecialStockType,
                             salesorder: getcomponentdata[i].SpecialStockIdfgSalesOrder,
-                            salesorderitem : getcomponentdata[i].SpecialStockIdfgSalesOrderItem
+                            salesorderitem: getcomponentdata[i].SpecialStockIdfgSalesOrderItem
                         });
                     }
 
@@ -1122,7 +1123,7 @@ isValidData: function (rowData) {
                     //     return acc;
                     // }, []);
 
-                    console.log("PostArrS:",PostArrS);
+                    console.log("PostArrS:", PostArrS);
                     const that = this;
                     sap.ui.core.BusyIndicator.hide();
                     sap.m.MessageBox.warning("Do you want to post this data.", {
@@ -1136,42 +1137,42 @@ isValidData: function (rowData) {
 
                                     const oModelGetS = that.getView().getModel("ZPROC_HEAD_CONF_PTG_SRVB");
                                     function formatDecimal(value) {
-                        return parseFloat(value).toFixed(3); 
-                    }
+                                        return parseFloat(value).toFixed(3);
+                                    }
 
 
-                    var opconfirmedworkquantity2 = formatDecimal(
-                        (getHeaderData.WorkCenterStandardWorkQty2 * getHeaderData.OpPlannedYieldQuantity) / getHeaderData.OperationReferenceQuantity
-                    );
+                                    var opconfirmedworkquantity2 = formatDecimal(
+                                        (getHeaderData.WorkCenterStandardWorkQty2 * getHeaderData.OpPlannedYieldQuantity) / getHeaderData.OperationReferenceQuantity
+                                    );
 
-                    var opconfirmedworkquantity3 = formatDecimal(
-                        (getHeaderData.WorkCenterStandardWorkQty3 * getHeaderData.OpPlannedYieldQuantity) / getHeaderData.OperationReferenceQuantity
-                    );
+                                    var opconfirmedworkquantity3 = formatDecimal(
+                                        (getHeaderData.WorkCenterStandardWorkQty3 * getHeaderData.OpPlannedYieldQuantity) / getHeaderData.OperationReferenceQuantity
+                                    );
 
-                    var opconfirmedworkquantity4 = formatDecimal(
-                        (getHeaderData.WorkCenterStandardWorkQty4 * getHeaderData.OpPlannedYieldQuantity) / getHeaderData.OperationReferenceQuantity
-                    );
+                                    var opconfirmedworkquantity4 = formatDecimal(
+                                        (getHeaderData.WorkCenterStandardWorkQty4 * getHeaderData.OpPlannedYieldQuantity) / getHeaderData.OperationReferenceQuantity
+                                    );
 
-                    var confirmationyieldquantity = formatDecimal(getHeaderData.OpPlannedYieldQuantity);
-                    var opconfirmedworkquantity1 = formatDecimal(getHeaderData.WorkCenterStandardWorkQty1);
+                                    var confirmationyieldquantity = formatDecimal(getHeaderData.OpPlannedYieldQuantity);
+                                    var opconfirmedworkquantity1 = formatDecimal(getHeaderData.WorkCenterStandardWorkQty1);
 
                                     const oEntryS = {
-                                     processorder: getHeaderData.ManufacturingOrder,
+                                        processorder: getHeaderData.ManufacturingOrder,
                                         sap_uid: "",
                                         materialdocument: "",
                                         matdocyear: "",
                                         orderoperation: ManufacturingOrderOperation,
                                         ordersuboperation: "0000",
                                         ordertype: getHeaderData.ordertype,
-                                       confirmationyieldquantity: confirmationyieldquantity,          
-                                            opconfirmedworkquantity1: opconfirmedworkquantity1,            
-                                            opworkquantityunit1: getHeaderData.WorkCenterStandardWorkQtyUnit1,
-                                            opconfirmedworkquantity2: opconfirmedworkquantity2,          
-                                            opworkquantityunit2: getHeaderData.WorkCenterStandardWorkQtyUnit2,
-                                            opconfirmedworkquantity3: opconfirmedworkquantity3,        
-                                            opworkquantityunit3: getHeaderData.WorkCenterStandardWorkQtyUnit3,
-                                            opconfirmedworkquantity4: opconfirmedworkquantity4,          
-                                            opworkquantityunit4: getHeaderData.WorkCenterStandardWorkQtyUnit4,
+                                        confirmationyieldquantity: confirmationyieldquantity,
+                                        opconfirmedworkquantity1: opconfirmedworkquantity1,
+                                        opworkquantityunit1: getHeaderData.WorkCenterStandardWorkQtyUnit1,
+                                        opconfirmedworkquantity2: opconfirmedworkquantity2,
+                                        opworkquantityunit2: getHeaderData.WorkCenterStandardWorkQtyUnit2,
+                                        opconfirmedworkquantity3: opconfirmedworkquantity3,
+                                        opworkquantityunit3: getHeaderData.WorkCenterStandardWorkQtyUnit3,
+                                        opconfirmedworkquantity4: opconfirmedworkquantity4,
+                                        opworkquantityunit4: getHeaderData.WorkCenterStandardWorkQtyUnit4,
                                         //isfinalconfirmation :  "X",
                                         tcode: 'PTG',
                                         toitem: PostArrS
@@ -1181,7 +1182,7 @@ isValidData: function (rowData) {
                                     console.log("oEntry:", oEntryS);
 
                                     let ToAPIPOstTabS = await that.ToAPIPOstTab_GIS(oModelGetS, oEntryS);
-                                     if (ToAPIPOstTabS.errorresponse !== "") {
+                                    if (ToAPIPOstTabS.errorresponse !== "") {
                                         try {
                                             // Parse the error response (assuming JSON format)
                                             var oResponse = JSON.parse(ToAPIPOstTabS.errorresponse);
@@ -1220,7 +1221,7 @@ isValidData: function (rowData) {
                                     });
                                     that.getView().setModel(that.TabModelsitems, "TabModelsitems");
                                     that.TabModelsitems.refresh(that);
-                                   sap.m.MessageBox.success(
+                                    sap.m.MessageBox.success(
                                         "Material Document: " + ToAPIPOstTabS.materialdocument +
                                         ", Confirmation Count: " + ToAPIPOstTabS.confirmationcount +
                                         ", Confirmation Group: " + ToAPIPOstTabS.confirmationgroup
@@ -1229,7 +1230,7 @@ isValidData: function (rowData) {
                                         MSGSTRIP: {
                                             "visible": true,
                                             "text": "Material Document No " + ToAPIPOstTabS.materialdocument + ", Confirmation Count: " + ToAPIPOstTabS.confirmationcount +
-                                        ", Confirmation Group: " + ToAPIPOstTabS.confirmationgroup,
+                                                ", Confirmation Group: " + ToAPIPOstTabS.confirmationgroup,
                                             "type": 'Success'
                                         }
                                     });
@@ -1316,7 +1317,7 @@ isValidData: function (rowData) {
                         });
 
                         const Header = {
-                              confirmationgroup: ToAPIPOstTabS.confirmationgroup,
+                            confirmationgroup: ToAPIPOstTabS.confirmationgroup,
                             confirmationcount: ToAPIPOstTabS.confirmationcount,
                             materialdocumentyear_gi531: ToAPIPOstTabS.matdocyear,
                             materialdocumentno_gi531: ToAPIPOstTabS.materialdocument,
@@ -1659,8 +1660,8 @@ isValidData: function (rowData) {
                                 sap.ui.core.BusyIndicator.show();
 
                                 try {
-                                   //const oModelGet = that.getView().getModel("ZPTG01_MATDOC_REV_SRVB");
-                                        const oModelGet531 = that.getView().getModel("ZCE_CONF_REV_SRVB");
+                                    //const oModelGet = that.getView().getModel("ZPTG01_MATDOC_REV_SRVB");
+                                    const oModelGet531 = that.getView().getModel("ZCE_CONF_REV_SRVB");
                                     // console.log("oEntry:", oEntry);
 
                                     let ToAPIPOstTab = await that.ToReverseAPIPOstTab531(oModelGet531, rowData);
@@ -1706,9 +1707,9 @@ isValidData: function (rowData) {
                             // materialdocument: rowData.materialdocumentno_gi531,
                             // matdocyear: rowData.materialdocumentyear_gi531,
                             confirmationgroup: rowData.confirmationgroup,
-                            confirmationcount : rowData.confirmationcount,
-                            materialdocument : rowData.materialdocumentno_gi531,
-                            matdocyear : rowData.materialdocumentyear_gi531
+                            confirmationcount: rowData.confirmationcount,
+                            materialdocument: rowData.materialdocumentno_gi531,
+                            matdocyear: rowData.materialdocumentyear_gi531
                         };
 
                         oModelGet531.create("/ZCE_CONF_REV", oEntry, {
@@ -1839,8 +1840,8 @@ isValidData: function (rowData) {
 
                             confirmationgroup: rowData.confirmationgroup,
                             confirmationcount: rowData.confirmationcount,
-                            materialdocument : rowData.materialdocumentno,
-                            matdocyear : rowData.materialdocumentyear
+                            materialdocument: rowData.materialdocumentno,
+                            matdocyear: rowData.materialdocumentyear
                         };
 
                         oModelGet261.create("/ZCE_CONF_REV", oEntry, {

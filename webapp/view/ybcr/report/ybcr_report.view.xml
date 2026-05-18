@@ -21,7 +21,7 @@
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
-                    <Title text="ZBCR" />
+                    <Title text="Batch Completion Report" />
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>
@@ -44,7 +44,7 @@
 
                                     <Label text="Batch No." design="Bold"  required="false" labelFor="multiInputWithSuggestions"/>
                                     
-                                    <MultiInput maxLength="10" required="true" width="12.5rem" id="idmaterialdocument" placeholder="Select Batch No." editable="true" enabled="true"   showValueHelp="true" valueHelpRequest=".onValueHelpRequest"  suggest=".OnSuggest_User" suggestionItems="{
+                                    <MultiInput maxLength="10" required="true" width="12.5rem" id="idmaterialdocument" placeholder="Select Batch No." editable="true" enabled="true"   showValueHelp="true" valueHelpRequest=".onBatchValueHelpRequest"  suggest=".OnSuggest_User" suggestionItems="{
                                         path: 'ZCE_ZCOUNT_HEAD_SRVB>/ZCE_ZCOUNT_BATCH_F4HELP',
                                         sorter: { path: 'batch' }}" showSuggestion="true"  suggestionItemSelected=".ondocumentsuggestselected">
                                         <suggestionItems>
@@ -194,14 +194,16 @@
                     <t:Column tooltip="Status" width="7rem">
                         <Label text="Status" />
                         <t:template>
-                            <Input value="{TabModel>status}" editable="{= !${TabModel>status} }" />
+                            <!-- <Input value="{TabModel>status}" editable="{= !${TabModel>status} }" /> -->
+                            <Input value="{TabModel>status}"  />
                         </t:template>
                     </t:Column>
 
                     <t:Column tooltip="Remark" width="7rem">
                         <Label text="Remark" />
                         <t:template>
-                            <Input value="{TabModel>remark}" editable="{= !${TabModel>remark} }"/>
+                            <!-- <Input value="{TabModel>remark}" editable="{= !${TabModel>remark} }"/> -->
+                            <Input value="{TabModel>remark}" />
                         </t:template>
                     </t:Column>
 

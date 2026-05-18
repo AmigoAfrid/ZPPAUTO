@@ -2000,7 +2000,7 @@ onRowSave: function () {
                     },
 
                          {
-                        label: 'Quantity Litre',
+                        label: 'Qty in Lacs',
                         property: 'qtylitre',
                         width: '12'
                     },
@@ -2104,7 +2104,7 @@ onRowSave: function () {
 
                        
                              {
-                        label: 'Weight',
+                        label: 'AIS Weight in KGS',
                         property: 'weight',
                         width: '12'
                     },

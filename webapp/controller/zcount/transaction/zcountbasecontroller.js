@@ -1417,9 +1417,9 @@ sap.ui.define([
 
                 // entry.Qty = totalQtyLac.toFixed(3); // This will appear in the PDF under Quantity
 
-                 let QTYS = Number(entry.Qty).toFixed(3)
-                 let finalValue = Number(QTYS) * 100000;
-               
+                let QTYS = Number(entry.Qty).toFixed(3)
+                let finalValue = Number(QTYS) * 100000;
+
                 // let QTYS = Math.floor(Number(entry.Qty));
 
                 const htmlContent = this._generatePDFContent(
@@ -1749,7 +1749,7 @@ sap.ui.define([
         </tr>
         <tr>
             <td>CUST MAT CODE</td>
-            <td>:${entry.materialbycustomer||""}</td>
+            <td>:${entry.materialbycustomer || ""}</td>
         </tr>
     </table>
  
@@ -1776,7 +1776,7 @@ sap.ui.define([
             <td>: ${entry.bodyprinting || ""}</td>
         </tr>
         <tr>
-            <td>PO NUMBER</td>
+            <td>PO No</td>
             <td>: ${entry.purchase_order || ""}</td>
         </tr>
         <tr>
@@ -2205,10 +2205,10 @@ sap.ui.define([
                 urlParameters: {
                     "$orderby": "createdat desc",  // Order by createdat (most recent first)
                     //"$skip": 15,                   // Skip the first 15 records (to get the last 10)
-                   // "$top": 10
+                    // "$top": 10
 
-                   "$top": "5000",
-                   "$skip": "0"
+                    "$top": "5000",
+                    "$skip": "0"
                 },
                 success: (oData) => {
                     const aItems = oData.results || [];
@@ -2253,57 +2253,57 @@ sap.ui.define([
                     sap.ui.core.BusyIndicator.hide();
                 }
             });
-        
-        
+
+
 
             // latest 10 record 
-        // Step 1: Get total count
-// oModel.read("/ZCE_ZCOUNT_ITEM/$count", {
-//     filters: [oFilter],
-//     success: (iCount) => {
-//         const skipValue = Math.max(0, iCount - 10); // skip until last 10
+            // Step 1: Get total count
+            // oModel.read("/ZCE_ZCOUNT_ITEM/$count", {
+            //     filters: [oFilter],
+            //     success: (iCount) => {
+            //         const skipValue = Math.max(0, iCount - 10); // skip until last 10
 
-//         // Step 2: Read last 10
-//         oModel.read("/ZCE_ZCOUNT_ITEM", {
-//             filters: [oFilter],
-//             urlParameters: {
-//                 "$orderby": "createdat asc", // oldest first
-//                 "$skip": skipValue.toString(),
-//                 "$top": "10"
-//             },
-//             success: (oData) => {
-//                 const aItems = oData.results || [];
+            //         // Step 2: Read last 10
+            //         oModel.read("/ZCE_ZCOUNT_ITEM", {
+            //             filters: [oFilter],
+            //             urlParameters: {
+            //                 "$orderby": "createdat asc", // oldest first
+            //                 "$skip": skipValue.toString(),
+            //                 "$top": "10"
+            //             },
+            //             success: (oData) => {
+            //                 const aItems = oData.results || [];
 
-//                 const aUpdatedItems = aItems.map(item => ({
-//                     ...item,
-//                     process_order: item.process_order.replace(/^0+/, ""),
-//                     isEditMode: false,
-//                     isTareEditable: true,
-//                     isTareEdited: false
-//                 }));
+            //                 const aUpdatedItems = aItems.map(item => ({
+            //                     ...item,
+            //                     process_order: item.process_order.replace(/^0+/, ""),
+            //                     isEditMode: false,
+            //                     isTareEditable: true,
+            //                     isTareEdited: false
+            //                 }));
 
-//                 const oTableModel = new sap.ui.model.json.JSONModel({ DatasZitem: aUpdatedItems });
-//                 oView.setModel(oTableModel, "TabZcountItemModel");
+            //                 const oTableModel = new sap.ui.model.json.JSONModel({ DatasZitem: aUpdatedItems });
+            //                 oView.setModel(oTableModel, "TabZcountItemModel");
 
-//                 sap.ui.core.BusyIndicator.hide();
-//             },
-//             error: (oError) => {
-//                 console.error("Failed to read last 10 items:", oError);
-//                 sap.m.MessageToast.show("Error reading last 10 records.");
-//                 sap.ui.core.BusyIndicator.hide();
-//             }
-//         });
-//     },
-//     error: (oError) => {
-//         console.error("Failed to get count:", oError);
-//         sap.m.MessageToast.show("Error getting record count.");
-//         sap.ui.core.BusyIndicator.hide();
-//     }
-// });
+            //                 sap.ui.core.BusyIndicator.hide();
+            //             },
+            //             error: (oError) => {
+            //                 console.error("Failed to read last 10 items:", oError);
+            //                 sap.m.MessageToast.show("Error reading last 10 records.");
+            //                 sap.ui.core.BusyIndicator.hide();
+            //             }
+            //         });
+            //     },
+            //     error: (oError) => {
+            //         console.error("Failed to get count:", oError);
+            //         sap.m.MessageToast.show("Error getting record count.");
+            //         sap.ui.core.BusyIndicator.hide();
+            //     }
+            // });
 
-        
-        
-        
+
+
+
         },
 
         onTarewtupate: async function () {
@@ -2369,11 +2369,370 @@ sap.ui.define([
             } finally {
                 sap.ui.core.BusyIndicator.hide();
             }
-        }
+        },
+
+        onPrintNew: async function () {
+            const Box1 = this.getView().byId("Box1").getValue();
+            const Box2 = this.getView().byId("Box2").getValue();
+            const sProcessOrders = this.getView().byId("idprocessorder").getValue();
+
+            if (!Box1 || !Box2) {
+                sap.m.MessageBox.warning("Please enter both Box1 and Box2.");
+                return;
+            }
+
+            const oModel = this.getView().getModel("ZCE_ZCOUNT_FORM_SRVB");
+            const itemModel = this.getView().getModel("ZCE_ZCOUNT_HEAD_SAVE_SRVB");
+
+            if (!oModel || typeof oModel.read !== "function" || !itemModel || typeof itemModel.read !== "function") {
+                console.error("OData models are undefined or invalid.");
+                sap.m.MessageBox.error("OData model is not available.");
+                return;
+            }
+
+            const aFilters = [];
 
 
+            var processOrderLegacy = "00" + sProcessOrders;
+            var processOrderFinal = sProcessOrders.padStart(12, "0").slice(-12);
+
+            // 🔹 Create each filter separately
+            const oFilterBox = new sap.ui.model.Filter("boxno", sap.ui.model.FilterOperator.BT, Box1, Box2);
+            // const oFilterOrder = new sap.ui.model.Filter("ProcessOrder", sap.ui.model.FilterOperator.EQ, processOrderLegacy);
+
+            // var oFilterProcessOrder = [
+            //     new sap.ui.model.Filter({
+            //         filters: [
+            //             new sap.ui.model.Filter("process_order", sap.ui.model.FilterOperator.EQ, processOrderLegacy),
+            //             new sap.ui.model.Filter("process_order", sap.ui.model.FilterOperator.EQ, processOrderFinal)
+            //         ],
+            //         and: false
+            //     })
+            // ];
 
 
+            var oFilterProcessOrder = new sap.ui.model.Filter({
+                filters: [
+                    new sap.ui.model.Filter("ProcessOrder", sap.ui.model.FilterOperator.EQ, processOrderLegacy),
+                    new sap.ui.model.Filter("ProcessOrder", sap.ui.model.FilterOperator.EQ, processOrderFinal)
+                ],
+                and: false
+            });
+
+
+            // 🔹 Push filters into array
+            aFilters.push(oFilterBox);
+            // aFilters.push(oFilterOrder);
+
+            aFilters.push(oFilterProcessOrder);
+
+
+            try {
+                // Fetch header data
+                const formData = await new Promise((resolve, reject) => {
+                    oModel.read("/ZCE_ZCOUNT_FORM", {
+                        filters: aFilters,
+                        success: resolve,
+                        error: reject
+                    });
+                });
+
+                // Fetch item data for qty_lac sum
+                const itemData = await new Promise((resolve, reject) => {
+                    oModel.read("/ZCE_ZCOUNT_FORM", {
+                        filters: aFilters,
+                        success: resolve,
+                        error: reject
+                    });
+                });
+
+                const items = itemData.results || [];
+                const totalQtyLac = items.reduce((sum, item) => sum + parseFloat(item.qty_lac || 0), 0);
+
+                const results = formData.results || [];
+
+                if (results.length === 0) {
+                    sap.m.MessageBox.information("No data found for the given box range.");
+                    return;
+                }
+
+                // Pass the total qty_lac to PDF generator
+                await this._generatePDF1(results, totalQtyLac);
+                this.getView().byId("Box1").setValue("");
+                this.getView().byId("Box2").setValue("");
+
+
+            } catch (err) {
+                console.error("Error fetching data:", err);
+                sap.m.MessageBox.error("Failed to fetch data from server.");
+            }
+        },
+
+        _generatePDF1: async function (dataArray, totalQtyLac) {
+            let getHeaderData = this.zcountmodel.getProperty("/HeaderData/");
+
+            // let oPurchaseOrder = getHeaderData[0].purchase_order;
+
+            let zsize = getHeaderData[0].Zsize;
+            let bodyprinting = getHeaderData[0].bodyprinting;
+            let capprinting = getHeaderData[0].capprinting;
+            let SalesOrder = getHeaderData[0].SalesOrder;
+
+            const { jsPDF } = window.jspdf;
+            const that = this;
+
+            const loadImageAsBase64 = async (url) => {
+                const response = await fetch(url);
+                const blob = await response.blob();
+                return new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onloadend = () => resolve(reader.result);
+                    reader.onerror = reject;
+                    reader.readAsDataURL(blob);
+                });
+            };
+
+            const logoBase64_ = await loadImageAsBase64(sap.ui.require.toUrl("zautodesignapp/images/NCLH.png"));
+            const logoBase64__ = await loadImageAsBase64(sap.ui.require.toUrl("zautodesignapp/images/VGcap.png"));
+            const logoBase64___ = await loadImageAsBase64(sap.ui.require.toUrl("zautodesignapp/images/TABLETH.png"));
+            const logoBase64____ = await loadImageAsBase64(sap.ui.require.toUrl("zautodesignapp/images/BOXH.png"));
+            const logoBase64_____ = await loadImageAsBase64(sap.ui.require.toUrl("zautodesignapp/images/QASeal.png"));
+
+            const doc = new jsPDF('p', 'mm', [210, 297]);
+            const promises = [];
+
+            for (let i = 0; i < dataArray.length; i++) {
+                const entry = dataArray[i];
+
+                // Assign totalQtyLac to the Qty field
+                entry.Batch = String(entry.Batch).replace(/^00/, '');
+
+                // entry.Qty = totalQtyLac.toFixed(3); // This will appear in the PDF under Quantity
+
+                let QTYS = Number(entry.Qty).toFixed(3)
+                let finalValue = Number(QTYS) * 100000;
+
+                // let QTYS = Math.floor(Number(entry.Qty));
+
+                const htmlContent = this._generatePDFContent1(
+                    entry,
+                    finalValue,
+                    logoBase64_,
+                    logoBase64__,
+                    logoBase64___,
+                    logoBase64____,
+                    logoBase64_____,
+                    zsize,
+                    bodyprinting,
+                    capprinting,
+                    SalesOrder
+                );
+
+                promises.push(new Promise((resolve, reject) => {
+                    const iframe = document.createElement('iframe');
+                    iframe.style.position = 'fixed';
+                    iframe.style.top = '-100000px';
+                    document.body.appendChild(iframe);
+
+                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                    iframeDoc.open();
+                    iframeDoc.write(htmlContent);
+                    iframeDoc.close();
+
+                    iframe.onload = () => {
+                        html2canvas(iframeDoc.body, { scale: 4 }).then(canvas => {
+                            const imgData = canvas.toDataURL('image/jpeg', 0.7);
+                            if (i > 0) {
+                                doc.addPage();
+                            }
+                            doc.addImage(imgData, 'JPEG', 0, 0, 210, 297);
+                            document.body.removeChild(iframe);
+                            resolve();
+                        }).catch(err => {
+                            document.body.removeChild(iframe);
+                            reject(err);
+                        });
+                    };
+                }));
+            }
+
+            await Promise.all(promises);
+
+            const blob = doc.output('blob');
+            const pdfUrl = URL.createObjectURL(blob);
+            window.open(pdfUrl, "Zcount");
+        },
+
+        _generatePDFContent1: function (
+            entry,
+            finalValue,
+            logoBase64_,
+            logoBase64__,
+            logoBase64___,
+            logoBase64____,
+            logoBase64_____,
+            zsize,
+            bodyprinting,
+            capprinting,
+            SalesOrder
+        ) {
+            return `
+
+            <!DOCTYPE html>
+                                <html lang="en">
+                                <head>
+                                <meta charset="UTF-8">
+                                <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+                                <style>
+                                body {
+                                    font-family: Courier, 'Courier New', monospace;
+                                    margin: 10px;
+                                    color: #000;
+                                }
+                                /* OUTER LABEL */
+                                .label {
+                                    width: 540px;
+                                    margin: 20px auto;
+                                }
+                                /* HEADER SPACE */
+                                .header-space {
+                                    height: 55px;
+                                }
+                                /* TABLE */
+                                .table {
+                                    width: 100%;
+                                    border-collapse: collapse;
+                                }
+                                /* TABLE CELLS */
+                                .table td {
+                                    padding: 6px 4px;
+                                    font-size: 10px;
+                                    font-weight: bold;
+                                border-bottom: 1px solid black;
+                                    vertical-align: middle;
+                                }                          
+                                /* CENTER VERTICAL DIVIDER */
+                                .table td:nth-child(2) {
+                                    border-right: 1px solid black;
+                                }                       
+                                /* BOX NO */
+                                .box {
+                                    width: 450px;
+                                    height: 18px;
+                                    border: 1px solid black;
+                                    margin: 10px auto 2px auto;
+                                    text-align: center;
+                                    font-size: 15px;
+                                    font-weight: bold;
+                                }
+                              
+                                /* COLOR LINE */
+
+                                .flex-container1 {
+                                    display: flex;
+                                    justify-content: space-between;
+                                   margin-top: 30px;
+                                }                             
+                                .centered1,
+                                .centered2 {
+                                    font-size: 14px;
+                                 font-weight: bold;
+                             }
+                                
+                            .centered {
+                                 font-size: 25px; 
+                                }                            
+                                /* ADDRESS */
+                             .box1 {
+                                    margin-top: 90px;
+                                }                              
+                                .to-address {
+                                    margin-left: 15px;
+                                    font-size: 14px;
+                                    font-weight: bold;
+                                }
+                                .table td:nth-child(2),
+                                .table td:nth-child(4) {
+                                    white-space: nowrap;
+                                }
+                                </style>
+                                </head>
+                                
+                                <body>
+                                
+                                <div class="label">
+                                
+                                    <!-- HEADER SPACE -->
+                                <div class="header-space"></div>
+                                
+                                    <!-- SINGLE TABLE -->
+                                <table class="table">
+                                <tr>
+                                <td>D.L.No</td><td>: ${entry.dlno || ""}</td>
+                                <td>QUANTITY.</td><td>: ${finalValue || ""} nos</td>
+                                </tr>
+                                <tr>
+                                <td>BATCH NO.</td><td>: ${entry.Batch || ""}</td>
+                                <td>NET WT.</td><td>: ${entry.netwt || ""} Kgs</td>
+                                </tr>
+                                <tr>
+                                <td>DATE OF MFG.</td><td>: ${entry.DOM || ""}</td>
+                                <td>GROSS WT.</td><td>: ${entry.grosswt || ""} Kgs</td>
+                                </tr>
+                                <tr>
+                                <td>DATE OF EXP.</td><td>: ${entry.DOE || ""}</td>
+                                <td>CAP PRINT MSG</td><td>: ${entry.capprinting || ""}</td>
+                                </tr>
+                                <tr>
+                                <td>CAP COLOUR.</td><td>: ${entry.cap_colour || ""}</td>
+                                <td>BODY PRINT MSG</td><td>: ${entry.bodyprinting || ""}</td>
+                                </tr>
+                                <tr>
+                                <td>BODY COLOUR.</td><td>: ${entry.body_colour || ""}</td>
+                                <td>PO No</td><td>: ${entry.purchase_order || ""}</td>
+                                </tr>
+                                <tr>
+                                <td>CUST MAT CODE</td><td>: ${entry.materialbycustomer || ""}</td>
+                                <td>INVOICE NO.</td><td>:</td>
+                                </tr>
+                                </table>
+                                
+                                    <!-- BOX NO -->
+                                <div class="box">
+
+                                        BOX NO : ${entry.boxno}/${entry.Batch || ""}
+                                <div class="flex-container1">
+                                <div class="centered1">
+
+                                                ${(entry.cap_colour || "").replace(/['":]/g, "").split("(")[0].trim()}
+                                </div>
+                                <div class="centered2">
+
+                                                ${(entry.body_colour || "").replace(/['":]/g, "").split("(")[0].trim()}
+                                </div>
+                                <div class="centered">
+
+                                                ${entry.zsize || ""}
+                                </div>
+                                </div>
+                                </div>                       
+                                    <!-- ADDRESS -->
+                                <div class="box1">
+                                <div class="to-address">
+                                            TO,<br>
+                                            ${entry.CustomerFullName || ""}<br>
+                                            PO Box No.${entry.po_box || ""} 
+                                            ${entry.CityName || ""}, 
+                                            ${entry.Region || ""}, 
+                                            ${entry.PostalCode || ""} 
+                                            ${entry.Countryname || ""}
+                                </div>
+                                </div>                               
+                                </div>                         
+                                </body>
+                                </html>
+`;
+        },
     });
 });
 

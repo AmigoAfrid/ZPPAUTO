@@ -226,6 +226,9 @@
 									<layout:VerticalLayout visible="true" class="customTopMargin sapUiSmallMarginEnd sapUiMediumMarginBottom customWidth">
 									<Button text="Print" tooltip="Execute" type="Emphasized" press="onPrint" enabled="true" />
 									</layout:VerticalLayout>
+									<layout:VerticalLayout visible="true" class="customTopMargin sapUiSmallMarginEnd sapUiMediumMarginBottom customWidth">
+									<Button text="Print New" tooltip="Execute" type="Emphasized" press="onPrintNew" enabled="true" />
+									</layout:VerticalLayout>
                                 </layout:HorizontalLayout>
 
 							</content>

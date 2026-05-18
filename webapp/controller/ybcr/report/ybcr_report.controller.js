@@ -313,8 +313,8 @@ sap.ui.define(
                     // Perform OData read request
                     oModel.read("/ZCDS_BATCH_F4HELP", {  // Replace "/ProductSet" with your OData entity set
                         filters: aFilters,
-                         urlParameters: {
-                            "$top": 5000 
+                        urlParameters: {
+                            "$top": 5000
                         },
                         success: function (oData) {
                             var aResults = oData.results.map(function (mProduct) {
@@ -698,7 +698,7 @@ sap.ui.define(
             //     if (bHasDate) {
             //         aFilter.push(new sap.ui.model.Filter("start_date", sap.ui.model.FilterOperator.BT, FromDate, ToDate));
             //     }
-                    
+
 
 
             //     const oModel = this.getView().getModel("ZCE_ZBCR_REPT_SRVB");
@@ -907,9 +907,9 @@ sap.ui.define(
             //                 } else {
             //                     that.getView().setBusy(false);
             //                     console.log("Total rows fetched:", aAllItems.length);
-                                                
+
             //                     let aResults = aAllItems; 
-                                
+
             //                     // Bind filtered data
             //                     const oTabModel = new sap.ui.model.json.JSONModel({ ItemData: aResults });
             //                     that.getView().setModel(oTabModel, "TabModel");
@@ -931,118 +931,382 @@ sap.ui.define(
             //     // Start fetching
             //     fetchData();
             // },
-
-
-
             OnGoItemPage: async function () {
 
-    var oDateRange = this.getView().byId("Datess");
-    var batchTokens = this.getView().byId("idmaterialdocument").getTokens();
-    var sDateRangeValue = oDateRange.getValue();
+                var oDateRange = this.getView().byId("Datess");
+                var sDateRangeValue = oDateRange.getValue();
 
-    const aBatchValues = batchTokens.map(oToken => oToken.getText().trim());
+                // MultiInput Tokens
+                const aBatchTokens = this.getView()
+                    .byId("idmaterialdocument")
+                    .getTokens();
 
-    // --- Date parsing ---
-    let bHasDate = sDateRangeValue && sDateRangeValue.trim() !== "";
-    let FromDate = "", ToDate = "";
+                // Date Variables
+                let bHasDate = sDateRangeValue && sDateRangeValue.trim() !== "";
+                let FromDate = "";
+                let ToDate = "";
 
-    if (bHasDate) {
-        let [startDateStr, endDateStr] = sDateRangeValue.split(" - ");
-        let startDate = new Date(startDateStr);
-        let endDate = new Date(endDateStr);
+                // Parse Date Range
+                if (bHasDate) {
 
-        FromDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000))
-            .toISOString().split("T")[0];
+                    let [startDateStr, endDateStr] =
+                        sDateRangeValue.split(" - ");
 
-        ToDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000))
-            .toISOString().split("T")[0];
-    }
+                    let startDate = new Date(startDateStr);
+                    let endDate = new Date(endDateStr);
 
-    // ---- Build filters ----
-    let aFilter = [];
+                    FromDate = new Date(
+                        startDate.getTime() -
+                        (startDate.getTimezoneOffset() * 60000)
+                    ).toISOString().split("T")[0];
 
-    // Batch filter (OR condition)
-    if (aBatchValues.length > 0) {
-        const aBatchFilters = aBatchValues.map(batch =>
-            new sap.ui.model.Filter("batch", sap.ui.model.FilterOperator.EQ, batch)
-        );
-
-        aFilter.push(
-            new sap.ui.model.Filter({
-                filters: aBatchFilters,
-                and: false // OR condition
-            })
-        );
-    }
-
-    // Date range filter
-    if (bHasDate) {
-        aFilter.push(
-            new sap.ui.model.Filter("start_date", sap.ui.model.FilterOperator.BT, FromDate, ToDate)
-        );
-    }
-
-    // Combine filters (AND = batch + date)
-    const FinalFilter = new sap.ui.model.Filter({
-        filters: aFilter,
-        and: true
-    });
-
-    // ---- Read Model ----
-    const oModel = this.getView().getModel("ZCE_ZBCR_REPT_SRVB");
-    const that = this;
-
-    that.getView().setBusy(true);
-
-    let aAllItems = [];
-    let iSkip = 0;
-    const iTop = 200;
-
-    // ---- Recursive Paging Function ----
-    function fetchData() {
-
-        let mParameters = {
-            urlParameters: {
-                "$skip": iSkip,
-                "$top": iTop
-            },
-            success: function (oData) {
-                if (oData.results.length > 0) {
-                    aAllItems = aAllItems.concat(oData.results);
-                    iSkip += iTop;
-                    fetchData(); // Continue next page
-                } else {
-                    that.getView().setBusy(false);
-
-                    console.log("Total rows fetched:", aAllItems.length);
-
-                    // Bind final result
-                    const oTabModel = new sap.ui.model.json.JSONModel({ ItemData: aAllItems });
-                    that.getView().setModel(oTabModel, "TabModel");
-
-                    if (aAllItems.length === 0) {
-                        sap.m.MessageToast.show("No records found for the given filters.");
-                    }
+                    ToDate = new Date(
+                        endDate.getTime() -
+                        (endDate.getTimezoneOffset() * 60000)
+                    ).toISOString().split("T")[0];
                 }
+
+                const oModel = this.getView()
+                    .getModel("ZCE_ZBCR_REPT_SRVB");
+
+                const that = this;
+
+                that.getView().setBusy(true);
+
+                let aAllItems = [];
+                let iSkip = 0;
+                const iTop = 100;
+
+                function fetchData() {
+
+                    oModel.read("/ZCE_ZBCR_REPT", {
+
+                        urlParameters: {
+                            "$skip": iSkip,
+                            "$top": iTop
+                        },
+
+                        success: function (oData) {
+
+                            if (oData.results.length > 0) {
+
+                                aAllItems =
+                                    aAllItems.concat(oData.results);
+
+                                iSkip += iTop;
+
+                                fetchData();
+
+                            } else {
+
+                                that.getView().setBusy(false);
+
+                                let aFilteredItems = aAllItems;
+
+                                // =========================
+                                // Batch Filter
+                                // =========================
+
+                                if (aBatchTokens.length > 0) {
+
+                                    aFilteredItems =
+                                        aFilteredItems.filter(function (item) {
+
+                                            const itemBatch =
+                                                String(item.batch || "").trim();
+
+                                            return aBatchTokens.some(function (oToken) {
+
+                                                const oRange =
+                                                    oToken.data("range");
+
+                                                // Manual Entry
+                                                if (!oRange) {
+
+                                                    return itemBatch ===
+                                                        String(oToken.getKey()).trim();
+                                                }
+
+                                                const sOperation =
+                                                    oRange.operation;
+
+                                                const value1 =
+                                                    String(oRange.value1 || "").trim();
+
+                                                const value2 =
+                                                    String(oRange.value2 || "").trim();
+
+                                                switch (sOperation) {
+
+                                                    // Equal To
+                                                    case "EQ":
+                                                        return itemBatch === value1;
+
+                                                    // Not Equal To
+                                                    case "NE":
+                                                        return itemBatch !== value1;
+
+                                                    // Between
+                                                    case "BT":
+                                                        return Number(itemBatch) >= Number(value1) &&
+                                                            Number(itemBatch) <= Number(value2);
+
+                                                    // Greater Than
+                                                    case "GT":
+                                                        return Number(itemBatch) > Number(value1);
+
+                                                    // Greater Than Equal
+                                                    case "GE":
+                                                        return Number(itemBatch) >= Number(value1);
+
+                                                    // Less Than
+                                                    case "LT":
+                                                        return Number(itemBatch) < Number(value1);
+
+                                                    // Less Than Equal
+                                                    case "LE":
+                                                        return Number(itemBatch) <= Number(value1);
+
+                                                    // Contains
+                                                    case "Contains":
+                                                        return itemBatch.includes(value1);
+
+                                                    // Starts With
+                                                    case "StartsWith":
+                                                        return itemBatch.startsWith(value1);
+
+                                                    // Ends With
+                                                    case "EndsWith":
+                                                        return itemBatch.endsWith(value1);
+
+                                                    // Empty
+                                                    case "Empty":
+                                                        return itemBatch === "";
+
+                                                    // Not Empty
+                                                    case "NotEmpty":
+                                                        return itemBatch !== "";
+
+                                                    default:
+                                                        return false;
+                                                }
+
+                                            });
+
+                                        });
+                                }
+
+                                // =========================
+                                // Date Filter
+                                // =========================
+
+                                if (bHasDate) {
+
+                                    const From = new Date(FromDate);
+                                    const To = new Date(ToDate);
+
+                                    aFilteredItems =
+                                        aFilteredItems.filter(function (item) {
+
+                                            if (!item.start_date) {
+                                                return false;
+                                            }
+
+                                            const itemDate =
+                                                new Date(item.start_date);
+
+                                            return itemDate >= From &&
+                                                itemDate <= To;
+                                        });
+                                }
+
+                                // =========================
+                                // Bind Data
+                                // =========================
+
+                                that.oTabModel =
+                                    new sap.ui.model.json.JSONModel({
+                                        ItemData: aFilteredItems
+                                    });
+
+                                that.getView().setModel(
+                                    that.oTabModel,
+                                    "TabModel"
+                                );
+
+                                console.log(
+                                    "Filtered Items:",
+                                    aFilteredItems
+                                );
+
+                                // =========================
+                                // Editable Logic
+                                // =========================
+
+                                const bEditable =
+                                    aFilteredItems.some(function (item) {
+
+                                        return !item.status ||
+                                            !item.remark;
+                                    });
+
+                                const oTable =
+                                    that.getView().byId("idItemTable");
+
+                                if (oTable) {
+
+                                    oTable.setEditable(bEditable);
+
+                                } else {
+
+                                    console.error(
+                                        "Table 'idItemTable' not found."
+                                    );
+                                }
+
+                                // =========================
+                                // No Data Message
+                                // =========================
+
+                                if (aFilteredItems.length === 0) {
+
+                                    sap.m.MessageToast.show(
+                                        "No records found for selected filters."
+                                    );
+                                }
+                            }
+                        },
+
+                        error: function (error) {
+
+                            that.getView().setBusy(false);
+
+                            console.error(
+                                "Error fetching data:",
+                                error
+                            );
+
+                            sap.m.MessageToast.show(
+                                "Error fetching data."
+                            );
+                        }
+                    });
+                }
+
+                // Start Fetch
+                fetchData();
             },
-            error: function (error) {
-                that.getView().setBusy(false);
-                console.error("Error fetching data:", error);
-                sap.m.MessageToast.show("Error fetching data.");
-            }
-        };
 
-        // 👉 Apply filters ONLY IF present
-        if (aFilter.length > 0) {
-            mParameters.filters = [FinalFilter];
-        }
 
-        oModel.read("/ZCE_ZBCR_REPT", mParameters);
-    }
+            // OnGoItemPage: async function () {
 
-    // ---- Start Fetching ----
-    fetchData();
-},
+            //     var oDateRange = this.getView().byId("Datess");
+            //     var batchTokens = this.getView().byId("idmaterialdocument").getTokens();
+            //     var sDateRangeValue = oDateRange.getValue();
+
+            //     const aBatchValues = batchTokens.map(oToken => oToken.getText().trim());
+
+            //     // --- Date parsing ---
+            //     let bHasDate = sDateRangeValue && sDateRangeValue.trim() !== "";
+            //     let FromDate = "", ToDate = "";
+
+            //     if (bHasDate) {
+            //         let [startDateStr, endDateStr] = sDateRangeValue.split(" - ");
+            //         let startDate = new Date(startDateStr);
+            //         let endDate = new Date(endDateStr);
+
+            //         FromDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000))
+            //             .toISOString().split("T")[0];
+
+            //         ToDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000))
+            //             .toISOString().split("T")[0];
+            //     }
+
+            //     // ---- Build filters ----
+            //     let aFilter = [];
+
+            //     // Batch filter (OR condition)
+            //     if (aBatchValues.length > 0) {
+            //         const aBatchFilters = aBatchValues.map(batch =>
+            //             new sap.ui.model.Filter("batch", sap.ui.model.FilterOperator.EQ, batch)
+            //         );
+
+            //         aFilter.push(
+            //             new sap.ui.model.Filter({
+            //                 filters: aBatchFilters,
+            //                 and: false // OR condition
+            //             })
+            //         );
+            //     }
+
+            //     // Date range filter
+            //     if (bHasDate) {
+            //         aFilter.push(
+            //             new sap.ui.model.Filter("start_date", sap.ui.model.FilterOperator.BT, FromDate, ToDate)
+            //         );
+            //     }
+
+            //     // Combine filters (AND = batch + date)
+            //     const FinalFilter = new sap.ui.model.Filter({
+            //         filters: aFilter,
+            //         and: true
+            //     });
+
+            //     // ---- Read Model ----
+            //     const oModel = this.getView().getModel("ZCE_ZBCR_REPT_SRVB");
+            //     const that = this;
+
+            //     that.getView().setBusy(true);
+
+            //     let aAllItems = [];
+            //     let iSkip = 0;
+            //     const iTop = 200;
+
+            //     // ---- Recursive Paging Function ----
+            //     function fetchData() {
+
+            //         let mParameters = {
+            //             urlParameters: {
+            //                 "$skip": iSkip,
+            //                 "$top": iTop
+            //             },
+            //             success: function (oData) {
+            //                 if (oData.results.length > 0) {
+            //                     aAllItems = aAllItems.concat(oData.results);
+            //                     iSkip += iTop;
+            //                     fetchData(); // Continue next page
+            //                 } else {
+            //                     that.getView().setBusy(false);
+
+            //                     console.log("Total rows fetched:", aAllItems.length);
+
+            //                     // Bind final result
+            //                     const oTabModel = new sap.ui.model.json.JSONModel({ ItemData: aAllItems });
+            //                     that.getView().setModel(oTabModel, "TabModel");
+
+            //                     if (aAllItems.length === 0) {
+            //                         sap.m.MessageToast.show("No records found for the given filters.");
+            //                     }
+            //                 }
+            //             },
+            //             error: function (error) {
+            //                 that.getView().setBusy(false);
+            //                 console.error("Error fetching data:", error);
+            //                 sap.m.MessageToast.show("Error fetching data.");
+            //             }
+            //         };
+
+            //         // 👉 Apply filters ONLY IF present
+            //         if (aFilter.length > 0) {
+            //             mParameters.filters = [FinalFilter];
+            //         }
+
+            //         oModel.read("/ZCE_ZBCR_REPT", mParameters);
+            //     }
+
+            //     // ---- Start Fetching ----
+            //     fetchData();
+            // },
 
             onRowSelectionChange: function (oEvent) {
                 var oTable = this.byId("idItemTable");
@@ -1074,96 +1338,190 @@ sap.ui.define(
 
                 console.log("Selected rows data after toggle:", aSelectedItems);
             },
-            // Save new added fileds grey out
+            // // Save new added fileds grey out
 
+            // onSaveOrCreateRows: function () {
+            //     var oTable = this.getView().byId("idItemTable");
+            //     var aSelectedIndices = oTable.getSelectedIndices();
+
+            //     if (aSelectedIndices.length === 0) {
+            //         MessageToast.show("Please select at least one row.");
+            //         return;
+            //     }
+
+            //     var oDataModel = this.getView().getModel("ZCE_ZBCR_REPT_SRVB"); // ✅ Correct model
+            //     var that = this;
+            //     var iProcessedCount = 0;
+
+            //     aSelectedIndices.forEach(function (iIndex) {
+            //         var oSelectedRow = oTable.getContextByIndex(iIndex).getObject();
+            //         var sBatch = oSelectedRow.batch;
+
+            //         if (!sBatch || !oSelectedRow.status || !oSelectedRow.remark) {
+            //             MessageToast.show("Please enter all required details before saving.");
+            //             return;
+            //         }
+
+            //         var payload = {
+            //             batch: sBatch,
+            //             status: oSelectedRow.status,
+            //             remark: oSelectedRow.remark
+            //         };
+
+            //         // 🔍 Check if record exists before deciding create/update
+            //         var sPath = "/ZCE_DCR_STATUS(batch='" + sBatch + "')";
+            //         oDataModel.read(sPath, {
+            //             success: function () {
+            //                 // ✅ Record exists → update
+            //                 that._updateRow(oDataModel, sBatch, payload, function () {
+            //                     iProcessedCount++;
+            //                     that._checkAndClearSelection(oTable, aSelectedIndices, iProcessedCount);
+            //                 });
+            //             },
+            //             error: function () {
+            //                 // ❌ Record doesn't exist → create
+            //                 that._createRow(oDataModel, payload, function () {
+            //                     iProcessedCount++;
+            //                     that._checkAndClearSelection(oTable, aSelectedIndices, iProcessedCount);
+            //                 });
+            //             }
+            //         });
+            //     });
+            // },
+
+            // /**
+            //  * Helper for updating an existing row
+            //  */
+            // _updateRow: function (oDataModel, sBatch, payload, fnCallback) {
+            //     oDataModel.update("/ZCE_DCR_STATUS(batch='" + sBatch + "')", payload, {
+            //         success: function () {
+            //             console.log("Row updated successfully for batch:", sBatch);
+            //             MessageToast.show("Row updated successfully for batch: " + sBatch);
+            //             if (fnCallback) fnCallback();
+            //         },
+            //         error: function (oError) {
+            //             console.error("Failed to update row for batch:", sBatch, oError);
+            //             MessageToast.show("Error updating row for batch: " + sBatch);
+            //             if (fnCallback) fnCallback();
+            //         }
+            //     });
+            // },
+
+            // /**
+            //  * Helper for creating a new row
+            //  */
+            // _createRow: function (oDataModel, payload, fnCallback) {
+            //     oDataModel.create("/ZCE_DCR_STATUS", payload, {
+            //         success: function (oData) {
+            //             console.log("Row created successfully:", oData);
+            //             MessageToast.show("Row created successfully for batch: " + payload.batch);
+            //             if (fnCallback) fnCallback();
+            //         },
+            //         error: function (oError) {
+            //             console.error("Failed to create row:", oError);
+            //             MessageToast.show("Error creating row for batch: " + payload.batch);
+            //             if (fnCallback) fnCallback();
+            //         }
+            //     });
+            // },
+
+            // /**
+            //  * Helper to clear selection and refresh table after all rows processed
+            //  */
+            // onSaveOrCreateRows: function () {
+
+            //     var oTable = this.getView().byId("idItemTable");
+            //     var aSelectedIndices = oTable.getSelectedIndices();
+
+            //     if (aSelectedIndices.length === 0) {
+            //         MessageToast.show("Please select at least one row.");
+            //         return;
+            //     }
+
+            //     var oDataModel = this.getView().getModel("ZCE_ZBCR_REPT_SRVB");
+
+            //     aSelectedIndices.forEach(function (iIndex) {
+
+            //         var oContext = oTable.getContextByIndex(iIndex);
+            //         var oSelectedRow = oContext.getObject();
+
+            //         if (!oSelectedRow.status || !oSelectedRow.remark) {
+            //             MessageToast.show("Please enter all required details before saving.");
+            //             return;
+            //         }
+
+            //         // Path 
+            //         var sPath = oContext.getPath();
+
+            //         var payload = {
+            //             status: oSelectedRow.status,
+            //             remark: oSelectedRow.remark
+            //         };
+
+            //         oDataModel.update(sPath, payload, {
+
+            //             merge: true,
+
+            //             success: function () {
+            //                 MessageToast.show("Updated Successfully");
+            //             },
+
+            //             error: function (oError) {
+            //                 console.log(oError);
+            //                 MessageToast.show("Update Failed");
+            //             }
+            //         });
+
+            //     });
+
+            // },
             onSaveOrCreateRows: function () {
+
                 var oTable = this.getView().byId("idItemTable");
                 var aSelectedIndices = oTable.getSelectedIndices();
+                var oDataModel = this.getView().getModel("ZCE_ZBCR_REPT_SRVB");
 
                 if (aSelectedIndices.length === 0) {
                     MessageToast.show("Please select at least one row.");
                     return;
                 }
 
-                var oDataModel = this.getView().getModel("ZCE_ZBCR_REPT_SRVB"); // ✅ Correct model
-                var that = this;
-                var iProcessedCount = 0;
-
                 aSelectedIndices.forEach(function (iIndex) {
-                    var oSelectedRow = oTable.getContextByIndex(iIndex).getObject();
-                    var sBatch = oSelectedRow.batch;
 
-                    if (!sBatch || !oSelectedRow.status || !oSelectedRow.remark) {
-                        MessageToast.show("Please enter all required details before saving.");
+                    var oContext = oTable.getContextByIndex(iIndex);
+                    var oSelectedRow = oContext.getObject();
+
+                    if (!oSelectedRow.status || !oSelectedRow.remark) {
+                        MessageToast.show("Please fill required fields");
                         return;
                     }
 
+                    var sBatch = oSelectedRow.batch;
+
+                    // ✔ IMPORTANT: update must use key path
+                    var sPath = "/ZCE_DCR_STATUS(batch='" + sBatch + "')";
+
                     var payload = {
-                        batch: sBatch,
                         status: oSelectedRow.status,
                         remark: oSelectedRow.remark
                     };
 
-                    // 🔍 Check if record exists before deciding create/update
-                    var sPath = "/ZCE_DCR_STATUS(batch='" + sBatch + "')";
-                    oDataModel.read(sPath, {
+                    oDataModel.update(sPath, payload, {
+
+                        merge: true,
+
                         success: function () {
-                            // ✅ Record exists → update
-                            that._updateRow(oDataModel, sBatch, payload, function () {
-                                iProcessedCount++;
-                                that._checkAndClearSelection(oTable, aSelectedIndices, iProcessedCount);
-                            });
+                            MessageToast.show("Updated Batch: " + oSelectedRow.batch);
                         },
-                        error: function () {
-                            // ❌ Record doesn't exist → create
-                            that._createRow(oDataModel, payload, function () {
-                                iProcessedCount++;
-                                that._checkAndClearSelection(oTable, aSelectedIndices, iProcessedCount);
-                            });
+
+                        error: function (oError) {
+                            console.log(oError);
+                            MessageToast.show("Update Failed for Batch: " + oSelectedRow.batch);
                         }
                     });
+
                 });
             },
-
-            /**
-             * Helper for updating an existing row
-             */
-            _updateRow: function (oDataModel, sBatch, payload, fnCallback) {
-                oDataModel.update("/ZCE_DCR_STATUS(batch='" + sBatch + "')", payload, {
-                    success: function () {
-                        console.log("Row updated successfully for batch:", sBatch);
-                        MessageToast.show("Row updated successfully for batch: " + sBatch);
-                        if (fnCallback) fnCallback();
-                    },
-                    error: function (oError) {
-                        console.error("Failed to update row for batch:", sBatch, oError);
-                        MessageToast.show("Error updating row for batch: " + sBatch);
-                        if (fnCallback) fnCallback();
-                    }
-                });
-            },
-
-            /**
-             * Helper for creating a new row
-             */
-            _createRow: function (oDataModel, payload, fnCallback) {
-                oDataModel.create("/ZCE_DCR_STATUS", payload, {
-                    success: function (oData) {
-                        console.log("Row created successfully:", oData);
-                        MessageToast.show("Row created successfully for batch: " + payload.batch);
-                        if (fnCallback) fnCallback();
-                    },
-                    error: function (oError) {
-                        console.error("Failed to create row:", oError);
-                        MessageToast.show("Error creating row for batch: " + payload.batch);
-                        if (fnCallback) fnCallback();
-                    }
-                });
-            },
-
-            /**
-             * Helper to clear selection and refresh table after all rows processed
-             */
             _checkAndClearSelection: function (oTable, aSelectedIndices, iProcessedCount) {
                 // When all selected rows have been processed
                 if (iProcessedCount === aSelectedIndices.length) {
@@ -1185,14 +1543,14 @@ sap.ui.define(
 
             OnExportExl: function () {
                 var that = this;  // Keep reference to this controller
- 
+
                 sap.m.MessageBox.confirm("Do you want to download the data?", {
                     onClose: function (oAction) {
                         if (oAction === sap.m.MessageBox.Action.OK) {
                             var oTable = that.getView().byId("idItemTable");
                             var oBinding = oTable.getBinding("rows");
                             var aCols = that.createColumnConfig();
- 
+
                             var oSettings = {
                                 workbook: {
                                     columns: aCols,
@@ -1201,7 +1559,7 @@ sap.ui.define(
                                 dataSource: oBinding,
                                 fileName: "YBCR Report"
                             };
- 
+
                             var oSheet = new Spreadsheet(oSettings);
                             oSheet.build().finally(function () {
                                 oSheet.destroy();
@@ -1279,7 +1637,7 @@ sap.ui.define(
                     },
 
 
-                       {
+                    {
                         label: 'FT Status',
                         property: 'ft_status',
                         width: '12'
@@ -1293,7 +1651,7 @@ sap.ui.define(
                     },
 
 
-                      {
+                    {
                         label: 'ACM Status',
                         property: 'acm_status',
                         width: '12'
@@ -1320,7 +1678,7 @@ sap.ui.define(
                     },
 
 
-                       {
+                    {
                         label: 'ATS Loss %',
                         property: 'atsloss_per',
                         width: '12'
@@ -1356,29 +1714,29 @@ sap.ui.define(
                     },
 
 
-                      {
+                    {
                         label: 'AIS Loss %',
                         property: 'aisloss_per',
                         width: '12'
                     },
 
 
-                        {
+                    {
                         label: 'Total Loss in Lakhs',
                         property: 'total_loss_lakhs',
                         width: '12'
                     },
 
 
-                    
-                        {
+
+                    {
                         label: 'Total Loss %',
                         property: 'total_loss_per',
                         width: '12'
                     },
 
 
-                         {
+                    {
                         label: 'Convertiblity',
                         property: 'convertiblity',
                         width: '12'
@@ -1401,7 +1759,7 @@ sap.ui.define(
                     },
 
 
-                    
+
                     {
                         label: 'PTG Status',
                         property: 'ptg_status',
@@ -1415,14 +1773,14 @@ sap.ui.define(
                         width: '12'
                     },
 
-                     {
+                    {
                         label: 'Printing Loss %',
                         property: 'ptgloss_per',
                         width: '12'
                     },
 
 
-    
+
 
                     {
                         label: 'Packed Qty',
@@ -1431,7 +1789,7 @@ sap.ui.define(
                     },
 
 
-                      {
+                    {
                         label: 'Packed Date',
                         property: 'packed_date',
                         type: sap.ui.export.EdmType.Date,
@@ -1440,7 +1798,7 @@ sap.ui.define(
                     },
 
 
-                     {
+                    {
                         label: 'Packing Status',
                         property: 'packing_status',
                         width: '12'
@@ -1464,6 +1822,217 @@ sap.ui.define(
                 ];
             },
 
+            // ================ Batch Standard Fragment =========================
+            onBatchValueHelpRequest: function () {
+
+                sap.ui.core.BusyIndicator.show();
+
+                var oModel = this.getView().getModel("ZCE_ZCOUNT_HEAD_SRVB");
+
+                // Check if the model is valid
+                if (!oModel) {
+                    console.error("OData model is not properly initialized.");
+                    sap.ui.core.BusyIndicator.hide();
+                    return;
+                }
+
+                //   var oFilters = [oFilters1];
+                var that = this;
+                var aAllItems = []; // Array to hold all retrieved items
+
+                // Function to fetch data recursively
+                function fetchData(skipCount) {
+                    // var that = this;
+                    // var oModel = that.getView().getModel();
+                    // that.getView().setModel(oModel);
+                    oModel.read("/ZCDS_BATCH_F4HELP", {
+                        //   filters: oFilters,
+                        urlParameters: {
+                            $top: 5000,  // Request a chunk of 5000 records
+                            $skip: skipCount  // Start from the skipCount position
+                        },
+                        success: function (oData) {
+                            var aItems = oData.results;
+                            aAllItems = aAllItems.concat(aItems); // Concatenate current chunk to the array
+
+                            // Check if there are more records to fetch
+                            if (oData.results.length >= 5000) {
+                                // If there are more records, fetch next chunk
+                                fetchData(skipCount + 5000);
+                            } else {
+                                // If no more records, all data is fetched
+                                finishFetching();
+                            }
+                        },
+                        error: function (oError) {
+                            console.error("Error reading data: ", oError);
+                            sap.ui.core.BusyIndicator.hide();
+                        }
+                    });
+                }
+
+                function finishFetching() {
+
+
+                    // Once all data is fetched, proceed to display it
+                    that.oJSONModel = new sap.ui.model.json.JSONModel({
+                        Datas: aAllItems
+                    });
+                    that.getView().setModel(that.oJSONModel, "oJSONModel");
+                    console.log("that.oJSONModel:", that.oJSONModel)
+
+                    // Load the value help dialog fragment
+                    that._oBasicSearchField = new sap.m.SearchField();
+                    that.loadFragment({
+                        name: "zautodesignapp.view.ybcr.report.fragment.BatchFragment"
+                    }).then(function (oDialog) {
+                        var oFilterBar = oDialog.getFilterBar();
+
+                        var oColumnProductCode;
+                        that._oVHD = oDialog;
+                        that.getView().addDependent(oDialog);
+
+                        // Set key fields for filtering in the Define Conditions Tab
+                        oDialog.setRangeKeyFields([{
+                            label: "Batch.",
+                            key: "batch",
+                            type: "string",
+                            typeInstance: new sap.ui.model.type.String({}, {
+                                maxLength: 15
+                            })
+                        }]);
+
+                        // Set Basic Search for FilterBar
+                        oFilterBar.setFilterBarExpanded(false);
+                        oFilterBar.setBasicSearch(that._oBasicSearchField);
+
+                        // Trigger filter bar search when the basic search is fired
+                        that._oBasicSearchField.attachSearch(function () {
+                            oFilterBar.search();
+                        });
+
+                        oDialog.getTableAsync().then(function (oTable) {
+                            oTable.setModel(that.oJSONModel);
+
+                            // Bind rows/items based on table type (sap.ui.table.Table or sap.m.Table)
+                            if (oTable.bindRows) {
+                                // Desktop/Table scenario (sap.ui.table.Table)
+                                oTable.bindAggregation("rows", {
+                                    path: "oJSONModel>/Datas",
+                                    events: {
+                                        dataReceived: function () {
+                                            oDialog.update();
+                                        }
+                                    }
+                                });
+
+                                // Define columns for sap.ui.table.Table
+                                oColumnProductCode = new sap.ui.table.Column({
+                                    label: new sap.m.Label({ text: "Batch." }),
+                                    template: new sap.m.Text({ wrapping: false, text: "{oJSONModel>batch}" })
+                                });
+                                oColumnProductCode.data({
+                                    fieldName: "batch"
+                                });
+
+                                oTable.addColumn(oColumnProductCode);
+
+
+                            } else if (oTable.bindItems) {
+                                // Mobile scenario (sap.m.Table)
+                                oTable.bindAggregation("items", {
+                                    path: "oJSONModel>/Datas",
+                                    template: new sap.m.ColumnListItem({
+                                        cells: [
+                                            new sap.m.Text({ text: "{oJSONModel>batch}" }),
+                                        ]
+                                    }),
+                                    events: {
+                                        dataReceived: function () {
+                                            oDialog.update();
+                                        }
+                                    }
+                                });
+
+                                // Define columns for sap.m.Table (if necessary)
+                                oTable.addColumn(new sap.m.Column({
+                                    header: new sap.m.Label({ text: "Batch." })
+                                }));
+
+                            }
+
+                            oDialog.update();
+                            sap.ui.core.BusyIndicator.hide();
+                        });
+
+                        oDialog.open();
+                        sap.ui.core.BusyIndicator.hide();
+                    });
+                }
+
+                // Start fetching data from the beginning
+                fetchData(0);
+
+            },
+
+            onBatchValueHelpOkPress: function (oEvent) {
+                var aTokens = oEvent.getParameter("tokens");
+                this._oMultiInput.setTokens(aTokens);
+                this._oVHD.close();
+            },
+
+            onBatchValueHelpCancelPress: function () {
+                this._oVHD.close();
+            },
+
+            onValueHelpAfterClose: function () {
+                this._oVHD.destroy();
+            },
+
+            onBatchFilterBarSearch: function (oEvent) {
+                var sSearchQuery = this._oBasicSearchField.getValue(),
+                    aSelectionSet = oEvent.getParameter("selectionSet");
+
+                var aFilters = aSelectionSet && aSelectionSet.reduce(function (aResult, oControl) {
+                    if (oControl.getValue()) {
+                        aResult.push(new sap.ui.model.Filter({
+                            path: oControl.getName(),
+                            operator: FilterOperator.Contains,
+                            value1: oControl.getValue()
+                        }));
+                    }
+
+                    return aResult;
+                }, []);
+
+                aFilters.push(new sap.ui.model.Filter({
+                    filters: [
+                        new sap.ui.model.Filter({ path: "batch", operator: sap.ui.model.FilterOperator.Contains, value1: sSearchQuery })
+
+                    ],
+                    and: false
+                }));
+
+                this._BatchfilterTable(new sap.ui.model.Filter({
+                    filters: aFilters,
+                    and: true
+                }));
+            },
+            _BatchfilterTable: function (oFilter) {
+                var oVHD = this._oVHD;
+
+                oVHD.getTableAsync().then(function (oTable) {
+                    if (oTable.bindRows) {
+                        oTable.getBinding("rows").filter(oFilter);
+                    }
+                    if (oTable.bindItems) {
+                        oTable.getBinding("items").filter(oFilter);
+                    }
+
+                    // This method must be called after binding update of the table.
+                    oVHD.update();
+                });
+            },
 
 
 
