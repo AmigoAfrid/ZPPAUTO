@@ -116,6 +116,10 @@
                                     <tnt:NavigationListItem visible="true" key="zlabel.report.zlabel_report" text="Report - YCOUNT" select=".OnNavBtn"/>
                                 </tnt:NavigationListItem>
 
+                                <tnt:NavigationListItem visible="true" text="Zpack Slip" select=".OnExpandItems" expanded="false" icon="sap-icon://product">
+                                    <tnt:NavigationListItem visible="true" key="zpackslip.transaction.zpackslip" text="Transaction" select=".OnNavBtn"/>
+                                </tnt:NavigationListItem>
+
                             </tnt:NavigationList>
 
                   

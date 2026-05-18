@@ -1607,7 +1607,7 @@ sap.ui.define([
             <td>: ${entry.bodyprinting || ""}</td>
         </tr>
         <tr>
-            <td>PO NUMBER</td>
+            <td>PO No</td>
             <td>: ${entry.purchase_order || ""}</td>
         </tr>
         <tr>

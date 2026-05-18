@@ -1,0 +1,19 @@
+<core:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:m="sap.m"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core">
+	<ValueHelpDialog title="Batch" ok=".onBatchValueHelpOkPress" cancel=".onBatchValueHelpCancelPress" afterClose=".onBatchValueHelpAfterClose" supportRanges="true" key="batch">
+		<filterBar>
+			<fb:FilterBar advancedMode="true" search=".onBatchFilterBarSearch" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem groupName="__$INTERNAL$" name="batch" label="Batch" visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="batch" />
+						</fb:control>
+					</fb:FilterGroupItem>
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+	</ValueHelpDialog>
+</core:FragmentDefinition>

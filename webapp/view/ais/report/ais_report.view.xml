@@ -250,7 +250,7 @@
                     </t:Column>
 
                         <t:Column tooltip="Quantity in KGS" width="10rem">
-                        <Label text="Quantity in KGS" />
+                        <Label text="Qty in Lacs" />
                         <t:template>
                             <Text text="{TabModel>qtylitre}" />
                         </t:template>
@@ -356,8 +356,8 @@
 
 
 
-                    <t:Column tooltip="Weight" width="6rem">
-                        <Label text="Weight" />
+                    <t:Column tooltip="Weight" width="8rem">
+                        <Label text="AIS weight in KGS" />
                         <t:template>
                             <Text text="{TabModel>weight}" />
                         </t:template>

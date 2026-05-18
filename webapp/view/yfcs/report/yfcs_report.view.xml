@@ -21,7 +21,7 @@
         <f:title>
             <f:DynamicPageTitle>
                 <f:heading>
-                    <Title text="Counting record - YFCS" />
+                    <Title text="Foreign Capsules Sorting" />
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>

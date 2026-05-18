@@ -1,0 +1,357 @@
+<mvc:View
+    controllerName="zautodesignapp.controller.zpackslip.transaction.zpackslip"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:t="sap.ui.table"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.f">
+    <f:DynamicPage showFooter="true" fitContent="true" >
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <Title text="Packing Slip" />
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+        <f:header>
+         <f:DynamicPageHeader  pinnable="true">
+
+            <l:VerticalLayout width="100%" >
+                <l:HorizontalLayout >
+
+                    <!-- 1st Column :                  -->                    
+                    <l:VerticalLayout width="22rem">
+                       
+                        <l:HorizontalLayout  >
+                            <Label text="Order" width="120px" class="sapUiTinyMargin" tooltip="Order" />
+                            <Input id="OrderNo" width="200px" value="{HeaderDataModel>/ProcessOrder}"
+                                   showValueHelp="true" valueHelpRequest="onOrderNoHelpRequest" maxLength="10" change="OnChangeOrderNo" valueState="{LocalViewSettings>/ValueStateProcessOrder}" valueStateText="{LocalViewSettings>/ValueStateTextProcessOrder}"/>
+                        </l:HorizontalLayout>
+
+                        <l:HorizontalLayout visible="false" >
+                            <Label text="Created On" width="120px" class="sapUiTinyMargin" tooltip="Order Date"/>
+                            <Input text="{HeaderDataModel>CreationDate}" width="200px" editable="false" ></Input>
+                        </l:HorizontalLayout>
+                      
+                        <l:HorizontalLayout >
+                                <Label text="S.O No" width="120px" class="sapUiTinyMargin" tooltip="S.O No"/>
+                                <Input width="200px" value="{HeaderDataModel>/SalesOrder}"  change="onChangeSalesOrder" editable="false"/>
+                        </l:HorizontalLayout>
+
+                        <l:HorizontalLayout >
+                                <Label text="Sales Order Item" width="120px" class="sapUiTinyMargin" tooltip="Sales Order Item"/>
+                                <Input width="200px" value="{HeaderDataModel>/salesOrderItem}" editable="false"/>
+                        </l:HorizontalLayout>
+                        
+                        <l:HorizontalLayout >
+                                <Label text="Batch" width="120px" class="sapUiTinyMargin" tooltip="Batch"/>
+                                <Input width="200px" value="{HeaderDataModel>/Batch}" editable="false"/>
+                        </l:HorizontalLayout>
+
+                        <l:HorizontalLayout >
+                                <Label text="Customer Name" width="120px" class="sapUiTinyMargin" tooltip="Customer Name"/>
+                                <Input width="200px" value="{HeaderDataModel>/CustomerName}"   editable="false"/>
+                        </l:HorizontalLayout>
+                        
+                        <l:HorizontalLayout >
+                                <Label text="Plant" width="120px" class="sapUiTinyMargin" tooltip="Plant" />
+                                <Input width="200px" value="{HeaderDataModel>/Plant}"  editable="false"/>
+                        </l:HorizontalLayout>
+
+                        <l:HorizontalLayout >
+                                <Label text="Size" width="120px" class="sapUiTinyMargin" tooltip="Size"/>
+                                <Input width="200px" value="{HeaderDataModel>/Zsize}" editable="false"/>
+                        </l:HorizontalLayout>
+                        
+                        <l:HorizontalLayout >
+                            <Label text="User Login" width="120px" class="sapUiTinyMargin" tooltip="User Login"/>
+                            <Input width="200px" value="{HeaderDataModel>/UserName}"  editable="false" />
+                        </l:HorizontalLayout>
+                    </l:VerticalLayout>
+
+                    <!-- 2nd Column :                  -->
+                    <l:VerticalLayout width="20rem" class="sapUiTinyMarginLeft" > 
+
+                        <l:HorizontalLayout>
+                            <Label text="Invoice No" width="120px" class="sapUiTinyMargin" tooltip="Invoice No"/>
+                            <Input width="150px" value="{HeaderDataModel>/InvoiceNo}" maxLength="{path:'ZCE_PACKSLIP_HEAD_SRVB>/ZCE_PACKSLIP_HEADType/InvoiceNo/@maxLength', type:'sap.ui.model.type.String'}" change="onChangeInvoiceNo"/>
+                        </l:HorizontalLayout>
+
+                        <l:HorizontalLayout >
+                            <Label text="Invoice Dt" width="120px" class="sapUiTinyMargin" tooltip="Invoice Dt"/>
+                            <DatePicker valueFormat="yyyy-MM-dd" displayFormat="dd-MM-yyyy"  width="150px"
+							            value="{ 'path':'HeaderDataModel>/InvoiceDate', 'type':'sap.ui.model.type.Date', 'formatOptions': { 'pattern': 'dd-MM-YYYY' } }" />
+                        </l:HorizontalLayout>
+
+                        <l:HorizontalLayout>
+                            <Label text="Number of Boxes" width="120px" class="sapUiTinyMargin" tooltip="Number of Boxes"/>
+                            <Input width="150px" value="{HeaderDataModel>/NoOfBoxes}" maxLength="{path:'ZCE_PACKSLIP_HEAD_SRVB>/ZCE_PACKSLIP_HEADType/NoOfBoxes/@maxLength', type:'sap.ui.model.type.String'}" change="onChangeBoxes"/>
+                        </l:HorizontalLayout>
+
+                        <l:HorizontalLayout>
+                            <Label text="Quantity" width="120px" class="sapUiTinyMargin" tooltip="Quantity"/>
+                            <Input width="150px" value="{HeaderDataModel>/Qty}" maxLength="{path:'ZCE_PACKSLIP_HEAD_SRVB>/ZCE_PACKSLIP_HEADType/Qty/@maxLength', type:'sap.ui.model.type.String'}" change="onChangeQunatity"/>
+                        </l:HorizontalLayout>
+
+                        <l:HorizontalLayout>
+                            <Label text="Base Unit" width="120px" class="sapUiTinyMargin" tooltip="Base Unit"/>
+                            <Input width="150px" value="{HeaderDataModel>/BaseUnit}" maxLength="{path:'ZCE_PACKSLIP_HEAD_SRVB>/ZCE_PACKSLIP_HEADType/BaseUnit/@maxLength', type:'sap.ui.model.type.String'}" change="onChangeBaseUnit"  editable="false"/>
+                        </l:HorizontalLayout>
+
+                        <l:HorizontalLayout>
+                            <Label text="Total Box" width="120px" class="sapUiTinyMargin" tooltip="Total Box"/>
+                            <Input width="150px" value="{HeaderDataModel>/TotalBox}" maxLength="{path:'ZCE_PACKSLIP_HEAD_SRVB>/ZCE_PACKSLIP_HEADType/TotalBox/@maxLength', type:'sap.ui.model.type.String'}" change="onChangeTotalBox"/>
+                        </l:HorizontalLayout>
+
+                        <l:HorizontalLayout>
+                            <Label text="Box Type" width="120px" class="sapUiTinyMargin" tooltip="Box Type"/>
+                            <Input width="150px" value="{HeaderDataModel>/BoxType}" maxLength="{path:'ZCE_PACKSLIP_HEAD_SRVB>/ZCE_PACKSLIP_HEADType/BoxType/@maxLength', type:'sap.ui.model.type.String'}" change="onChangeBoxType"/>
+                        </l:HorizontalLayout>
+
+                        <l:HorizontalLayout>
+                            <Label text="Remarks" width="120px" class="sapUiTinyMargin" tooltip="Remarks"/>
+                            <Input width="150px" value="{HeaderDataModel>/Remarks}" maxLength="{path:'ZCE_PACKSLIP_HEAD_SRVB>/ZCE_PACKSLIP_HEADType/Remarks/@maxLength', type:'sap.ui.model.type.String'}" change="onChangeRemrks"/>
+                        </l:HorizontalLayout>
+                        
+                        <l:HorizontalLayout class="serialLayoutBorder sapUiLargeMarginLeft sapUiSmallMarginTop" >
+                            <Label text="Serial No" width="100px" class="sapUiTinyMargin" tooltip="Serial No"/>
+                            <Input width="5rem" value="{HeaderDataModel>/serialNo}"  class="sapUiTinyMargin" maxLength="4"/>
+                            <Button text="Print" type="Accept" tooltip="Print"  class="sapUiTinyMargin" press="onPrintPress" />
+                        </l:HorizontalLayout>
+
+                    </l:VerticalLayout>   
+
+                    <!-- 3rd Column :                  -->
+                    <l:VerticalLayout class="sapUiMediumMarginLeft" >                 
+                 
+                        <l:VerticalLayout> 
+
+                            <Label text="Cap Details:" design="Bold" class="capDetailsUnderline"  />
+
+                            <l:HorizontalLayout >
+                                <Label text="Cap Color Des" width="120px" class="sapUiTinyMargin"  tooltip="Cap Color Des"/>
+                                <Input width="200px"  editable="false"  value="{HeaderDataModel>/CapColorDes}"/>
+                            </l:HorizontalLayout>
+
+                            <l:HorizontalLayout >
+                                <Label text="Cap Color Code" width="120px" class="sapUiTinyMargin"  tooltip="Cap Color Code"/>
+                                <Input width="200px"  editable="false"  value="{HeaderDataModel>/CapColorCode}"/>
+                            </l:HorizontalLayout>
+
+                            <l:HorizontalLayout >
+                                <Label text="Cap Print Message" width="120px" class="sapUiTinyMargin"  tooltip="Cap Print Message"/>
+                                <Input width="200px"  editable="false"  value="{HeaderDataModel>/CapPrintMsg}"/>
+                            </l:HorizontalLayout>
+
+                            <l:HorizontalLayout >
+                                <Label text="Cap Printing Link" width="120px" class="sapUiTinyMargin" tooltip="Cap Printing Link"/>
+                                <Input width="200px"  editable="false"  value="{HeaderDataModel>/CapPrintInk}"/>
+                            </l:HorizontalLayout>                           
+                            
+                        </l:VerticalLayout>
+
+                        <l:VerticalLayout>
+
+                            <Label text="Body Details:"  design="Bold" class="capDetailsUnderline"   />
+                                                
+                            <l:HorizontalLayout>
+                                <Label text="Body Color Des" width="120px" class="sapUiTinyMargin"  tooltip="Body Color Des"/>
+                                <Input width="200px" value="{HeaderDataModel>/BodyColorDes}" maxLength="{path:'ZCE_PACKSLIP_HEAD_SRVB>/ZCE_PACKSLIP_HEADType/QuotationNo/@maxLength', type:'sap.ui.model.type.String'}"  editable="false"/>
+                            </l:HorizontalLayout>
+
+                            <l:HorizontalLayout >
+                                <Label text="Body Color Code" width="120px" class="sapUiTinyMargin"  tooltip="Body Color Code"/>
+                                <Input width="200px" value="{HeaderDataModel>/BodyColorCode}" maxLength="{path:'ZCE_PACKSLIP_HEAD_SRVB>/ZCE_PACKSLIP_HEADType/QuotationNo/@maxLength', type:'sap.ui.model.type.String'}"  editable="false"/>
+                            </l:HorizontalLayout>
+
+                            <l:HorizontalLayout >
+                                <Label text="Body Printing Message" width="120px" class="sapUiTinyMargin"  tooltip="Body Printing Message"/>
+                                <Input width="200px" value="{HeaderDataModel>/BodyPrintMsg}" maxLength="{path:'ZCE_PACKSLIP_HEAD_SRVB>/ZCE_PACKSLIP_HEADType/QuotationNo/@maxLength', type:'sap.ui.model.type.String'}"  editable="false"/>
+                            </l:HorizontalLayout>
+
+                            <l:HorizontalLayout>
+                                <Label text="Body Printing Ink" width="120px" class="sapUiTinyMargin"  tooltip="Body Printing Ink"/>
+                                <Input width="200px" value="{HeaderDataModel>/BodyPrintInk}" maxLength="{path:'ZCE_PACKSLIP_HEAD_SRVB>/ZCE_PACKSLIP_HEADType/QuotationNo/@maxLength', type:'sap.ui.model.type.String'}"  editable="false"/>
+                            </l:HorizontalLayout>
+                                
+                        </l:VerticalLayout>
+
+                    </l:VerticalLayout>
+                    
+                </l:HorizontalLayout>
+            </l:VerticalLayout>
+         </f:DynamicPageHeader>
+        </f:header>
+            <f:content>
+                <t:Table rows="{ProcessOrderItems>/}" selectionMode="MultiToggle" rowMode="Auto"  rowSelectionChange="onRowSelect"  fixedColumnCount="7" >
+                    <t:extension>
+                        <Toolbar>
+                    <Label design="Bold" id="UiSOitems_Toolbar_ALL"
+					text="Items ({LocalViewSettings>/TableCount})" />
+                        </Toolbar>
+                    </t:extension>
+                    <t:columns>
+                        <t:Column label="Sl No" sortProperty="slNo" filterProperty="slNo" width="5rem">
+                            <t:template>
+                                <Text text="{ProcessOrderItems>SerNo}"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column label="Process Order No" width="6rem">
+                            <t:template>
+                                <Text text="{ProcessOrderItems>ProcessOrder}"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column label="Created Date" width="6rem" >
+                            <t:template>
+                                <!-- <Text text="{ProcessOrderItems>CreationDate}"/> -->
+                                <Text width="7rem" text="{path: 'ProcessOrderItems>CreationDate',
+                                             type: 'sap.ui.model.type.DateTime',
+                                             formatOptions: {
+                                                    pattern: 'dd.MM.yyyy'
+                                                }
+                                            }"/> 
+                                
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column label="Time"  width="5rem">
+                            <t:template>
+                                <Text text="{ProcessOrderItems>time}"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column label="S.O No"  width="5rem"  >
+                            <t:template>
+                                <Text text="{ProcessOrderItems>SalesOrder}"/>
+                            </t:template>
+                        </t:Column>
+
+                            <t:Column label="Sales Order Item" width="5rem"  >
+                            <t:template>
+                                <Text text="{ProcessOrderItems>salesOrderItem}"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column label="Batch No" width="6rem" >
+                            <t:template>
+                                <Text text="{ProcessOrderItems>Batch}"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column label="Inv No" width="5rem" >
+                            <t:template>
+                                <Text text="{ProcessOrderItems>InvoiceNo}"/>
+                            </t:template>
+                        </t:Column>
+
+                        <t:Column label="Inv Dt" width="6rem" >
+                            <t:template>
+                                <!-- <Text text="{ProcessOrderItems>InvoiceDate}"/> -->
+                                <Text text="{path: 'ProcessOrderItems>InvoiceDate',
+                                             type: 'sap.ui.model.type.DateTime',
+                                             formatOptions: {
+                                                    pattern: 'dd.MM.yyyy'
+                                                }
+                                            }"/> 
+                            </t:template>
+                        </t:Column>
+                        <t:Column label="Customer Name" width="12rem" >
+                            <t:template>
+                                <Text text="{ProcessOrderItems>CustomerName}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column label="Plant" width="5rem" >
+                            <t:template>
+                                <Text text="{ProcessOrderItems>Plant}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column label="Zsize" width="5rem">
+                            <t:template>
+                                <Text text="{ProcessOrderItems>Zsize}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column label="No Of Boxes"  width="5rem" >
+                            <t:template>
+                                <Text text="{ProcessOrderItems>NoOfBoxes}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column label="Qty" width="5rem">
+                            <t:template>
+                                <Text text="{ProcessOrderItems>Qty}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column label="Base Unit" width="5rem" >
+                            <t:template>
+                                <Text text="{ProcessOrderItems>BaseUnit}"/>
+                            </t:template>
+                        </t:Column>
+                         <t:Column label="Total Box" width="5rem" >
+                            <t:template>
+                                <Text text="{ProcessOrderItems>TotalBox}"/>
+                            </t:template>
+                        </t:Column>
+                         <t:Column label="Box Type" width="5rem">
+                            <t:template>
+                                <Text text="{ProcessOrderItems>BoxType}"/>
+                            </t:template>
+                        </t:Column>
+                         <t:Column label="Remarks" width="5rem" >
+                            <t:template>
+                                <Text text="{ProcessOrderItems>Remarks}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column label="Cap Color Des" width="5rem">
+                            <t:template>
+                                <Text text="{ProcessOrderItems>CapColorDes}"/>
+                            </t:template>
+                        </t:Column>
+                         <t:Column label="Cap Color Code" width="5rem">
+                            <t:template>
+                                <Text text="{ProcessOrderItems>CapColorCode}"/>
+                            </t:template>
+                        </t:Column>
+                         <t:Column label="Cap Print Msg" width="5rem" >
+                            <t:template>
+                                <Text text="{ProcessOrderItems>CapPrintMsg}"/>
+                            </t:template>
+                        </t:Column>
+                         <t:Column label="Cap Print Ink" width="5rem" >
+                            <t:template>
+                                <Text text="{ProcessOrderItems>CapPrintInk}"/>
+                            </t:template>
+                        </t:Column>
+                         <t:Column label="Body Color Des" width="5rem" >
+                            <t:template>
+                                <Text text="{ProcessOrderItems>BodyColorDes}"/>
+                            </t:template>
+                        </t:Column>
+                        <t:Column label="Body Color Code" width="5rem" >
+                            <t:template>
+                                <Text text="{ProcessOrderItems>BodyColorCode}"/>
+                            </t:template>
+                        </t:Column>
+                         <t:Column label="Body Print Msg" width="5rem" >
+                            <t:template>
+                                <Text text="{ProcessOrderItems>BodyPrintMsg}"/>
+                            </t:template>
+                        </t:Column>
+                          <t:Column label="No Of Boxes" width="5rem" >
+                            <t:template>
+                                <Text text="{ProcessOrderItems>BodyPrintInk}"/>
+                            </t:template>
+                        </t:Column>                                                                                                                                                                                                                                                            
+                    </t:columns>
+                </t:Table>
+            </f:content>
+            <f:footer>
+				<OverflowToolbar>
+					<ToolbarSpacer  />
+                    <Button tooltip="Clear" type="Default" press="onCancel" enabled="true" text="Clear" icon="sap-icon://sys-cancel"/>
+					<Button tooltip="Save" type="Success" press=".onSave" enabled="true" text="Save" icon="sap-icon://save"/>
+				</OverflowToolbar>
+			</f:footer>
+    </f:DynamicPage>
+</mvc:View>
+

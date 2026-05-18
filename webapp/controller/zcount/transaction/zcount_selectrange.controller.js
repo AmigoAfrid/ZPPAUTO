@@ -196,7 +196,6 @@ if (oODataModel) {
                 sap.ui.core.BusyIndicator.hide();
             },
 
-
            
             onValueHelpCancelPress: function () {
                 this._oVHD.close();

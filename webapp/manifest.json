@@ -681,6 +681,24 @@
           "localUri": "localService/ZCE_YFCS_TAB_SRVB/metadata.xml",
           "odataVersion": "2.0"
         }
+      },
+      "ZCE_PACKSLIP_TABL_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZCE_PACKSLIP_TABL_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZCE_PACKSLIP_TABL_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
+      },
+      "ZCE_PACKSLIP_HEAD_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZCE_PACKSLIP_HEAD_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZCE_PACKSLIP_HEAD_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
       }
     },
     "crossNavigation": {
@@ -1085,6 +1103,16 @@
         "dataSource": "ZCE_YFCS_TAB_SRVB",
         "preload": true,
         "settings": {}
+      },
+      "ZCE_PACKSLIP_TABL_SRVB": {
+        "dataSource": "ZCE_PACKSLIP_TABL_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZCE_PACKSLIP_HEAD_SRVB": {
+        "dataSource": "ZCE_PACKSLIP_HEAD_SRVB",
+        "preload": true,
+        "settings": {}
       }
     },
     "resources": {
@@ -1261,6 +1289,11 @@
           "pattern": "yfcs_report",
           "name": "yfcs_report",
           "target": "yfcs_report"
+        },
+        {
+          "pattern": "zpackslip",
+          "name": "zpackslip",
+          "target": "zpackslip"
         }
       ],
       "targets": {
@@ -1417,6 +1450,11 @@
         "yfcs_report": {
           "viewName": "yfcs/report/yfcs_report",
           "viewLevel": 29,
+          "viewType": "XML"
+        },
+        "zpackslip": {
+          "viewName": "zpackslip/transaction/zpackslip",
+          "viewLevel": 27,
           "viewType": "XML"
         }
       }
