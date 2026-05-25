@@ -216,17 +216,17 @@
 
 								<layout:HorizontalLayout visible="true" class=" sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
                                     <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
-									<Label text="Box :" tooltip="Enter the starting value" design="Bold" class="sapUiSmallMarginEnd" />
-									<Input value="" editable="true" placeholder="Enter From Value"  id="Box1"/>
+									<Label text="Box 1 (From) :" tooltip="Enter the starting value" design="Bold" class="sapUiSmallMarginEnd" />
+									<Input value="" editable="true" placeholder="Enter Box 1"  id="Box1"/>
                                     </layout:VerticalLayout>
 									<layout:VerticalLayout visible="true" class=" sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
-									<Label text="To:" tooltip="Enter the ending value" design="Bold" class="" />
-                                    <Input value="" editable="true" placeholder="Enter To Value"  id="Box2"/>
+									<Label text="Box 2 (To) :" tooltip="Enter the ending value" design="Bold" class="sapUiSmallMarginBegin" />
+                                    <Input value="" editable="true" placeholder="Enter Box 2"  id="Box2" change="onBox2Change" />
 									</layout:VerticalLayout>
 									<layout:VerticalLayout visible="true" class="customTopMargin sapUiSmallMarginEnd sapUiMediumMarginBottom customWidth">
 									<Button text="Print" tooltip="Execute" type="Emphasized" press="onPrint" enabled="true" />
 									</layout:VerticalLayout>
-									<layout:VerticalLayout visible="true" class="customTopMargin sapUiSmallMarginEnd sapUiMediumMarginBottom customWidth">
+									<layout:VerticalLayout visible="false" class="customTopMargin sapUiSmallMarginEnd sapUiMediumMarginBottom customWidth">
 									<Button text="Print New" tooltip="Execute" type="Emphasized" press="onPrintNew" enabled="true" />
 									</layout:VerticalLayout>
                                 </layout:HorizontalLayout>

@@ -22,11 +22,11 @@ sap.ui.define([
             this.setDefaultSettings();
 
             var userInfoService = sap.ushell.Container.getService("UserInfo");
-                var userName = userInfoService.getUser().getFullName();
-                this.TENTUSERID = userInfoService.getUser().getId();
-                this.TENTUSERNAME = userInfoService.getUser().getFullName();
-                console.log("getId:" , this.TENTUSERID);
-                console.log("User Name: " + this.TENTUSERNAME);
+            var userName = userInfoService.getUser().getFullName();
+            this.TENTUSERID = userInfoService.getUser().getId();
+            this.TENTUSERNAME = userInfoService.getUser().getFullName();
+            console.log("getId:", this.TENTUSERID);
+            console.log("User Name: " + this.TENTUSERNAME);
             // this.getView().getModel("HeaderDataModel").setProperty("/UserName", this.TENTUSERNAME);
         },
         setDefaultSettings: function () {
@@ -222,7 +222,7 @@ sap.ui.define([
             var oHeaderPayload = {
                 Processorder: HeaderModel.ProcessOrder,
                 Creationdate: new Date(),
-                time : new Date().toTimeString().split(' ')[0],
+                time: new Date().toTimeString().split(' ')[0],
                 Serno: Serno,
                 Salesorder: HeaderModel.SalesOrder,
                 Salesorderitem: HeaderModel.salesOrderItem,
@@ -530,8 +530,14 @@ sap.ui.define([
             sap.ui.core.BusyIndicator.show();
 
             var oProcessOrder = this.getView().getModel("HeaderDataModel").getProperty("/ProcessOrder");
-            
+
             var oSerialNo = this.getView().getModel("HeaderDataModel").getProperty("/serialNo");
+
+            if(!oProcessOrder || !oSerialNo){
+                sap.m.MessageBox.information("Please enter both Process Order and Serial No ");
+                sap.ui.core.BusyIndicator.hide();
+                return;
+            }
 
             try {
                 // Construct service URL
@@ -614,6 +620,6 @@ sap.ui.define([
 
 
 
-        
+
     });
 });

@@ -105,154 +105,154 @@ sap.ui.define(
 
                 sap.ui.core.BusyIndicator.show();
 
-                    //   var oFilters1 = new sap.ui.model.Filter("Createdat", sap.ui.model.FilterOperator.EQ, Date);
-                    // Retrieve the model from the view
-                    var oModel = this.getView().getModel("ZCE_ZCOUNT_HEAD_SRVB");
+                //   var oFilters1 = new sap.ui.model.Filter("Createdat", sap.ui.model.FilterOperator.EQ, Date);
+                // Retrieve the model from the view
+                var oModel = this.getView().getModel("ZCE_ZCOUNT_HEAD_SRVB");
 
-                    // Check if the model is valid
-                    if (!oModel) {
-                        console.error("OData model is not properly initialized.");
-                        sap.ui.core.BusyIndicator.hide();
-                        return;
-                    }
+                // Check if the model is valid
+                if (!oModel) {
+                    console.error("OData model is not properly initialized.");
+                    sap.ui.core.BusyIndicator.hide();
+                    return;
+                }
 
-                    //   var oFilters = [oFilters1];
-                    var that = this;
-                    var aAllItems = []; // Array to hold all retrieved items
+                //   var oFilters = [oFilters1];
+                var that = this;
+                var aAllItems = []; // Array to hold all retrieved items
 
-                    // Function to fetch data recursively
-                    function fetchData(skipCount) {
-                        // var that = this;
-                        // var oModel = that.getView().getModel();
-                        // that.getView().setModel(oModel);
-                        oModel.read("/ZCDS_BATCH_F4HELP", {
-                            //   filters: oFilters,
-                            urlParameters: {
-                                $top: 5000,  // Request a chunk of 5000 records
-                                $skip: skipCount  // Start from the skipCount position
-                            },
-                            success: function (oData) {
-                                var aItems = oData.results;
-                                aAllItems = aAllItems.concat(aItems); // Concatenate current chunk to the array
+                // Function to fetch data recursively
+                function fetchData(skipCount) {
+                    // var that = this;
+                    // var oModel = that.getView().getModel();
+                    // that.getView().setModel(oModel);
+                    oModel.read("/ZCDS_BATCH_F4HELP", {
+                        //   filters: oFilters,
+                        urlParameters: {
+                            $top: 5000,  // Request a chunk of 5000 records
+                            $skip: skipCount  // Start from the skipCount position
+                        },
+                        success: function (oData) {
+                            var aItems = oData.results;
+                            aAllItems = aAllItems.concat(aItems); // Concatenate current chunk to the array
 
-                                // Check if there are more records to fetch
-                                if (oData.results.length >= 5000) {
-                                    // If there are more records, fetch next chunk
-                                    fetchData(skipCount + 5000);
-                                } else {
-                                    // If no more records, all data is fetched
-                                    finishFetching();
-                                }
-                            },
-                            error: function (oError) {
-                                console.error("Error reading data: ", oError);
-                                sap.ui.core.BusyIndicator.hide();
+                            // Check if there are more records to fetch
+                            if (oData.results.length >= 5000) {
+                                // If there are more records, fetch next chunk
+                                fetchData(skipCount + 5000);
+                            } else {
+                                // If no more records, all data is fetched
+                                finishFetching();
                             }
+                        },
+                        error: function (oError) {
+                            console.error("Error reading data: ", oError);
+                            sap.ui.core.BusyIndicator.hide();
+                        }
+                    });
+                }
+
+                function finishFetching() {
+
+
+                    // Once all data is fetched, proceed to display it
+                    that.oJSONModel = new sap.ui.model.json.JSONModel({
+                        Datas: aAllItems
+                    });
+                    that.getView().setModel(that.oJSONModel, "oJSONModel");
+                    console.log("that.oJSONModel:", that.oJSONModel)
+
+                    // Load the value help dialog fragment
+                    that._oBasicSearchField = new sap.m.SearchField();
+                    that.loadFragment({
+                        name: "zautodesignapp.view.yfcs.report.fragment.BatchFragment"
+                    }).then(function (oDialog) {
+                        var oFilterBar = oDialog.getFilterBar();
+
+                        var oColumnProductCode, oColumnPostingDate, oColumnCompanyCode;
+                        that._oVHD = oDialog;
+                        that.getView().addDependent(oDialog);
+
+                        // Set key fields for filtering in the Define Conditions Tab
+                        oDialog.setRangeKeyFields([{
+                            label: "Batch No.",
+                            key: "batch",
+                            type: "string",
+                            typeInstance: new sap.ui.model.type.String({}, {
+                                maxLength: 10
+                            })
+                        }]);
+
+                        // Set Basic Search for FilterBar
+                        oFilterBar.setFilterBarExpanded(false);
+                        oFilterBar.setBasicSearch(that._oBasicSearchField);
+
+                        // Trigger filter bar search when the basic search is fired
+                        that._oBasicSearchField.attachSearch(function () {
+                            oFilterBar.search();
                         });
-                    }
 
-                    function finishFetching() {
+                        oDialog.getTableAsync().then(function (oTable) {
+                            oTable.setModel(that.oJSONModel);
 
-
-                        // Once all data is fetched, proceed to display it
-                        that.oJSONModel = new sap.ui.model.json.JSONModel({
-                            Datas: aAllItems
-                        });
-                        that.getView().setModel(that.oJSONModel, "oJSONModel");
-                        console.log("that.oJSONModel:", that.oJSONModel)
-
-                        // Load the value help dialog fragment
-                        that._oBasicSearchField = new sap.m.SearchField();
-                        that.loadFragment({
-                            name: "zautodesignapp.view.yfcs.report.fragment.BatchFragment"
-                        }).then(function (oDialog) {
-                            var oFilterBar = oDialog.getFilterBar();
-
-                            var oColumnProductCode, oColumnPostingDate, oColumnCompanyCode;
-                            that._oVHD = oDialog;
-                            that.getView().addDependent(oDialog);
-
-                            // Set key fields for filtering in the Define Conditions Tab
-                            oDialog.setRangeKeyFields([{
-                                label: "Batch No.",
-                                key: "batch",
-                                type: "string",
-                                typeInstance: new sap.ui.model.type.String({}, {
-                                    maxLength: 10
-                                })
-                            }]);
-
-                            // Set Basic Search for FilterBar
-                            oFilterBar.setFilterBarExpanded(false);
-                            oFilterBar.setBasicSearch(that._oBasicSearchField);
-
-                            // Trigger filter bar search when the basic search is fired
-                            that._oBasicSearchField.attachSearch(function () {
-                                oFilterBar.search();
-                            });
-
-                            oDialog.getTableAsync().then(function (oTable) {
-                                oTable.setModel(that.oJSONModel);
-
-                                // Bind rows/items based on table type (sap.ui.table.Table or sap.m.Table)
-                                if (oTable.bindRows) {
-                                    // Desktop/Table scenario (sap.ui.table.Table)
-                                    oTable.bindAggregation("rows", {
-                                        path: "oJSONModel>/Datas",
-                                        events: {
-                                            dataReceived: function () {
-                                                oDialog.update();
-                                            }
+                            // Bind rows/items based on table type (sap.ui.table.Table or sap.m.Table)
+                            if (oTable.bindRows) {
+                                // Desktop/Table scenario (sap.ui.table.Table)
+                                oTable.bindAggregation("rows", {
+                                    path: "oJSONModel>/Datas",
+                                    events: {
+                                        dataReceived: function () {
+                                            oDialog.update();
                                         }
-                                    });
+                                    }
+                                });
 
-                                    // Define columns for sap.ui.table.Table
-                                    oColumnProductCode = new sap.ui.table.Column({
-                                        label: new sap.m.Label({ text: "Batch No." }),
-                                        template: new sap.m.Text({ wrapping: false, text: "{oJSONModel>batch}" })
-                                    });
-                                    oColumnProductCode.data({
-                                        fieldName: "batch"
-                                    });
+                                // Define columns for sap.ui.table.Table
+                                oColumnProductCode = new sap.ui.table.Column({
+                                    label: new sap.m.Label({ text: "Batch No." }),
+                                    template: new sap.m.Text({ wrapping: false, text: "{oJSONModel>batch}" })
+                                });
+                                oColumnProductCode.data({
+                                    fieldName: "batch"
+                                });
 
-                                    oTable.addColumn(oColumnProductCode);
+                                oTable.addColumn(oColumnProductCode);
 
 
-                                } else if (oTable.bindItems) {
-                                    // Mobile scenario (sap.m.Table)
-                                    oTable.bindAggregation("items", {
-                                        path: "oJSONModel>/Datas",
-                                        template: new sap.m.ColumnListItem({
-                                            cells: [
-                                                new sap.m.Text({ text: "{oJSONModel>batch}" }),
+                            } else if (oTable.bindItems) {
+                                // Mobile scenario (sap.m.Table)
+                                oTable.bindAggregation("items", {
+                                    path: "oJSONModel>/Datas",
+                                    template: new sap.m.ColumnListItem({
+                                        cells: [
+                                            new sap.m.Text({ text: "{oJSONModel>batch}" }),
 
-                                            ]
-                                        }),
-                                        events: {
-                                            dataReceived: function () {
-                                                oDialog.update();
-                                            }
+                                        ]
+                                    }),
+                                    events: {
+                                        dataReceived: function () {
+                                            oDialog.update();
                                         }
-                                    });
+                                    }
+                                });
 
-                                    // Define columns for sap.m.Table (if necessary)
-                                    oTable.addColumn(new sap.m.Column({
-                                        header: new sap.m.Label({ text: "Batch No." })
-                                    }));
+                                // Define columns for sap.m.Table (if necessary)
+                                oTable.addColumn(new sap.m.Column({
+                                    header: new sap.m.Label({ text: "Batch No." })
+                                }));
 
-                                }
+                            }
 
-                                oDialog.update();
-                                sap.ui.core.BusyIndicator.hide();
-                            });
-
-                            oDialog.open();
+                            oDialog.update();
                             sap.ui.core.BusyIndicator.hide();
                         });
-                    }
 
-                    // Start fetching data from the beginning
-                    fetchData(0);
+                        oDialog.open();
+                        sap.ui.core.BusyIndicator.hide();
+                    });
+                }
+
+                // Start fetching data from the beginning
+                fetchData(0);
             },
 
             onValueHelpOkPress_Batch: function (oEvent) {
@@ -1105,6 +1105,23 @@ sap.ui.define(
                                 iSkip += iTop;
                                 fetchData(); // continue loading
                             } else {
+                                let totalLacQty = 0;
+                                let totalNetQty = 0;
+                                let totalGrossQty = 0;
+                                aAllItems.forEach(function (item) {
+                                    totalLacQty += parseFloat(item.qty_lac) || 0;
+                                    totalNetQty += parseFloat(item.netwt) || 0;
+                                    totalGrossQty += parseFloat(item.grosswt) || 0;
+                                });
+                                // ✅ Add total row with only those fields
+                                aAllItems.push({
+                                    createdat: "Total",
+                                    qty_lac: totalLacQty.toFixed(2),
+                                    netwt: totalNetQty.toFixed(2),
+                                    grosswt: totalGrossQty.toFixed(2),
+                                    isTotalRow: true
+
+                                });
                                 that.getView().setBusy(false);
                                 console.log("Total rows fetched:", aAllItems.length);
 
@@ -1158,7 +1175,7 @@ sap.ui.define(
                     var oContext = oTable.getContextByIndex(iIndex);
                     var oRow = oContext.getObject();
 
-                    if (!oRow.yfcs_date || !oRow.Observations || !oRow.fsc_operator || !oRow.location){
+                    if (!oRow.yfcs_date || !oRow.Observations || !oRow.fsc_operator || !oRow.location) {
                         sap.ui.core.BusyIndicator.hide();
                         sap.m.MessageBox.warning("All input fields are mandetory to save");
                         return;
@@ -1185,7 +1202,7 @@ sap.ui.define(
                         Boxno: oRow.boxno,
                         Location: oRow.location,
                         Observations: oRow.Observations,
-                        Packedby:oRow.packedby,
+                        Packedby: oRow.packedby,
                         Capprinting: oRow.capprinting,
                         Bodyprinting: oRow.bodyprinting,
                         YfcsDate: that.formatDate(oRow.yfcs_date),
@@ -1497,8 +1514,32 @@ sap.ui.define(
                 });
                 return aCols;
 
-            }
+            },
+             OnDateChangeValue: function (Datess) {
+                var that = this;
+                if (Datess === "Total") {
+                    return "Total"; // Directly return "Total" if that's the value
+                }
+                if (Datess !== null) {
 
+                    return new Promise(function (resolve, reject) {
+
+                        let Dtasss = new Date(Datess);
+                        var dd = '' + Dtasss.getDate();
+                        var mm = '' + (Dtasss.getMonth() + 1); //January is 0!
+                        if (mm.length < 2) {
+                            mm = '0' + mm;
+                        }
+                        if (dd.length < 2) {
+                            dd = '0' + dd;
+                        }
+                        var yyyy = Dtasss.getFullYear();
+                        let Dtasss1 = dd + '-' + mm + '-' + yyyy;
+                        resolve(Dtasss1);
+
+                    });
+                }
+            },
 
 
 

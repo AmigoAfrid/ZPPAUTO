@@ -302,6 +302,9 @@ server:
           - path: /sap/opu/odata/sap/ZCE_PACKSLIP_HEAD_SRVB/
             url: https://my421040.s4hana.cloud.sap
             destination: my421040_cust
+          - path: /sap/opu/odata/sap/ZCE_POSTED_DIPS_SRVB/
+            url: https://my421040.s4hana.cloud.sap
+            destination: my421040_cust
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
@@ -605,6 +608,10 @@ server:
           - urlPath: /sap/opu/odata/sap/ZCE_PACKSLIP_HEAD_SRVB
             metadataPath: ./webapp/localService/ZCE_PACKSLIP_HEAD_SRVB/metadata.xml
             mockdataPath: ./webapp/localService/ZCE_PACKSLIP_HEAD_SRVB/data
+            generateMockData: true
+          - urlPath: /sap/opu/odata/sap/ZCE_POSTED_DIPS_SRVB
+            metadataPath: ./webapp/localService/ZCE_POSTED_DIPS_SRVB/metadata.xml
+            mockdataPath: ./webapp/localService/ZCE_POSTED_DIPS_SRVB/data
             generateMockData: true
         annotations:
           - localPath: ./webapp/localService/ZSB_ACM_REPORT/ZSB_ACM_REPORT_VAN.xml

@@ -7,6 +7,7 @@ sap.ui.define([
     "sap/m/PDFViewer",
     "zautodesignapp/util/jspdf/html2canvasmin",
     "zautodesignapp/util/jspdf/jspdfmin",
+    "zautodesignapp/util/PDFLib",
 ], function (Controller, JSONModel, MessageToast, MessageBox, Filter, FilterOperator, ODataModel, Device, SearchField, TypeString, PDFLibjs, pdfjsLib, pdf, ColumnListItem, Label, PDFViewer) {
     "use strict";
 
@@ -36,6 +37,14 @@ sap.ui.define([
 
             // Set the model to the view
             this.getView().setModel(this.TabZlabelItemModel, "TabZlabelItemModel");
+
+            this._pdfViewer2 = new sap.m.PDFViewer({
+                isTrustedSource: true,
+                width: "100%",
+                height: "600px", // Adjust height as needed
+                title: ""
+            });
+            this.getView().addDependent(this._pdfViewer2);
 
 
 
@@ -1580,7 +1589,7 @@ sap.ui.define([
         </tr>
         <tr>
             <td>CUST MAT CODE</td>
-            <td>:${entry.materialbycustomer||""}</td>
+            <td>:${entry.materialbycustomer || ""}</td>
         </tr>
     </table>
  
@@ -2195,6 +2204,127 @@ sap.ui.define([
             } finally {
                 sap.ui.core.BusyIndicator.hide();
             }
+        },
+
+        onBox2_Change: function () {
+            var oBox1 = parseFloat(this.byId("Box1_").getValue());
+            if (!oBox1) {
+                sap.m.MessageToast.show("Please enter Box 1 value first");
+                this.byId("Box2_").setValue("");
+            }
+        },
+
+        // Print function :================================
+        onPrintPDF: async function () {
+            sap.ui.core.BusyIndicator.show();
+
+            var oProcessOrder = this.getView().getModel("zlabelmodel").getProperty("/HeaderData/0/ProcessOrder");
+
+            const Box1 = parseInt(this.getView().byId("Box1_").getValue(), 10);
+            const Box2 = parseInt(this.getView().byId("Box2_").getValue(), 10);
+
+            // Validate input
+            if (!Box1 || !Box2) {
+                sap.m.MessageToast.show("Please enter both Box1 and Box2");
+                sap.ui.core.BusyIndicator.hide();
+                return;
+            }
+
+            if (Box2 < Box1) {
+                sap.m.MessageToast.show("Box 2 value must be greater than Box 1");
+                this.getView().byId("Box2_").setValue("");
+                sap.ui.core.BusyIndicator.hide();
+                return;
+            }
+
+            try {
+
+                const pdfContentArray = [];
+
+                // Loop 
+                for (let i = Box1; i <= Box2; i++) {
+
+                    const sServiceUrl = `/sap/bc/http/sap/Z_ZLABEL?processorder=${oProcessOrder}&boxno=${i}`;
+
+                    // Service Link
+                    console.log("Service URL:", sServiceUrl);
+
+                    const pdfData = await this.fetchPDFData(sServiceUrl);
+
+                    // Push into array
+                    pdfContentArray.push(pdfData);
+                }
+
+                // Display all PDFs
+                this.displayPDFs(pdfContentArray);
+
+                sap.m.MessageToast.show("PDFs generated successfully!");
+
+                // Optional: Clear fields
+                this.getView().byId("Box1_").setValue("");
+                this.getView().byId("Box2_").setValue("");
+
+            } catch (error) {
+                console.error("Error generating PDFs:", error);
+                sap.m.MessageToast.show("Failed to generate PDFs. Please try again.");
+            } finally {
+                sap.ui.core.BusyIndicator.hide();
+            }
+        },
+
+        fetchPDFData: function (sServiceUrl) {
+            return new Promise((resolve, reject) => {
+                jQuery.ajax({
+                    url: sServiceUrl,
+                    method: "GET",
+                    success: function (data, textStatus, jqXHR) {
+                        resolve(data); // Resolve with PDF data
+                    },
+                    error: function (jqXHR, textStatus, errorThrown) {
+                        console.error("Error fetching data. Status:", textStatus, "Error:", errorThrown);
+                        sap.m.MessageToast.show("HTTP Service Error...!");
+                        reject(errorThrown);
+                        sap.ui.core.BusyIndicator.hide();
+                    }
+                });
+            });
+        },
+
+        displayPDFs: async function (pdfDataArray) {
+            const base64ToArrayBuffer = (base64) => {
+                const binaryString = atob(base64);
+                const binaryLen = binaryString.length;
+                const bytes = new Uint8Array(binaryLen);
+                for (let i = 0; i < binaryLen; i++) {
+                    bytes[i] = binaryString.charCodeAt(i);
+                }
+                return bytes.buffer;
+            };
+
+            const mergedPdf = await PDFLib.PDFDocument.create();
+            for (let document of pdfDataArray) {
+                const pdfBytes = base64ToArrayBuffer(document);
+                const pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
+                const copiedPages = await mergedPdf.copyPages(pdfDoc, pdfDoc.getPageIndices());
+                copiedPages.forEach((page) => mergedPdf.addPage(page));
+            }
+
+            const pdfBytes = await mergedPdf.save();
+            const pdfBlob = new Blob([pdfBytes], { type: 'application/pdf' });
+            const _pdfurl = URL.createObjectURL(pdfBlob);
+
+            if (!this._pdfViewer2) {
+                this._pdfViewer2 = new sap.m.PDFViewer({
+                    width: "auto",
+                    source: _pdfurl
+                });
+                jQuery.sap.addUrlWhitelist("blob");
+            } else {
+                this._pdfViewer2.setSource(_pdfurl);
+            }
+
+            this._pdfViewer2.setTitle("Z-Label PDF");
+            this._pdfViewer2.open();
         }
 
 
