@@ -965,9 +965,17 @@ sap.ui.define(
                         (endDate.getTimezoneOffset() * 60000)
                     ).toISOString().split("T")[0];
                 }
+                
+                let FinalFilter = [];
 
-                const oModel = this.getView()
-                    .getModel("ZCE_ZBCR_REPT_SRVB");
+                if (aBatchTokens.length > 0) {
+                    const batchFilters = aBatchTokens.map(function (oToken) {
+                        return new sap.ui.model.Filter("batch", sap.ui.model.FilterOperator.EQ, oToken.getText());
+                    });
+                    FinalFilter.push(new sap.ui.model.Filter({ filters: batchFilters, and: false }));
+                }
+
+                const oModel = this.getView().getModel("ZCE_ZBCR_REPT_SRVB");
 
                 const that = this;
 
@@ -980,7 +988,7 @@ sap.ui.define(
                 function fetchData() {
 
                     oModel.read("/ZCE_ZBCR_REPT", {
-
+                        filters: FinalFilter,                        
                         urlParameters: {
                             "$skip": iSkip,
                             "$top": iTop
@@ -1024,7 +1032,7 @@ sap.ui.define(
                                                 if (!oRange) {
 
                                                     return itemBatch ===
-                                                        String(oToken.getKey()).trim();
+                                                        String(oToken.getText()).trim();
                                                 }
 
                                                 const sOperation =
@@ -1140,31 +1148,6 @@ sap.ui.define(
                                 );
 
                                 // =========================
-                                // Editable Logic
-                                // =========================
-
-                                const bEditable =
-                                    aFilteredItems.some(function (item) {
-
-                                        return !item.status ||
-                                            !item.remark;
-                                    });
-
-                                const oTable =
-                                    that.getView().byId("idItemTable");
-
-                                if (oTable) {
-
-                                    oTable.setEditable(bEditable);
-
-                                } else {
-
-                                    console.error(
-                                        "Table 'idItemTable' not found."
-                                    );
-                                }
-
-                                // =========================
                                 // No Data Message
                                 // =========================
 
@@ -1196,117 +1179,10 @@ sap.ui.define(
                 // Start Fetch
                 fetchData();
             },
+            
 
 
-            // OnGoItemPage: async function () {
-
-            //     var oDateRange = this.getView().byId("Datess");
-            //     var batchTokens = this.getView().byId("idmaterialdocument").getTokens();
-            //     var sDateRangeValue = oDateRange.getValue();
-
-            //     const aBatchValues = batchTokens.map(oToken => oToken.getText().trim());
-
-            //     // --- Date parsing ---
-            //     let bHasDate = sDateRangeValue && sDateRangeValue.trim() !== "";
-            //     let FromDate = "", ToDate = "";
-
-            //     if (bHasDate) {
-            //         let [startDateStr, endDateStr] = sDateRangeValue.split(" - ");
-            //         let startDate = new Date(startDateStr);
-            //         let endDate = new Date(endDateStr);
-
-            //         FromDate = new Date(startDate.getTime() - (startDate.getTimezoneOffset() * 60000))
-            //             .toISOString().split("T")[0];
-
-            //         ToDate = new Date(endDate.getTime() - (endDate.getTimezoneOffset() * 60000))
-            //             .toISOString().split("T")[0];
-            //     }
-
-            //     // ---- Build filters ----
-            //     let aFilter = [];
-
-            //     // Batch filter (OR condition)
-            //     if (aBatchValues.length > 0) {
-            //         const aBatchFilters = aBatchValues.map(batch =>
-            //             new sap.ui.model.Filter("batch", sap.ui.model.FilterOperator.EQ, batch)
-            //         );
-
-            //         aFilter.push(
-            //             new sap.ui.model.Filter({
-            //                 filters: aBatchFilters,
-            //                 and: false // OR condition
-            //             })
-            //         );
-            //     }
-
-            //     // Date range filter
-            //     if (bHasDate) {
-            //         aFilter.push(
-            //             new sap.ui.model.Filter("start_date", sap.ui.model.FilterOperator.BT, FromDate, ToDate)
-            //         );
-            //     }
-
-            //     // Combine filters (AND = batch + date)
-            //     const FinalFilter = new sap.ui.model.Filter({
-            //         filters: aFilter,
-            //         and: true
-            //     });
-
-            //     // ---- Read Model ----
-            //     const oModel = this.getView().getModel("ZCE_ZBCR_REPT_SRVB");
-            //     const that = this;
-
-            //     that.getView().setBusy(true);
-
-            //     let aAllItems = [];
-            //     let iSkip = 0;
-            //     const iTop = 200;
-
-            //     // ---- Recursive Paging Function ----
-            //     function fetchData() {
-
-            //         let mParameters = {
-            //             urlParameters: {
-            //                 "$skip": iSkip,
-            //                 "$top": iTop
-            //             },
-            //             success: function (oData) {
-            //                 if (oData.results.length > 0) {
-            //                     aAllItems = aAllItems.concat(oData.results);
-            //                     iSkip += iTop;
-            //                     fetchData(); // Continue next page
-            //                 } else {
-            //                     that.getView().setBusy(false);
-
-            //                     console.log("Total rows fetched:", aAllItems.length);
-
-            //                     // Bind final result
-            //                     const oTabModel = new sap.ui.model.json.JSONModel({ ItemData: aAllItems });
-            //                     that.getView().setModel(oTabModel, "TabModel");
-
-            //                     if (aAllItems.length === 0) {
-            //                         sap.m.MessageToast.show("No records found for the given filters.");
-            //                     }
-            //                 }
-            //             },
-            //             error: function (error) {
-            //                 that.getView().setBusy(false);
-            //                 console.error("Error fetching data:", error);
-            //                 sap.m.MessageToast.show("Error fetching data.");
-            //             }
-            //         };
-
-            //         // 👉 Apply filters ONLY IF present
-            //         if (aFilter.length > 0) {
-            //             mParameters.filters = [FinalFilter];
-            //         }
-
-            //         oModel.read("/ZCE_ZBCR_REPT", mParameters);
-            //     }
-
-            //     // ---- Start Fetching ----
-            //     fetchData();
-            // },
+           
 
             onRowSelectionChange: function (oEvent) {
                 var oTable = this.byId("idItemTable");
@@ -1340,105 +1216,102 @@ sap.ui.define(
             },
             // // Save new added fileds grey out
 
-            // onSaveOrCreateRows: function () {
-            //     var oTable = this.getView().byId("idItemTable");
-            //     var aSelectedIndices = oTable.getSelectedIndices();
+            onSaveOrCreateRows: function () {
+                var oTable = this.getView().byId("idItemTable");
+                var aSelectedIndices = oTable.getSelectedIndices();
 
-            //     if (aSelectedIndices.length === 0) {
-            //         MessageToast.show("Please select at least one row.");
-            //         return;
-            //     }
+                if (aSelectedIndices.length === 0) {
+                    MessageToast.show("Please select at least one row.");
+                    return;
+                }
 
-            //     var oDataModel = this.getView().getModel("ZCE_ZBCR_REPT_SRVB"); // ✅ Correct model
-            //     var that = this;
-            //     var iProcessedCount = 0;
+                var oDataModel = this.getView().getModel("ZCE_ZBCR_REPT_SRVB"); // ✅ Correct model
+                var that = this;
+                var iProcessedCount = 0;
 
-            //     aSelectedIndices.forEach(function (iIndex) {
-            //         var oSelectedRow = oTable.getContextByIndex(iIndex).getObject();
-            //         var sBatch = oSelectedRow.batch;
+                aSelectedIndices.forEach(function (iIndex) {
+                    var oSelectedRow = oTable.getContextByIndex(iIndex).getObject();
+                    var sBatch = oSelectedRow.batch;
 
-            //         if (!sBatch || !oSelectedRow.status || !oSelectedRow.remark) {
-            //             MessageToast.show("Please enter all required details before saving.");
-            //             return;
-            //         }
+                    if (!sBatch || !oSelectedRow.status || !oSelectedRow.remark) {
+                        MessageToast.show("Please enter all required details before saving.");
+                        return;
+                    }
 
-            //         var payload = {
-            //             batch: sBatch,
-            //             status: oSelectedRow.status,
-            //             remark: oSelectedRow.remark
-            //         };
+                    var payload = {
+                        batch: sBatch,
+                        status: oSelectedRow.status,
+                        remark: oSelectedRow.remark
+                    };
 
-            //         // 🔍 Check if record exists before deciding create/update
-            //         var sPath = "/ZCE_DCR_STATUS(batch='" + sBatch + "')";
-            //         oDataModel.read(sPath, {
-            //             success: function () {
-            //                 // ✅ Record exists → update
-            //                 that._updateRow(oDataModel, sBatch, payload, function () {
-            //                     iProcessedCount++;
-            //                     that._checkAndClearSelection(oTable, aSelectedIndices, iProcessedCount);
-            //                 });
-            //             },
-            //             error: function () {
-            //                 // ❌ Record doesn't exist → create
-            //                 that._createRow(oDataModel, payload, function () {
-            //                     iProcessedCount++;
-            //                     that._checkAndClearSelection(oTable, aSelectedIndices, iProcessedCount);
-            //                 });
-            //             }
-            //         });
-            //     });
-            // },
+                    // 🔍 Check if record exists before deciding create/update
+                    var sPath = "/ZCE_DCR_STATUS(batch='" + sBatch + "')";
+                    oDataModel.read(sPath, {
+                        success: function () {
+                            // ✅ Record exists → update
+                            that._updateRow(oDataModel, sBatch, payload, function () {
+                                iProcessedCount++;
+                                that._checkAndClearSelection(oTable, aSelectedIndices, iProcessedCount);
+                            });
+                        },
+                        error: function () {
+                            // ❌ Record doesn't exist → create
+                            that._createRow(oDataModel, payload, function () {
+                                iProcessedCount++;
+                                that._checkAndClearSelection(oTable, aSelectedIndices, iProcessedCount);
+                            });
+                        }
+                    });
+                });
+            },
 
-            // /**
-            //  * Helper for updating an existing row
-            //  */
-            // _updateRow: function (oDataModel, sBatch, payload, fnCallback) {
-            //     oDataModel.update("/ZCE_DCR_STATUS(batch='" + sBatch + "')", payload, {
-            //         success: function () {
-            //             console.log("Row updated successfully for batch:", sBatch);
-            //             MessageToast.show("Row updated successfully for batch: " + sBatch);
-            //             if (fnCallback) fnCallback();
-            //         },
-            //         error: function (oError) {
-            //             console.error("Failed to update row for batch:", sBatch, oError);
-            //             MessageToast.show("Error updating row for batch: " + sBatch);
-            //             if (fnCallback) fnCallback();
-            //         }
-            //     });
-            // },
+            /**
+             * Helper for updating an existing row
+             */
+            _updateRow: function (oDataModel, sBatch, payload, fnCallback) {
+                oDataModel.update("/ZCE_DCR_STATUS(batch='" + sBatch + "')", payload, {
+                    success: function () {
+                        console.log("Row updated successfully for batch:", sBatch);
+                        MessageToast.show("Row updated successfully for batch: " + sBatch);
+                        if (fnCallback) fnCallback();
+                    },
+                    error: function (oError) {
+                        console.error("Failed to update row for batch:", sBatch, oError);
+                        MessageToast.show("Error updating row for batch: " + sBatch);
+                        if (fnCallback) fnCallback();
+                    }
+                });
+            },
 
-            // /**
-            //  * Helper for creating a new row
-            //  */
-            // _createRow: function (oDataModel, payload, fnCallback) {
-            //     oDataModel.create("/ZCE_DCR_STATUS", payload, {
-            //         success: function (oData) {
-            //             console.log("Row created successfully:", oData);
-            //             MessageToast.show("Row created successfully for batch: " + payload.batch);
-            //             if (fnCallback) fnCallback();
-            //         },
-            //         error: function (oError) {
-            //             console.error("Failed to create row:", oError);
-            //             MessageToast.show("Error creating row for batch: " + payload.batch);
-            //             if (fnCallback) fnCallback();
-            //         }
-            //     });
-            // },
-
-            // /**
-            //  * Helper to clear selection and refresh table after all rows processed
-            //  */
+            /**
+             * Helper for creating a new row
+             */
+            _createRow: function (oDataModel, payload, fnCallback) {
+                oDataModel.create("/ZCE_DCR_STATUS", payload, {
+                    success: function (oData) {
+                        console.log("Row created successfully:", oData);
+                        MessageToast.show("Row created successfully for batch: " + payload.batch);
+                        if (fnCallback) fnCallback();
+                    },
+                    error: function (oError) {
+                        console.error("Failed to create row:", oError);
+                        MessageToast.show("Error creating row for batch: " + payload.batch);
+                        if (fnCallback) fnCallback();
+                    }
+                });
+            },
+            
+            
             // onSaveOrCreateRows: function () {
 
             //     var oTable = this.getView().byId("idItemTable");
             //     var aSelectedIndices = oTable.getSelectedIndices();
-
-            //     if (aSelectedIndices.length === 0) {
-            //         MessageToast.show("Please select at least one row.");
-            //         return;
-            //     }
-
             //     var oDataModel = this.getView().getModel("ZCE_ZBCR_REPT_SRVB");
+
+            //     if (aSelectedIndices.length === 0) {
+            //         MessageToast.show("Please select at least one row.");
+            //         return;
+            //     }
 
             //     aSelectedIndices.forEach(function (iIndex) {
 
@@ -1446,12 +1319,14 @@ sap.ui.define(
             //         var oSelectedRow = oContext.getObject();
 
             //         if (!oSelectedRow.status || !oSelectedRow.remark) {
-            //             MessageToast.show("Please enter all required details before saving.");
+            //             MessageToast.show("Please fill required fields");
             //             return;
             //         }
 
-            //         // Path 
-            //         var sPath = oContext.getPath();
+            //         var sBatch = oSelectedRow.batch;
+
+            //         // ✔ IMPORTANT: update must use key path
+            //         var sPath = "/ZCE_DCR_STATUS(batch='" + sBatch + "')";
 
             //         var payload = {
             //             status: oSelectedRow.status,
@@ -1459,69 +1334,18 @@ sap.ui.define(
             //         };
 
             //         oDataModel.update(sPath, payload, {
-
-            //             merge: true,
-
             //             success: function () {
-            //                 MessageToast.show("Updated Successfully");
+            //                 MessageToast.show("Updated Batch: " + oSelectedRow.batch);
             //             },
 
             //             error: function (oError) {
             //                 console.log(oError);
-            //                 MessageToast.show("Update Failed");
+            //                 MessageToast.show("Update Failed for Batch: " + oSelectedRow.batch);
             //             }
             //         });
 
             //     });
-
             // },
-            onSaveOrCreateRows: function () {
-
-                var oTable = this.getView().byId("idItemTable");
-                var aSelectedIndices = oTable.getSelectedIndices();
-                var oDataModel = this.getView().getModel("ZCE_ZBCR_REPT_SRVB");
-
-                if (aSelectedIndices.length === 0) {
-                    MessageToast.show("Please select at least one row.");
-                    return;
-                }
-
-                aSelectedIndices.forEach(function (iIndex) {
-
-                    var oContext = oTable.getContextByIndex(iIndex);
-                    var oSelectedRow = oContext.getObject();
-
-                    if (!oSelectedRow.status || !oSelectedRow.remark) {
-                        MessageToast.show("Please fill required fields");
-                        return;
-                    }
-
-                    var sBatch = oSelectedRow.batch;
-
-                    // ✔ IMPORTANT: update must use key path
-                    var sPath = "/ZCE_DCR_STATUS(batch='" + sBatch + "')";
-
-                    var payload = {
-                        status: oSelectedRow.status,
-                        remark: oSelectedRow.remark
-                    };
-
-                    oDataModel.update(sPath, payload, {
-
-                        merge: true,
-
-                        success: function () {
-                            MessageToast.show("Updated Batch: " + oSelectedRow.batch);
-                        },
-
-                        error: function (oError) {
-                            console.log(oError);
-                            MessageToast.show("Update Failed for Batch: " + oSelectedRow.batch);
-                        }
-                    });
-
-                });
-            },
             _checkAndClearSelection: function (oTable, aSelectedIndices, iProcessedCount) {
                 // When all selected rows have been processed
                 if (iProcessedCount === aSelectedIndices.length) {

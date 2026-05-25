@@ -455,147 +455,374 @@ sap.ui.define(
 
 
             // Table item dips currency 
+            // onchangedipscur: function (oEvent) {
+            //     // Show the BusyIndicator at the start
+            //     sap.ui.core.BusyIndicator.show();
+
+            //     try {
+            //         const input = oEvent.getSource(); // the Input field
+            //         const context = input.getBindingContext("TabItemModel");
+            //         let getHeaderData = this.screen2headermodel.getProperty("/HEADERDATA/");
+            //         let OrderQtyLakh = parseFloat(getHeaderData.QtytoMfdLakhs);
+
+            //         if (context) {
+            //             const rowPath = context.getPath();
+            //             const rowData = context.getObject();
+
+
+            //             /// data and shift mandatory validation
+
+            //             if (rowData.zdate === "" || rowData.shift === "") {
+            //                 console.log("rowData", rowData);
+            //                 sap.m.MessageBox.warning("Please fill all mandatory fields (Date, Shift) before entering Dips Current.");
+            //                 sap.ui.core.BusyIndicator.hide();
+            //                 return
+            //             };
+            //             function toUTCDate(localDate) {
+            //                 return new Date(Date.UTC(
+            //                     localDate.getFullYear(),
+            //                     localDate.getMonth(),
+            //                     localDate.getDate()
+            //                 ));
+            //             }
+
+
+            //             var oDate = toUTCDate(rowData.zdate);
+
+
+
+            //             var Filters = [new sap.ui.model.Filter("zdate", sap.ui.model.FilterOperator.EQ, oDate),
+            //             new sap.ui.model.Filter("shift", sap.ui.model.FilterOperator.EQ, rowData.shift),
+            //             new sap.ui.model.Filter("acmno", sap.ui.model.FilterOperator.EQ, getHeaderData.ACMNO)
+
+            //             ];
+
+            //             console.log("Filters:", Filters);
+
+
+            //             var Dipsvalidmodel = this.getView().getModel("ZCE_POSTED_DIPS_SRVB");
+            //             Dipsvalidmodel.read("/ZCE_POSTED_DIPS", {
+            //                 filters: Filters,
+            //                 success: function (oData) {
+            //                     console.log("oData:", oData);
+
+            //                     if (oData.results.length > 0) {
+
+            //                         let remainingDips = oData.results[0].max_dips - oData.results[0].dipscurrent;
+            //                         if (remainingDips < rowData.dipscurrent) {
+            //                         sap.m.MessageBox.warning("The entered Dips Current value exceeds the remaining dips for the selected date and shift. Remaining dips: " + remainingDips);
+            //                         sap.ui.core.BusyIndicator.hide();
+            //                         return;
+            //                         }
+            //                     }
+
+            //                 },
+            //                 error: function (oError) {
+            //                     sap.ui.core.BusyIndicator.hide();
+            //                 }
+            //             });
+
+            //             let getdipcurr = rowData.dipscurrent.trim() !== "" ? parseFloat(rowData.dipscurrent) : 0.00;
+            //             let cumulative = rowData.cumulative.trim() !== "" ? parseFloat(rowData.cumulative) : 0.00;
+            //             let dipsqtylakh = rowData.dipsqtylakh.trim() !== "" ? parseFloat(rowData.dipsqtylakh) : 0.00;
+
+            //             // Split the row index value
+            //             let a = rowPath;
+            //             let b = a.split("/");
+            //             let rowobject = b[1];
+            //             let rowindex = parseInt(b[2]);
+
+            //             if (rowindex > 0) {
+            //                 let num = rowindex - 1;
+
+            //                 let c = this.getView().getModel("TabItemModel");
+            //                 let cdatas = c.getProperty("/Datatabitem/" + num);
+            //                 let dispmaster = this.dipsmodelcal.getProperty("/DipsData");
+            //                 // debugger
+            //                 let getdipscummlat = parseFloat(cdatas.cumulative);
+            //                 let aBC = parseFloat(getdipscummlat) + parseFloat(getdipcurr);
+            //                 let cumulativelkh_total = (aBC * dispmaster.qty_dips) / 100000;
+            //                 let dipsshift_val = parseFloat(dispmaster.max_dips)
+
+            //                 let BalQtyLakhFinal = parseFloat(OrderQtyLakh) - parseFloat(cumulativelkh_total);
+
+            //                 // if(BalQtyLakhFinal <= "0.00" || BalQtyLakhFinal <=0){
+
+            //                 // sap.m.MessageBox.show("Balance Quantaty Reached to ZERO");
+            //                 // sap.ui.core.BusyIndicator.hide();
+            //                 //  return;
+
+            //                 // }
+
+
+            //                 let dipsqtylakhtotal = (getdipcurr * dispmaster.qty_dips) / 100000;
+
+            //                 let getdipcurr_K = parseFloat(getdipcurr)
+            //                 let dipsshift_val_K = parseFloat(dipsshift_val)
+
+            //                 // Guard clause to avoid processing if dipcurrent is greater than DIPS Master Shift Lakh QTY
+            //                 if (getdipcurr_K > dipsshift_val_K || BalQtyLakhFinal <= "0.00" || BalQtyLakhFinal <= 0) {
+            //                     sap.m.MessageBox.information("Currency value exceeds the shortage in shift quantity...")
+            //                     context.getModel().setProperty(`${rowPath}/dipscurrent`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/balanceqty`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/dipsuptoprevious`, '0.000');
+            //                     context.getModel().setProperty(`${rowPath}/cummulativeinlaksh`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/dipsqtylakh`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/capcutqty`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/bodycutqty`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/capcakeqty`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/bodycakeqty`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/hfx`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/wastage`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/floorwastage`, '0.00');
+            //                     return;
+            //                 }
+
+
+            //                 // Update the model with new values
+            //                 context.getModel().setProperty(`${rowPath}/dipscurrent`, getdipcurr);
+            //                 context.getModel().setProperty(`${rowPath}/dipsuptoprevious`, getdipcurr.toFixed(3));
+            //                 context.getModel().setProperty(`${rowPath}/cumulative`, aBC.toFixed(3));
+            //                 context.getModel().setProperty(`${rowPath}/cummulativeinlaksh`, cumulativelkh_total.toFixed(2));
+            //                 context.getModel().setProperty(`${rowPath}/dipsqtylakh`, dipsqtylakhtotal.toFixed(2));
+            //                 context.getModel().setProperty(`${rowPath}/balanceqty`, BalQtyLakhFinal.toFixed(3));
+
+            //             } else {
+            //                 let c = this.getView().getModel("TabItemModel");
+            //                 let cdatas = c.getProperty("/Datatabitem/" + rowindex);
+            //                 let dispmaster = this.dipsmodelcal.getProperty("/DipsData");
+
+            //                 let getdipscummlat = parseFloat(cdatas.cumulative);
+            //                 let aBC = parseFloat(getdipcurr);
+            //                 let cumulativelkh_total = (aBC * dispmaster.qty_dips) / 100000;
+
+            //                 let BalQtyLakhFinal = parseFloat(OrderQtyLakh) - parseFloat(cumulativelkh_total);
+            //                 let dipsqtylakhtotal = (getdipcurr * dispmaster.qty_dips) / 100000;
+
+            //                 // // Guard clause to avoid processing if dipcurrent is greater than OrderQtyLakh
+            //                 // if (getdipcurr > OrderQtyLakh) {
+            //                 //     sap.m.MessageBox.information("Please enter valid value...")
+            //                 //     context.getModel().setProperty(`${rowPath}/dipscurrent`, '0.000');
+            //                 //     return;
+            //                 // }
+
+            //                 let dipsshift_val = parseFloat(dispmaster.max_dips)
+
+            //                 let getdipcurr_K = parseFloat(getdipcurr)
+            //                 let dipsshift_val_K = parseFloat(dipsshift_val)
+
+
+            //                 // Guard clause to avoid processing if dipcurrent is greater than DIPS Master Shift Lakh QTY
+            //                 if (getdipcurr_K > dipsshift_val_K) {
+            //                     sap.m.MessageBox.information("Currency value exceeds the shortage in shift quantity...")
+            //                     context.getModel().setProperty(`${rowPath}/dipscurrent`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/balanceqty`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/dipsuptoprevious`, '0.000');
+            //                     context.getModel().setProperty(`${rowPath}/cummulativeinlaksh`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/cumulative`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/dipsqtylakh`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/capcutqty`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/bodycutqty`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/capcakeqty`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/bodycakeqty`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/hfx`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/wastage`, '0.00');
+            //                     context.getModel().setProperty(`${rowPath}/floorwastage`, '0.00');
+            //                     return;
+            //                 }
+
+            //                 // Update the model with new values
+            //                 context.getModel().setProperty(`${rowPath}/dipscurrent`, getdipcurr);
+            //                 context.getModel().setProperty(`${rowPath}/dipsuptoprevious`, getdipcurr.toFixed(3));
+            //                 context.getModel().setProperty(`${rowPath}/cumulative`, aBC.toFixed(3));
+            //                 context.getModel().setProperty(`${rowPath}/cummulativeinlaksh`, cumulativelkh_total.toFixed(2));
+            //                 context.getModel().setProperty(`${rowPath}/dipsqtylakh`, dipsqtylakhtotal.toFixed(2));
+            //                 context.getModel().setProperty(`${rowPath}/balanceqty`, BalQtyLakhFinal.toFixed(3));
+            //             }
+
+            //         } else {
+            //             console.log("No binding context found.");
+            //         }
+            //     } catch (error) {
+            //         console.error("Error occurred during onchangedipscur:", error);
+            //     } finally {
+            //         // Hide the BusyIndicator in finally block
+            //         sap.ui.core.BusyIndicator.hide();
+            //     }
+            // },
             onchangedipscur: function (oEvent) {
-                // Show the BusyIndicator at the start
                 sap.ui.core.BusyIndicator.show();
 
                 try {
-                    const input = oEvent.getSource(); // the Input field
+                    const input = oEvent.getSource();
                     const context = input.getBindingContext("TabItemModel");
                     let getHeaderData = this.screen2headermodel.getProperty("/HEADERDATA/");
                     let OrderQtyLakh = parseFloat(getHeaderData.QtytoMfdLakhs);
 
-                    if (context) {
-                        const rowPath = context.getPath();
-                        const rowData = context.getObject();
-                        let getdipcurr = rowData.dipscurrent.trim() !== "" ? parseFloat(rowData.dipscurrent) : 0.00;
-                        let cumulative = rowData.cumulative.trim() !== "" ? parseFloat(rowData.cumulative) : 0.00;
-                        let dipsqtylakh = rowData.dipsqtylakh.trim() !== "" ? parseFloat(rowData.dipsqtylakh) : 0.00;
-
-                        // Split the row index value
-                        let a = rowPath;
-                        let b = a.split("/");
-                        let rowobject = b[1];
-                        let rowindex = parseInt(b[2]);
-
-                        if (rowindex > 0) {
-                            let num = rowindex - 1;
-
-                            let c = this.getView().getModel("TabItemModel");
-                            let cdatas = c.getProperty("/Datatabitem/" + num);
-                            let dispmaster = this.dipsmodelcal.getProperty("/DipsData");
-                            // debugger
-                            let getdipscummlat = parseFloat(cdatas.cumulative);
-                            let aBC = parseFloat(getdipscummlat) + parseFloat(getdipcurr);
-                            let cumulativelkh_total = (aBC * dispmaster.qty_dips) / 100000;
-                            let dipsshift_val = parseFloat(dispmaster.max_dips)
-
-                            let BalQtyLakhFinal = parseFloat(OrderQtyLakh) - parseFloat(cumulativelkh_total);
-
-                            // if(BalQtyLakhFinal <= "0.00" || BalQtyLakhFinal <=0){
-
-                            // sap.m.MessageBox.show("Balance Quantaty Reached to ZERO");
-                            // sap.ui.core.BusyIndicator.hide();
-                            //  return;
-
-                            // }
-
-
-                            let dipsqtylakhtotal = (getdipcurr * dispmaster.qty_dips) / 100000;
-
-                            let getdipcurr_K = parseFloat(getdipcurr)
-                            let dipsshift_val_K = parseFloat(dipsshift_val)
-
-                            // Guard clause to avoid processing if dipcurrent is greater than DIPS Master Shift Lakh QTY
-                            if (getdipcurr_K > dipsshift_val_K || BalQtyLakhFinal <= "0.00" || BalQtyLakhFinal <= 0) {
-                                sap.m.MessageBox.information("Currency value exceeds the shortage in shift quantity...")
-                                context.getModel().setProperty(`${rowPath}/dipscurrent`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/balanceqty`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/dipsuptoprevious`, '0.000');
-                                context.getModel().setProperty(`${rowPath}/cummulativeinlaksh`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/dipsqtylakh`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/capcutqty`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/bodycutqty`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/capcakeqty`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/bodycakeqty`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/hfx`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/wastage`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/floorwastage`, '0.00');
-                                return;
-                            }
-
-
-                            // Update the model with new values
-                            context.getModel().setProperty(`${rowPath}/dipscurrent`, getdipcurr);
-                            context.getModel().setProperty(`${rowPath}/dipsuptoprevious`, getdipcurr.toFixed(3));
-                            context.getModel().setProperty(`${rowPath}/cumulative`, aBC.toFixed(3));
-                            context.getModel().setProperty(`${rowPath}/cummulativeinlaksh`, cumulativelkh_total.toFixed(2));
-                            context.getModel().setProperty(`${rowPath}/dipsqtylakh`, dipsqtylakhtotal.toFixed(2));
-                            context.getModel().setProperty(`${rowPath}/balanceqty`, BalQtyLakhFinal.toFixed(3));
-
-                        } else {
-                            let c = this.getView().getModel("TabItemModel");
-                            let cdatas = c.getProperty("/Datatabitem/" + rowindex);
-                            let dispmaster = this.dipsmodelcal.getProperty("/DipsData");
-
-                            let getdipscummlat = parseFloat(cdatas.cumulative);
-                            let aBC = parseFloat(getdipcurr);
-                            let cumulativelkh_total = (aBC * dispmaster.qty_dips) / 100000;
-
-                            let BalQtyLakhFinal = parseFloat(OrderQtyLakh) - parseFloat(cumulativelkh_total);
-                            let dipsqtylakhtotal = (getdipcurr * dispmaster.qty_dips) / 100000;
-
-                            // // Guard clause to avoid processing if dipcurrent is greater than OrderQtyLakh
-                            // if (getdipcurr > OrderQtyLakh) {
-                            //     sap.m.MessageBox.information("Please enter valid value...")
-                            //     context.getModel().setProperty(`${rowPath}/dipscurrent`, '0.000');
-                            //     return;
-                            // }
-
-                            let dipsshift_val = parseFloat(dispmaster.max_dips)
-
-                            let getdipcurr_K = parseFloat(getdipcurr)
-                            let dipsshift_val_K = parseFloat(dipsshift_val)
-
-
-                            // Guard clause to avoid processing if dipcurrent is greater than DIPS Master Shift Lakh QTY
-                            if (getdipcurr_K > dipsshift_val_K) {
-                                sap.m.MessageBox.information("Currency value exceeds the shortage in shift quantity...")
-                                context.getModel().setProperty(`${rowPath}/dipscurrent`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/balanceqty`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/dipsuptoprevious`, '0.000');
-                                context.getModel().setProperty(`${rowPath}/cummulativeinlaksh`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/cumulative`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/dipsqtylakh`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/capcutqty`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/bodycutqty`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/capcakeqty`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/bodycakeqty`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/hfx`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/wastage`, '0.00');
-                                context.getModel().setProperty(`${rowPath}/floorwastage`, '0.00');
-                                return;
-                            }
-
-                            // Update the model with new values
-                            context.getModel().setProperty(`${rowPath}/dipscurrent`, getdipcurr);
-                            context.getModel().setProperty(`${rowPath}/dipsuptoprevious`, getdipcurr.toFixed(3));
-                            context.getModel().setProperty(`${rowPath}/cumulative`, aBC.toFixed(3));
-                            context.getModel().setProperty(`${rowPath}/cummulativeinlaksh`, cumulativelkh_total.toFixed(2));
-                            context.getModel().setProperty(`${rowPath}/dipsqtylakh`, dipsqtylakhtotal.toFixed(2));
-                            context.getModel().setProperty(`${rowPath}/balanceqty`, BalQtyLakhFinal.toFixed(3));
-                        }
-
-                    } else {
+                    if (!context) {
                         console.log("No binding context found.");
+                        sap.ui.core.BusyIndicator.hide();
+                        return;
                     }
+
+                    const rowPath = context.getPath();
+                    const rowData = context.getObject();
+
+
+                    if (!rowData.zdate || rowData.zdate === "" || rowData.shift === "") {
+                        sap.m.MessageBox.warning("Please fill all mandatory fields (Date, Shift) before entering Dips Current.");
+                        sap.ui.core.BusyIndicator.hide();
+                        return;
+                    }
+
+
+                    function toUTCDate(localDate) {
+                        return new Date(Date.UTC(
+                            localDate.getFullYear(),
+                            localDate.getMonth(),
+                            localDate.getDate()
+                        ));
+                    }
+
+                    var oDate = toUTCDate(rowData.zdate);
+
+                    var Filters = [
+                        new sap.ui.model.Filter("zdate", sap.ui.model.FilterOperator.EQ, oDate),
+                        new sap.ui.model.Filter("shift", sap.ui.model.FilterOperator.EQ, rowData.shift),
+                        new sap.ui.model.Filter("acmno", sap.ui.model.FilterOperator.EQ, getHeaderData.ACMNO)
+                    ];
+
+                    console.log("Filters:", Filters);
+
+
+                    var Dipsvalidmodel = this.getView().getModel("ZCE_POSTED_DIPS_SRVB");
+                    var that = this;
+
+                    Dipsvalidmodel.read("/ZCE_POSTED_DIPS", {
+                        filters: Filters,
+                        success: function (oData) {
+                            console.log("oData:", oData);
+
+
+                            if (oData.results.length > 0) {
+                                let remainingDips = oData.results[0].max_dips - oData.results[0].dipscurrent;
+                                if (parseFloat(rowData.dipscurrent) > remainingDips) {
+                                    sap.m.MessageBox.warning(
+                                        "The entered Dips Current value exceeds the remaining dips for the selected date and shift. Remaining dips: " + remainingDips
+                                    );
+                                    context.getModel().setProperty(`${rowPath}/dipscurrent`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/balanceqty`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/dipsuptoprevious`, '0.000');
+                                    context.getModel().setProperty(`${rowPath}/cummulativeinlaksh`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/dipsqtylakh`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/capcutqty`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/bodycutqty`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/capcakeqty`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/bodycakeqty`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/hfx`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/wastage`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/floorwastage`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/cumulative`, '0.00');
+                                    sap.ui.core.BusyIndicator.hide();
+                                    return;
+                                }
+                            }
+
+
+                            let getdipcurr = rowData.dipscurrent.trim() !== "" ? parseFloat(rowData.dipscurrent) : 0.00;
+                            let rowindex = parseInt(rowPath.split("/")[2]);
+
+                            if (rowindex > 0) {
+                                let num = rowindex - 1;
+                                let c = that.getView().getModel("TabItemModel");
+                                let cdatas = c.getProperty("/Datatabitem/" + num);
+                                let dispmaster = that.dipsmodelcal.getProperty("/DipsData");
+
+                                let getdipscummlat = parseFloat(cdatas.cumulative);
+                                let aBC = parseFloat(getdipscummlat) + parseFloat(getdipcurr);
+                                let cumulativelkh_total = (aBC * dispmaster.qty_dips) / 100000;
+                                let dipsshift_val = parseFloat(dispmaster.max_dips);
+                                let BalQtyLakhFinal = parseFloat(OrderQtyLakh) - parseFloat(cumulativelkh_total);
+                                let dipsqtylakhtotal = (getdipcurr * dispmaster.qty_dips) / 100000;
+
+                                if (parseFloat(getdipcurr) > dipsshift_val || BalQtyLakhFinal <= 0) {
+                                    sap.m.MessageBox.information("Currency value exceeds the shortage in shift quantity...");
+                                    context.getModel().setProperty(`${rowPath}/dipscurrent`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/balanceqty`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/dipsuptoprevious`, '0.000');
+                                    context.getModel().setProperty(`${rowPath}/cummulativeinlaksh`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/dipsqtylakh`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/capcutqty`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/bodycutqty`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/capcakeqty`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/bodycakeqty`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/hfx`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/wastage`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/floorwastage`, '0.00');
+                                    sap.ui.core.BusyIndicator.hide();
+                                    return;
+                                }
+
+                                context.getModel().setProperty(`${rowPath}/dipscurrent`, getdipcurr);
+                                context.getModel().setProperty(`${rowPath}/dipsuptoprevious`, getdipcurr.toFixed(3));
+                                context.getModel().setProperty(`${rowPath}/cumulative`, aBC.toFixed(3));
+                                context.getModel().setProperty(`${rowPath}/cummulativeinlaksh`, cumulativelkh_total.toFixed(2));
+                                context.getModel().setProperty(`${rowPath}/dipsqtylakh`, dipsqtylakhtotal.toFixed(2));
+                                context.getModel().setProperty(`${rowPath}/balanceqty`, BalQtyLakhFinal.toFixed(3));
+
+                            } else {
+                                let c = that.getView().getModel("TabItemModel");
+                                let cdatas = c.getProperty("/Datatabitem/" + rowindex);
+                                let dispmaster = that.dipsmodelcal.getProperty("/DipsData");
+
+                                let aBC = parseFloat(getdipcurr);
+                                let cumulativelkh_total = (aBC * dispmaster.qty_dips) / 100000;
+                                let BalQtyLakhFinal = parseFloat(OrderQtyLakh) - parseFloat(cumulativelkh_total);
+                                let dipsqtylakhtotal = (getdipcurr * dispmaster.qty_dips) / 100000;
+                                let dipsshift_val = parseFloat(dispmaster.max_dips);
+
+                                if (parseFloat(getdipcurr) > dipsshift_val) {
+                                    sap.m.MessageBox.information("Currency value exceeds the shortage in shift quantity...");
+                                    context.getModel().setProperty(`${rowPath}/dipscurrent`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/balanceqty`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/dipsuptoprevious`, '0.000');
+                                    context.getModel().setProperty(`${rowPath}/cummulativeinlaksh`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/cumulative`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/dipsqtylakh`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/capcutqty`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/bodycutqty`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/capcakeqty`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/bodycakeqty`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/hfx`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/wastage`, '0.00');
+                                    context.getModel().setProperty(`${rowPath}/floorwastage`, '0.00');
+                                    sap.ui.core.BusyIndicator.hide();
+                                    return;
+                                }
+
+                                context.getModel().setProperty(`${rowPath}/dipscurrent`, getdipcurr);
+                                context.getModel().setProperty(`${rowPath}/dipsuptoprevious`, getdipcurr.toFixed(3));
+                                context.getModel().setProperty(`${rowPath}/cumulative`, aBC.toFixed(3));
+                                context.getModel().setProperty(`${rowPath}/cummulativeinlaksh`, cumulativelkh_total.toFixed(2));
+                                context.getModel().setProperty(`${rowPath}/dipsqtylakh`, dipsqtylakhtotal.toFixed(2));
+                                context.getModel().setProperty(`${rowPath}/balanceqty`, BalQtyLakhFinal.toFixed(3));
+                            }
+
+                            sap.ui.core.BusyIndicator.hide();
+                        },
+                        error: function (oError) {
+                            console.error("OData read error:", oError);
+                            sap.ui.core.BusyIndicator.hide();
+                        }
+                    });
+
                 } catch (error) {
                     console.error("Error occurred during onchangedipscur:", error);
-                } finally {
-                    // Hide the BusyIndicator in finally block
                     sap.ui.core.BusyIndicator.hide();
                 }
             },
+
+
 
 
             onRowSelectedtab: function (oEvent) {

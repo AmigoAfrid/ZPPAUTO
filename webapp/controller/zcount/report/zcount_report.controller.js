@@ -971,6 +971,9 @@ sap.ui.define(
 
             OnDateChangeValue: function (Datess) {
                 var that = this;
+                if (Datess === "Total") {
+                    return "Total"; // Directly return "Total" if that's the value
+                }
                 if (Datess !== null) {
 
                     return new Promise(function (resolve, reject) {
@@ -1479,6 +1482,29 @@ sap.ui.define(
                                     oBinding.sort(oSorter);
                                 }
                             } else {
+                                let totalQty = 0;
+                                let totalLacQty = 0;
+                                let totalTareWtQty = 0;
+                                let totalNetQty = 0;
+                                let totalGrossQty = 0;
+                                aAllItems.forEach(function (item) {
+                                    totalQty     += parseFloat(item.qty)    || 0;
+                                    totalLacQty   += parseFloat(item.qty_lac)      || 0;
+                                    totalTareWtQty  += parseFloat(item.tare_wt)     || 0;
+                                    totalNetQty  += parseFloat(item.netwt)     || 0;
+                                    totalGrossQty += parseFloat(item.grosswt)    || 0;
+                                });
+                                // ✅ Add total row with only those fields
+                                aAllItems.push({
+                                        createdat: "Total",
+                                        qty: totalQty.toFixed(2),
+                                        qty_lac: totalLacQty.toFixed(2),
+                                        tare_wt: totalTareWtQty.toFixed(2),
+                                        netwt: totalNetQty.toFixed(2),
+                                        grosswt: totalGrossQty.toFixed(2),
+                                        isTotalRow: true
+
+                                });
                                 that.tabModel = new sap.ui.model.json.JSONModel({ ItemData: aAllItems });
                                 that.getView().setModel(that.tabModel, "TabModel");
                                 that.getView().setBusy(false);

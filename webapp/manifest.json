@@ -699,6 +699,15 @@
           "localUri": "localService/ZCE_PACKSLIP_HEAD_SRVB/metadata.xml",
           "odataVersion": "2.0"
         }
+      },
+      "ZCE_POSTED_DIPS_SRVB": {
+        "uri": "/sap/opu/odata/sap/ZCE_POSTED_DIPS_SRVB/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/ZCE_POSTED_DIPS_SRVB/metadata.xml",
+          "odataVersion": "2.0"
+        }
       }
     },
     "crossNavigation": {
@@ -710,7 +719,8 @@
           "signature": {
             "parameters": {},
             "additionalParameters": "allowed"
-          }
+          },
+          "subTitle": "{{zppauto-display.flpSubtitle}}"
         }
       }
     }
@@ -1111,6 +1121,11 @@
       },
       "ZCE_PACKSLIP_HEAD_SRVB": {
         "dataSource": "ZCE_PACKSLIP_HEAD_SRVB",
+        "preload": true,
+        "settings": {}
+      },
+      "ZCE_POSTED_DIPS_SRVB": {
+        "dataSource": "ZCE_POSTED_DIPS_SRVB",
         "preload": true,
         "settings": {}
       }

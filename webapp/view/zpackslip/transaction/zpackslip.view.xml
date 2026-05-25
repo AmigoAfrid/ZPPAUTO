@@ -332,14 +332,19 @@
                                 <Text text="{ProcessOrderItems>BodyColorCode}"/>
                             </t:template>
                         </t:Column>
-                         <t:Column label="Body Print Msg" width="5rem" >
+                         <t:Column label="Body Print Msg" width="7rem" >
                             <t:template>
                                 <Text text="{ProcessOrderItems>BodyPrintMsg}"/>
                             </t:template>
                         </t:Column>
-                          <t:Column label="No Of Boxes" width="5rem" >
+                        <t:Column label="No Of Boxes" width="5rem" >
                             <t:template>
-                                <Text text="{ProcessOrderItems>BodyPrintInk}"/>
+                                <Text text="{ProcessOrderItems>NoOfBoxes}"/>
+                            </t:template>
+                        </t:Column>   
+                         <t:Column label="User Login" width="8rem" >
+                            <t:template>
+                                <Text text="{ProcessOrderItems>UserName}"/>
                             </t:template>
                         </t:Column>                                                                                                                                                                                                                                                            
                     </t:columns>

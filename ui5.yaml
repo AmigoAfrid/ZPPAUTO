@@ -304,6 +304,9 @@ server:
           - path: /sap/opu/odata/sap/ZCE_PACKSLIP_HEAD_SRVB/
             url: https://my421040.s4hana.cloud.sap
             destination: my421040_cust
+          - path: /sap/opu/odata/sap/ZCE_POSTED_DIPS_SRVB/
+            url: https://my421040.s4hana.cloud.sap
+            destination: my421040_cust
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:

@@ -217,15 +217,15 @@
 
 								<layout:HorizontalLayout visible="true" class=" sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
                                     <layout:VerticalLayout visible="true" class="sapUiSmallMarginBegin sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
-									<Label text="Box :" tooltip="Enter the starting value" design="Bold" class="sapUiSmallMarginEnd" />
-									<Input value="" editable="true" placeholder="Enter From Value"  id="Box1_"/>
+									<Label text="Box 1 (From) :" tooltip="Enter the starting value" design="Bold" class="sapUiSmallMarginEnd" />
+									<Input value="" editable="true" placeholder="Enter Box 1 "  id="Box1_"/>
                                     </layout:VerticalLayout>
 									<layout:VerticalLayout visible="true" class=" sapUiSmallMarginEnd  sapUiTinyMarginTop customWidth">
-									<Label text="To:" tooltip="Enter the ending value" design="Bold" class="" />
-                                    <Input value="" editable="true" placeholder="Enter To Value"  id="Box2_"/>
+									<Label text="Box 2 (To) :" tooltip="Enter the ending value" design="Bold" class="" />
+                                    <Input value="" editable="true" placeholder="Enter Box 2 " change="onBox2_Change"  id="Box2_"/>
 									</layout:VerticalLayout>
 									<layout:VerticalLayout visible="true" class="customTopMargin sapUiSmallMarginEnd sapUiMediumMarginBottom customWidth">
-									<Button text="Print" tooltip="Execute" type="Emphasized" press="onPrint" enabled="true" />
+									<Button text="Print" tooltip="Execute" type="Emphasized" press="onPrintPDF" enabled="true" />
 									</layout:VerticalLayout>
                                 </layout:HorizontalLayout>
 

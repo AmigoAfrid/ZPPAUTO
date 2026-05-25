@@ -4,7 +4,7 @@ xmlns:chart="sap.suite.ui.microchart" xmlns:f="sap.f"
 	xmlns:layout="sap.ui.layout" controllerName="zautodesignapp.controller.Home"
 	xmlns:html="http://www.w3.org/1999/xhtml">
 	<!-- <App> -->
-			<Page class="sapUiTinyMarginTop sapUiTinyMarginBegin" id="idpagetitle" title="Production Planning Automation" titleAlignment="Center">
+			<Page class="sapUiTinyMarginTop sapUiTinyMarginBegin" id="idpagetitle" title="" titleAlignment="Center">
 				<!-- <Image width="100%" height="100%" src="{/svgLogo1}"></Image> -->
 				<Image width="100%" height="100%" src="https://news-images.dhan.co/natural-capsules-limited-shareholders-approve-key-board-changes-and-appointments-at-32nd-agm.jpg"></Image>
 	</Page>
